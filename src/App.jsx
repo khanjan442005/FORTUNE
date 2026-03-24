@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { DarkModeProvider } from './context/DarkModeContext'
+import NeonCursor from './components/NeonCursor'
 
 const Home = lazy(() => import('./pages/Home'))
 const Landing = lazy(() => import('./pages/Landing'))
@@ -20,6 +21,7 @@ function LoadingFallback() {
 function App() {
   return (
     <DarkModeProvider>
+      <NeonCursor />
       <BrowserRouter>
         <Suspense fallback={<LoadingFallback />}>
           <Routes>

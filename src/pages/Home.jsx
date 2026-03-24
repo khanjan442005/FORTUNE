@@ -1,5 +1,5 @@
-import { useEffect, Suspense } from "react"
-import { motion, useScroll, useMotionValue, useSpring, useTransform } from "framer-motion"
+import { useEffect, Suspense, useState } from "react"
+import { motion, useScroll, useMotionValue, useTransform } from "framer-motion"
 import Navbar from "../components/Navbar"
 import HeroSlider from "../components/HeroSlider"
 import Products from "../components/Products"
@@ -34,47 +34,46 @@ function LoadingFallback() {
   )
 }
 
-function CustomCursor() {
-  const cursorX = useMotionValue(-100)
-  const cursorY = useMotionValue(-100)
-  
-  const springConfig = { damping: 25, stiffness: 150 }
-  const cursorXSpring = useSpring(cursorX, springConfig)
-  const cursorYSpring = useSpring(cursorY, springConfig)
-
-  useEffect(() => {
-    const moveCursor = (e) => {
-      cursorX.set(e.clientX - 16)
-      cursorY.set(e.clientY - 16)
-    }
-    
-    window.addEventListener("mousemove", moveCursor)
-    return () => window.removeEventListener("mousemove", moveCursor)
-  }, [cursorX, cursorY])
-
-  return (
-    <motion.div
-      className="fixed top-0 left-0 w-8 h-8 rounded-full bg-cyan-400 pointer-events-none z-[9999] mix-blend-difference"
-      style={{ x: cursorXSpring, y: cursorYSpring }}
-    />
-  )
-}
-
 function ParallaxBackground() {
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
+  const [isParallaxEnabled, setIsParallaxEnabled] = useState(false)
 
   const x = useTransform(mouseX, [-0.5, 0.5], [-30, 30])
   const y = useTransform(mouseY, [-0.5, 0.5], [-30, 30])
 
   useEffect(() => {
+    const inputQuery = window.matchMedia("(hover: hover) and (pointer: fine)")
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+
+    const updateParallaxState = () => {
+      setIsParallaxEnabled(inputQuery.matches && !motionQuery.matches)
+    }
+
+    updateParallaxState()
+    inputQuery.addEventListener("change", updateParallaxState)
+    motionQuery.addEventListener("change", updateParallaxState)
+
+    return () => {
+      inputQuery.removeEventListener("change", updateParallaxState)
+      motionQuery.removeEventListener("change", updateParallaxState)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!isParallaxEnabled) {
+      mouseX.set(0)
+      mouseY.set(0)
+      return
+    }
+
     const handleMouseMove = (e) => {
       mouseX.set(e.clientX / window.innerWidth - 0.5)
       mouseY.set(e.clientY / window.innerHeight - 0.5)
     }
-    window.addEventListener("mousemove", handleMouseMove)
-    return () => window.removeEventListener("mousemove", handleMouseMove)
-  }, [mouseX, mouseY])
+    window.addEventListener("pointermove", handleMouseMove, { passive: true })
+    return () => window.removeEventListener("pointermove", handleMouseMove)
+  }, [mouseX, mouseY, isParallaxEnabled])
 
   return (
     <motion.div 
@@ -107,7 +106,6 @@ function Home() {
   return (
     <Suspense fallback={<LoadingFallback />}>
       <div className="min-h-screen bg-[#030712]">
-        <CustomCursor />
         <ParallaxBackground />
         <ScrollProgress />
         <Navbar />
