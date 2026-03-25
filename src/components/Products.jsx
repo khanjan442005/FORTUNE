@@ -2,12 +2,41 @@ import { useState, useRef, useMemo } from "react"
 import { Link } from "react-router-dom"
 import { motion, useMotionValue, useTransform } from "framer-motion"
 import products from '../data/products'
+import { useDebounce, useLocalStorage } from "../hooks/useInView"
 
 const categories = [
   { id: 'all', name: 'All Products' },
   { id: 'window', name: 'Windows' },
   { id: 'door', name: 'Doors' }
 ]
+
+const PRODUCT_FILTERS_KEY = 'dynamic-windows.products.filters'
+
+function createDefaultProductFilters() {
+  return {
+    activeCategory: 'all',
+    searchQuery: ''
+  }
+}
+
+function normalizeProductFilters(value) {
+  const activeCategory = categories.some((category) => category.id === value?.activeCategory)
+    ? value.activeCategory
+    : 'all'
+
+  return {
+    activeCategory,
+    searchQuery: String(value?.searchQuery || '').slice(0, 80)
+  }
+}
+
+function parseProductFilters(value) {
+  return normalizeProductFilters(JSON.parse(value))
+}
+
+function serializeProductFilters(value) {
+  return JSON.stringify(normalizeProductFilters(value))
+}
 
 function ProductCard({ product, index }) {
   const [isHovered, setIsHovered] = useState(false)
@@ -126,17 +155,29 @@ function ProductCard({ product, index }) {
 }
 
 function Products() {
-  const [activeCategory, setActiveCategory] = useState('all')
-  const [searchQuery, setSearchQuery] = useState('')
+  const [productFilters, setProductFilters] = useLocalStorage(
+    PRODUCT_FILTERS_KEY,
+    createDefaultProductFilters,
+    {
+      deserializer: parseProductFilters,
+      serializer: serializeProductFilters,
+      syncTabs: false
+    }
+  )
+  const activeCategory = productFilters.activeCategory
+  const searchQuery = productFilters.searchQuery
+  const debouncedSearchQuery = useDebounce(searchQuery, 180)
+  const normalizedSearchQuery = debouncedSearchQuery.trim().toLowerCase()
 
   const filteredProducts = useMemo(() => {
     return products.filter(product => {
       const matchesCategory = activeCategory === 'all' || product.category === activeCategory
-      const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.description.toLowerCase().includes(searchQuery.toLowerCase())
+      const matchesSearch = !normalizedSearchQuery ||
+        product.name.toLowerCase().includes(normalizedSearchQuery) ||
+        product.description.toLowerCase().includes(normalizedSearchQuery)
       return matchesCategory && matchesSearch
     })
-  }, [activeCategory, searchQuery])
+  }, [activeCategory, normalizedSearchQuery])
 
   return (
     <section id="products" className="min-h-screen py-24 bg-[#030712] relative overflow-hidden flex items-center">
@@ -178,7 +219,12 @@ function Products() {
             {categories.map((category) => (
               <button
                 key={category.id}
-                onClick={() => setActiveCategory(category.id)}
+                onClick={() =>
+                  setProductFilters((previous) => ({
+                    ...previous,
+                    activeCategory: category.id,
+                  }))
+                }
                 className={`px-6 py-3 rounded-xl font-medium transition-all ${
                   activeCategory === category.id
                     ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/25'
@@ -195,7 +241,12 @@ function Products() {
               type="text"
               placeholder="Search products..."
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) =>
+                setProductFilters((previous) => ({
+                  ...previous,
+                  searchQuery: e.target.value,
+                }))
+              }
               className="input-glow w-full pl-12"
             />
             <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -203,7 +254,13 @@ function Products() {
             </svg>
             {searchQuery && (
               <button
-                onClick={() => setSearchQuery('')}
+                type="button"
+                onClick={() =>
+                  setProductFilters((previous) => ({
+                    ...previous,
+                    searchQuery: '',
+                  }))
+                }
                 className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

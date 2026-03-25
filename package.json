@@ -4,10 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "node scripts/run-stack.mjs dev",
+    "dev:client": "vite",
+    "dev:server": "node server/contact-server.mjs",
+    "dev:server:watch": "node --watch server/contact-server.mjs",
+    "server": "node server/contact-server.mjs",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "preview:client": "vite preview --host 127.0.0.1",
+    "preview:full": "node scripts/run-stack.mjs preview"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",

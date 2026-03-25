@@ -1,8 +1,30 @@
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { motion } from "framer-motion"
 
 function Footer() {
   const currentYear = new Date().getFullYear()
+  const [showScrollTop, setShowScrollTop] = useState(false)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 320)
+    }
+
+    handleScroll()
+    window.addEventListener("scroll", handleScroll, { passive: true })
+
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const handleScrollToTop = () => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    window.scrollTo({
+      top: 0,
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+    })
+  }
   
   const footerLinks = {
     products: [
@@ -185,19 +207,27 @@ function Footer() {
       </div>
       
       {/* Back to Top Button */}
-      <motion.a
-        href="#"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
+      <motion.button
+        type="button"
+        aria-label="Scroll to top"
+        onClick={handleScrollToTop}
+        initial={false}
+        animate={{
+          opacity: showScrollTop ? 1 : 0,
+          y: showScrollTop ? 0 : 20,
+          scale: showScrollTop ? 1 : 0.96,
+        }}
         viewport={{ once: true }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        className="fixed bottom-8 right-8 w-12 h-12 glass rounded-full flex items-center justify-center shadow-lg shadow-cyan-500/20 z-50"
+        className={`fixed bottom-8 right-8 w-12 h-12 glass rounded-full flex items-center justify-center shadow-lg shadow-cyan-500/20 z-50 transition-[visibility] ${
+          showScrollTop ? "visible pointer-events-auto" : "invisible pointer-events-none"
+        }`}
       >
         <svg className="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
         </svg>
-      </motion.a>
+      </motion.button>
     </footer>
   )
 }

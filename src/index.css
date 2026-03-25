@@ -17,10 +17,25 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  cursor: none !important;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+html,
+body {
+  cursor: none;
+}
+
+html.custom-cursor-active,
+html.custom-cursor-active body,
+html.custom-cursor-active body *,
+html.custom-cursor-active body *:hover,
+html.custom-cursor-active body *:focus,
+html.custom-cursor-active body *:active {
+  cursor: none !important;
 }
 
 body {
@@ -28,6 +43,36 @@ body {
   color: white;
   font-family: 'Inter', system-ui, sans-serif;
   overflow-x: hidden;
+}
+
+a,
+button {
+  cursor: none !important;
+}
+
+.enemy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.4rem;
+  border: 1px solid rgba(248, 113, 113, 0.45);
+  border-radius: 9999px;
+  background: linear-gradient(135deg, rgba(127, 29, 29, 0.9), rgba(239, 68, 68, 0.22));
+  color: #fecaca;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  box-shadow: 0 0 18px rgba(239, 68, 68, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.enemy:hover {
+  transform: translateY(-2px);
+  border-color: rgba(252, 165, 165, 0.8);
+  box-shadow: 0 0 28px rgba(248, 113, 113, 0.35);
+}
+
+.enemy:active {
+  transform: scale(0.96);
 }
 
 /* Custom Scrollbar */
@@ -161,11 +206,6 @@ body:has(.neon-cursor) {
 body:has(.neon-cursor) a,
 body:has(.neon-cursor) button,
 body:has(.neon-cursor) [role="button"] {
-  cursor: none;
-}
-
-/* Gaming Cursor */
-body {
   cursor: none;
 }
 

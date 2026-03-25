@@ -1,5 +1,6 @@
 import { useEffect, Suspense, useState } from "react"
 import { motion, useScroll, useMotionValue, useTransform } from "framer-motion"
+import { useLocation } from "react-router-dom"
 import Navbar from "../components/Navbar"
 import HeroSlider from "../components/HeroSlider"
 import Products from "../components/Products"
@@ -88,20 +89,61 @@ function ParallaxBackground() {
 }
 
 function Home() {
+  const location = useLocation()
+
   useEffect(() => {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault()
-        const target = document.querySelector(this.getAttribute('href'))
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          })
-        }
+    const anchors = Array.from(document.querySelectorAll('a[href^="#"]'))
+
+    const handleAnchorClick = (event) => {
+      const href = event.currentTarget.getAttribute("href")
+
+      if (!href || href === "#") {
+        return
+      }
+
+      const target = document.querySelector(href)
+
+      if (!target) {
+        return
+      }
+
+      event.preventDefault()
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
       })
-    })
+    }
+
+    anchors.forEach((anchor) => anchor.addEventListener("click", handleAnchorClick))
+
+    return () => {
+      anchors.forEach((anchor) => anchor.removeEventListener("click", handleAnchorClick))
+    }
   }, [])
+
+  useEffect(() => {
+    const scrollToSection = () => {
+      if (!location.hash) {
+        window.scrollTo({ top: 0, behavior: "smooth" })
+        return
+      }
+
+      const target = document.querySelector(location.hash)
+
+      if (!target) {
+        return
+      }
+
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      })
+    }
+
+    const frameId = window.requestAnimationFrame(scrollToSection)
+
+    return () => window.cancelAnimationFrame(frameId)
+  }, [location.hash])
 
   return (
     <Suspense fallback={<LoadingFallback />}>

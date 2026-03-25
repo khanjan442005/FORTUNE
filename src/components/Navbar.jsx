@@ -15,14 +15,14 @@ function Navbar() {
   }, [])
 
   const navItems = [
-    { name: 'Home', href: '/' },
-    { name: 'Products', href: '#products' },
-    { name: '3D Showcase', href: '#showcase' },
-    { name: 'Testimonials', href: '#testimonials' },
-    { name: 'Features', href: '#features' },
-    { name: 'Gallery', href: '#gallery' },
-    { name: 'About', href: '#about' },
-    { name: 'Contact', href: '#contact' }
+    { name: 'Home', to: '/' },
+    { name: 'Products', to: '/#products' },
+    { name: '3D Showcase', to: '/#showcase' },
+    { name: 'Features', to: '/#features' },
+    { name: 'Testimonials', to: '/#testimonials' },
+    { name: 'Gallery', to: '/#gallery' },
+    { name: 'About', to: '/#about' },
+    { name: 'Contact', to: '/#contact' }
   ]
 
   return (
@@ -73,25 +73,14 @@ function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
               >
-                {item.href.startsWith('#') ? (
-                  <a
-                    href={item.href}
-                    className="relative px-4 py-2 text-white/70 hover:text-white font-medium transition-colors group"
-                  >
-                    <span className="relative z-10">{item.name}</span>
-                    <span className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></span>
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 group-hover:w-full transition-all duration-300"></span>
-                  </a>
-                ) : (
-                  <Link
-                    to={item.href}
-                    className="relative px-4 py-2 text-white/70 hover:text-white font-medium transition-colors group"
-                  >
-                    <span className="relative z-10">{item.name}</span>
-                    <span className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></span>
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 group-hover:w-full transition-all duration-300"></span>
-                  </Link>
-                )}
+                <Link
+                  to={item.to}
+                  className="relative px-4 py-2 text-white/70 hover:text-white font-medium transition-colors group"
+                >
+                  <span className="relative z-10">{item.name}</span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-lg scale-0 group-hover:scale-100 transition-transform duration-300"></span>
+                  <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-cyan-500 to-blue-500 group-hover:w-full transition-all duration-300"></span>
+                </Link>
               </motion.div>
             ))}
           </div>
@@ -142,23 +131,13 @@ function Navbar() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 * index }}
                   >
-                    {item.href.startsWith('#') ? (
-                      <a
-                        href={item.href}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="block px-4 py-3 text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition-all"
-                      >
-                        {item.name}
-                      </a>
-                    ) : (
-                      <Link
-                        to={item.href}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                        className="block px-4 py-3 text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition-all"
-                      >
-                        {item.name}
-                      </Link>
-                    )}
+                    <Link
+                      to={item.to}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="block px-4 py-3 text-white/70 hover:text-white hover:bg-white/5 rounded-xl transition-all"
+                    >
+                      {item.name}
+                    </Link>
                   </motion.div>
                 ))}
               </div>
