@@ -40,17 +40,15 @@ function Navbar() {
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center gap-3 group">
             <motion.div
-              whileHover={{ rotate: 360, scale: 1.1 }}
-              transition={{ duration: 0.6 }}
-              className="relative w-12 h-12"
+              whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
+              transition={{ duration: 0.5 }}
+              className="relative"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl blur-md opacity-50 group-hover:opacity-80 transition-opacity"></div>
-              <div className="relative w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-xl flex items-center justify-center border border-cyan-400/30">
-                <svg viewBox="0 0 24 24" className="w-7 h-7 text-white" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="3" y="3" width="18" height="18" rx="2" />
-                  <line x1="3" y1="9" x2="21" y2="9" />
-                  <line x1="9" y1="3" x2="9" y2="21" />
-                </svg>
+              <div className="relative w-12 h-12 bg-gradient-to-br from-cyan-500 via-blue-500 to-purple-600 rounded-xl flex items-center justify-center border border-cyan-400/30 shadow-lg shadow-cyan-500/20">
+                <span className="text-white font-black text-xl tracking-tight" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
+                  <span className="opacity-90">D</span><span className="opacity-100">W</span>
+                </span>
               </div>
             </motion.div>
             <div>

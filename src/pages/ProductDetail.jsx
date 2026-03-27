@@ -1,13 +1,30 @@
 import { useParams, Link } from "react-router-dom"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import products from "../data/products"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 
+function saveToRecentlyViewed(product) {
+  try {
+    const stored = JSON.parse(localStorage.getItem("dw_recently_viewed") || "[]")
+    const filtered = stored.filter(p => p.id !== product.id)
+    const minimal = { id: product.id, name: product.name, images: product.images, category: product.category, price: product.price, description: product.description }
+    const updated = [minimal, ...filtered].slice(0, 8)
+    localStorage.setItem("dw_recently_viewed", JSON.stringify(updated))
+  } catch (err) {
+    console.warn("Failed to save recently viewed:", err)
+  }
+}
+
 function ProductDetailContent({ id }) {
   const product = products.find(p => p.id === parseInt(id))
   const [selectedImage, setSelectedImage] = useState(0)
+
+  useEffect(() => {
+    if (product) saveToRecentlyViewed(product)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product?.id])
 
   if (!product) {
     return (
@@ -144,7 +161,7 @@ function ProductDetailContent({ id }) {
               </div>
 
               <div className="flex gap-4">
-                <Link to="/#contact" className="flex-1 neon-button text-center">
+                <Link to="/contact" className="flex-1 neon-button text-center">
                   <span>Get Quote Now</span>
                 </Link>
                 <Link to="/" className="px-6 py-3 glass rounded-xl font-semibold text-white hover:bg-white/10 transition-colors">
