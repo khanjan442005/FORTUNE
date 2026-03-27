@@ -160,8 +160,17 @@ function MiniProductCard({ product }) {
   )
 }
 
+function shuffleArray(arr) {
+  const copy = [...arr]
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(((i + 1) * (i * 31 + 17)) % (i + 1))
+    ;[copy[i], copy[j]] = [copy[j], copy[i]]
+  }
+  return copy
+}
+
 function TrendingProducts() {
-  const trending = useMemo(() => [...products].sort(() => 0.5 - Math.random()).slice(0, 4), [])
+  const trending = useMemo(() => shuffleArray(products).slice(0, 4), [])
 
   return (
     <section className="py-16 relative overflow-hidden">
@@ -366,18 +375,18 @@ function LiveNotification() {
   const [msg, setMsg] = useState("")
   const [visible, setVisible] = useState(false)
 
-  const notifications = [
-    "🔥 Someone from Mumbai just viewed Casement Windows",
-    "⭐ Sliding Door got a 5-star review",
-    "🏠 Bay Windows installed in Delhi today",
-    "🔥 Someone from Bangalore is viewing Products",
-    "💎 Premium French Door just got ordered",
-    "🎉 500+ happy customers and counting",
-    "🔨 New batch of Skylight Windows just arrived",
-    "⭐ Someone gave a 5-star testimonial",
-  ]
-
   useEffect(() => {
+    const notifications = [
+      "🔥 Someone from Mumbai just viewed Casement Windows",
+      "⭐ Sliding Door got a 5-star review",
+      "🏠 Bay Windows installed in Delhi today",
+      "🔥 Someone from Bangalore is viewing Products",
+      "💎 Premium French Door just got ordered",
+      "🎉 500+ happy customers and counting",
+      "🔨 New batch of Skylight Windows just arrived",
+      "⭐ Someone gave a 5-star testimonial",
+    ]
+
     const show = () => {
       const random = notifications[Math.floor(Math.random() * notifications.length)]
       setMsg(random)
