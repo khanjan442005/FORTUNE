@@ -5,8 +5,7 @@ import products from "../data/products"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 
-function ProductDetail() {
-  const { id } = useParams()
+function ProductDetailContent({ id }) {
   const product = products.find(p => p.id === parseInt(id))
   const [selectedImage, setSelectedImage] = useState(0)
 
@@ -24,6 +23,8 @@ function ProductDetail() {
   }
 
   const images = product.images || []
+  const resolvedImageIndex = Math.min(selectedImage, Math.max(images.length - 1, 0))
+  const activeImage = images[resolvedImageIndex] || images[0]
   const relatedProducts = products
     .filter(p => p.category === product.category && p.id !== product.id)
     .slice(0, 4)
@@ -50,8 +51,8 @@ function ProductDetail() {
               <div className="relative mb-6 glass rounded-3xl overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.img
-                    key={selectedImage}
-                    src={images[selectedImage]}
+                    key={`${product.id}-${resolvedImageIndex}`}
+                    src={activeImage}
                     alt={product.name}
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -72,7 +73,7 @@ function ProductDetail() {
                       key={index}
                       onClick={() => setSelectedImage(index)}
                       className={`flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border-2 transition-all ${
-                        selectedImage === index 
+                        resolvedImageIndex === index 
                           ? 'border-cyan-400 shadow-lg shadow-cyan-400/30' 
                           : 'border-transparent hover:border-gray-600'
                       }`}
@@ -143,9 +144,9 @@ function ProductDetail() {
               </div>
 
               <div className="flex gap-4">
-                <a href="#contact" className="flex-1 neon-button text-center">
+                <Link to="/#contact" className="flex-1 neon-button text-center">
                   <span>Get Quote Now</span>
-                </a>
+                </Link>
                 <Link to="/" className="px-6 py-3 glass rounded-xl font-semibold text-white hover:bg-white/10 transition-colors">
                   View All Products
                 </Link>
@@ -188,6 +189,12 @@ function ProductDetail() {
       <Footer />
     </div>
   )
+}
+
+function ProductDetail() {
+  const { id = "" } = useParams()
+
+  return <ProductDetailContent key={id} id={id} />
 }
 
 export default ProductDetail

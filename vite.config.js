@@ -6,6 +6,8 @@ import react from '@vitejs/plugin-react'
 export default defineConfig(({ mode }) => {
   const rootDir = fileURLToPath(new URL('.', import.meta.url))
   const env = loadEnv(mode, rootDir, '')
+  const host = env.VITE_HOST || '127.0.0.1'
+  const port = Number(env.VITE_PORT || 5173)
   const proxy = {
     '/api': {
       target: env.CONTACT_SERVER_URL || 'http://127.0.0.1:8787',
@@ -16,9 +18,12 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     server: {
+      host,
+      port,
       proxy,
     },
     preview: {
+      host,
       proxy,
     },
   }

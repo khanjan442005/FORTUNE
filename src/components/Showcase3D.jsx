@@ -124,6 +124,98 @@ const featureCameraViews = {
   },
 };
 
+function browserSupportsWebGL() {
+  if (typeof window === "undefined" || typeof document === "undefined") {
+    return false;
+  }
+
+  try {
+    const canvas = document.createElement("canvas");
+
+    return Boolean(
+      canvas.getContext("webgl2") ||
+        canvas.getContext("webgl") ||
+        canvas.getContext("experimental-webgl"),
+    );
+  } catch {
+    return false;
+  }
+}
+
+function StaticShowcasePreview({ finish, activeFeature }) {
+  const activeFeatureCard = premiumFeatures.find((feature) => feature.key === activeFeature);
+  const isGlassActive = activeFeature === "glass";
+  const isPrecisionActive = activeFeature === "precision";
+  const isThermalActive = activeFeature === "thermal";
+  const isLockingActive = activeFeature === "locking";
+
+  return (
+    <div className="absolute inset-0 flex items-center justify-center px-8 py-12">
+      <div className="w-full max-w-[460px] rounded-[2rem] border border-white/10 bg-slate-950/70 p-8 shadow-[0_30px_120px_rgba(2,8,23,0.55)]">
+        <div className="mb-8 flex items-center justify-between gap-4">
+          <div>
+            <p className="text-xs uppercase tracking-[0.26em] text-slate-400">Static Preview</p>
+            <h4 className="mt-2 text-xl font-semibold text-white">{finish.name}</h4>
+          </div>
+          <div className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs text-cyan-200">
+            {activeFeatureCard?.title || "Premium Feature"}
+          </div>
+        </div>
+
+        <div className="relative mx-auto flex aspect-[4/5] max-w-[280px] items-center justify-center rounded-[2rem] border border-white/10 bg-[#08111f] p-6 shadow-inner shadow-cyan-500/10">
+          <div
+            className="absolute inset-4 rounded-[1.75rem] blur-3xl"
+            style={{ backgroundColor: finish.glow, opacity: 0.12 }}
+          />
+          <div
+            className="relative h-full w-full rounded-[1.4rem] border-[14px] shadow-[0_0_24px_rgba(34,211,238,0.12)]"
+            style={{ borderColor: finish.frame, backgroundColor: finish.trim }}
+          >
+            <div
+              className="absolute inset-[10%] rounded-[1rem] border"
+              style={{
+                borderColor: isPrecisionActive ? "#a5f3fc" : finish.trim,
+                backgroundColor: isGlassActive ? "#ffffff" : finish.glass,
+                boxShadow: isGlassActive ? "0 0 24px rgba(255,255,255,0.28)" : "none",
+              }}
+            />
+            <div
+              className="absolute bottom-[8%] left-[8%] right-[8%] h-3 rounded-full"
+              style={{
+                backgroundColor: isThermalActive ? "#fb923c" : finish.thermal,
+                boxShadow: isThermalActive ? "0 0 18px rgba(251,146,60,0.4)" : "none",
+              }}
+            />
+            <div
+              className="absolute bottom-[18%] top-[18%] left-1/2 w-2 -translate-x-1/2 rounded-full"
+              style={{
+                backgroundColor: isPrecisionActive ? "#a5f3fc" : finish.trim,
+                boxShadow: isPrecisionActive ? "0 0 16px rgba(165,243,252,0.35)" : "none",
+              }}
+            />
+            {[22, 50, 78].map((top, index) => (
+              <div
+                key={index}
+                className="absolute right-[4%] h-5 w-3 -translate-y-1/2 rounded-full"
+                style={{
+                  top: `${top}%`,
+                  backgroundColor: isLockingActive ? "#f8fafc" : finish.handle,
+                  boxShadow: isLockingActive ? "0 0 16px rgba(248,250,252,0.35)" : "none",
+                }}
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-8 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300">
+          WebGL is not available on this device, so the interactive 3D canvas has been replaced
+          with a static preview.
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function FeatureCameraDirector({ activeFeature, focusRequest, controlsRef }) {
   const desiredPositionRef = useRef(new THREE.Vector3(0, 0.15, 9));
   const desiredTargetRef = useRef(new THREE.Vector3(0, 0, 0));
@@ -422,6 +514,7 @@ function Showcase3D() {
   const [sceneReady, setSceneReady] = useState(false);
   const [hasInteracted, setHasInteracted] = useState(false);
   const [focusRequest, setFocusRequest] = useState(0);
+  const [supportsWebGL] = useState(() => browserSupportsWebGL());
   const controlsRef = useRef(null);
   const [showcaseRef, isShowcaseInView] = useInView({
     threshold: 0.15,
@@ -468,6 +561,10 @@ function Showcase3D() {
       block: "start",
     });
   };
+
+  const showCanvas = supportsWebGL === true && isShowcaseInView;
+  const showStaticPreview = supportsWebGL === false;
+  const showLoadingState = supportsWebGL === true && !sceneReady;
 
   return (
     <section
@@ -517,7 +614,7 @@ function Showcase3D() {
               {premiumFeatures.find((feature) => feature.key === activeFeature)?.title}
             </div>
 
-            {isShowcaseInView && (
+            {showCanvas && (
               <Canvas
                 shadows
                 dpr={[1, 1.75]}
@@ -586,12 +683,16 @@ function Showcase3D() {
               </Canvas>
             )}
 
+            {showStaticPreview && (
+              <StaticShowcasePreview finish={selectedFinish} activeFeature={activeFeature} />
+            )}
+
             <motion.div
               initial={false}
-              animate={{ opacity: isShowcaseInView && sceneReady ? 0 : 1 }}
+              animate={{ opacity: showLoadingState && !showStaticPreview ? 1 : 0 }}
               transition={{ duration: 0.45 }}
               className={`absolute inset-0 flex items-center justify-center bg-[#030712] ${
-                isShowcaseInView && sceneReady ? "pointer-events-none" : ""
+                !showLoadingState || showStaticPreview ? "pointer-events-none" : ""
               }`}
             >
               <div className="loading-spinner"></div>

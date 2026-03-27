@@ -6,19 +6,6 @@ function resolveValue(value) {
   return value instanceof Function ? value() : value
 }
 
-function readStoredValue(key, fallbackValue, deserializer) {
-  if (typeof window === 'undefined') {
-    return fallbackValue
-  }
-
-  try {
-    const item = window.localStorage.getItem(key)
-    return item === null ? fallbackValue : deserializer(item)
-  } catch {
-    return fallbackValue
-  }
-}
-
 export function useInView(options = {}) {
   const {
     threshold = 0.1,
@@ -94,8 +81,56 @@ export function useLocalStorage(key, initialValue, options = {}) {
     syncTabs = true,
   } = options
   const fallbackValue = useMemo(() => resolveValue(initialValue), [initialValue])
+  const snapshotCacheRef = useRef({
+    hasStoredValue: false,
+    raw: null,
+    value: fallbackValue,
+  })
   const getSnapshot = useCallback(
-    () => readStoredValue(key, fallbackValue, deserializer),
+    () => {
+      if (typeof window === 'undefined') {
+        return fallbackValue
+      }
+
+      try {
+        const item = window.localStorage.getItem(key)
+
+        if (item === null) {
+          snapshotCacheRef.current = {
+            hasStoredValue: false,
+            raw: null,
+            value: fallbackValue,
+          }
+
+          return fallbackValue
+        }
+
+        if (
+          snapshotCacheRef.current.hasStoredValue &&
+          snapshotCacheRef.current.raw === item
+        ) {
+          return snapshotCacheRef.current.value
+        }
+
+        const parsedValue = deserializer(item)
+
+        snapshotCacheRef.current = {
+          hasStoredValue: true,
+          raw: item,
+          value: parsedValue,
+        }
+
+        return parsedValue
+      } catch {
+        snapshotCacheRef.current = {
+          hasStoredValue: false,
+          raw: null,
+          value: fallbackValue,
+        }
+
+        return fallbackValue
+      }
+    },
     [deserializer, fallbackValue, key],
   )
 

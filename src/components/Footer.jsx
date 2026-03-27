@@ -110,6 +110,7 @@ function Footer() {
                   className="flex-1 input-glow py-3"
                 />
                 <motion.button
+                  type="button"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl font-semibold"
@@ -126,7 +127,7 @@ function Footer() {
                 {socialLinks.map((social, index) => (
                   <motion.a
                     key={index}
-                    href="#"
+                    href="/#contact"
                     whileHover={{ scale: 1.1, y: -5 }}
                     whileTap={{ scale: 0.95 }}
                     className={`w-10 h-10 glass rounded-xl flex items-center justify-center text-lg ${social.color} transition-colors`}
@@ -145,9 +146,9 @@ function Footer() {
             <ul className="space-y-3">
               {footerLinks.products.map((link, index) => (
                 <li key={index}>
-                  <a href="#products" className="text-gray-400 hover:text-cyan-400 transition-colors">
+                  <Link to="/#products" className="text-gray-400 hover:text-cyan-400 transition-colors">
                     {link}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -159,12 +160,12 @@ function Footer() {
             <ul className="space-y-3">
               {footerLinks.company.map((link, index) => (
                 <li key={index}>
-                  <a 
-                    href={link === "Contact" ? "#contact" : "#about"} 
+                  <Link 
+                    to={link === "Contact" ? "/#contact" : "/#about"} 
                     className="text-gray-400 hover:text-cyan-400 transition-colors"
                   >
                     {link}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -176,9 +177,9 @@ function Footer() {
             <ul className="space-y-3">
               {footerLinks.support.map((link, index) => (
                 <li key={index}>
-                  <a href="#" className="text-gray-400 hover:text-cyan-400 transition-colors">
+                  <Link to="/#contact" className="text-gray-400 hover:text-cyan-400 transition-colors">
                     {link}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -193,13 +194,13 @@ function Footer() {
             </p>
             <div className="flex gap-6">
               {["Privacy Policy", "Terms of Service", "Cookie Policy"].map((link, index) => (
-                <a
+                <Link
                   key={index}
-                  href="#"
+                  to="/#contact"
                   className="text-gray-500 hover:text-cyan-400 text-sm transition-colors"
                 >
                   {link}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
