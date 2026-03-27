@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
+import Logo3D from "./Logo3D"
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -15,7 +16,7 @@ function Navbar() {
   }, [])
 
   const navItems = [
-    { name: 'Home', to: '/' },
+    { name: 'Home', to: '/home' },
     { name: 'Products', to: '/products' },
     { name: '3D Showcase', to: '/showcase' },
     { name: 'Features', to: '/features' },
@@ -38,30 +39,7 @@ function Navbar() {
     >
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-3 group">
-            <motion.div
-              whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
-              transition={{ duration: 0.5 }}
-              className="relative"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl blur-md opacity-50 group-hover:opacity-80 transition-opacity"></div>
-              <div className="relative w-12 h-12 bg-gradient-to-br from-cyan-500 via-blue-500 to-purple-600 rounded-xl flex items-center justify-center border border-cyan-400/30 shadow-lg shadow-cyan-500/20">
-                <span className="text-white font-black text-xl tracking-tight" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-                  <span className="opacity-90">D</span><span className="opacity-100">W</span>
-                </span>
-              </div>
-            </motion.div>
-            <div>
-              <motion.h1 
-                className="text-2xl font-bold tracking-wide"
-                whileHover={{ scale: 1.05 }}
-              >
-                <span className="text-white">Dynamic</span>
-                <span className="gradient-text ml-1">Windows</span>
-              </motion.h1>
-              <p className="text-xs text-cyan-400/70 tracking-widest uppercase">Premium Solutions</p>
-            </div>
-          </Link>
+          <Logo3D size="md" showText={true} />
 
           <div className="hidden lg:flex items-center gap-4">
             {navItems.map((item, index) => (

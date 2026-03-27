@@ -72,7 +72,7 @@ function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <Link to="/" className="flex items-center gap-3 mb-6">
+            <Link to="/home" className="flex items-center gap-3 mb-6">
               <motion.div
                 whileHover={{ scale: 1.1 }}
                 transition={{ duration: 0.5 }}
