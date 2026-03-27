@@ -16,13 +16,13 @@ function Navbar() {
 
   const navItems = [
     { name: 'Home', to: '/' },
-    { name: 'Products', to: '/#products' },
-    { name: '3D Showcase', to: '/#showcase' },
-    { name: 'Features', to: '/#features' },
-    { name: 'Testimonials', to: '/#testimonials' },
-    { name: 'Gallery', to: '/#gallery' },
-    { name: 'About', to: '/#about' },
-    { name: 'Contact', to: '/#contact' }
+    { name: 'Products', to: '/products' },
+    { name: '3D Showcase', to: '/showcase' },
+    { name: 'Features', to: '/features' },
+    { name: 'Testimonials', to: '/testimonials' },
+    { name: 'Gallery', to: '/gallery' },
+    { name: 'About', to: '/about' },
+    { name: 'Contact', to: '/contact' }
   ]
 
   return (

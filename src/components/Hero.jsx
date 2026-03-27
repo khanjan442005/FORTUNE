@@ -2,6 +2,7 @@ import { useRef, useMemo } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
 import { Float, OrbitControls, MeshDistortMaterial, Environment, Stars } from "@react-three/drei"
 import { motion } from "framer-motion"
+import { Link } from "react-router-dom"
 
 function WindowModel() {
   const groupRef = useRef()
@@ -218,7 +219,7 @@ function Hero() {
               transition={{ delay: 0.8 }}
               className="flex flex-wrap gap-4"
             >
-              <a href="#products">
+              <Link to="/products">
                 <motion.button
                   whileHover={{ scale: 1.05, boxShadow: "0 0 40px rgba(0, 240, 255, 0.4)" }}
                   whileTap={{ scale: 0.95 }}
@@ -226,8 +227,8 @@ function Hero() {
                 >
                   <span>Explore Products</span>
                 </motion.button>
-              </a>
-              <a href="#contact">
+              </Link>
+              <Link to="/contact">
                 <motion.button
                   whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.1)" }}
                   whileTap={{ scale: 0.95 }}
@@ -235,7 +236,7 @@ function Hero() {
                 >
                   <span>Get Quote</span>
                 </motion.button>
-              </a>
+              </Link>
             </motion.div>
             
             {/* Stats */}

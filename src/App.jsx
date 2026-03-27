@@ -1,11 +1,18 @@
-import { Suspense, lazy, useEffect } from 'react'
-import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { Suspense, lazy } from 'react'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import NeonCursor from './components/NeonCursor'
 import ErrorBoundary from './components/ErrorBoundary'
 
 const Home = lazy(() => import('./pages/Home'))
 const Landing = lazy(() => import('./pages/Landing'))
 const ProductDetail = lazy(() => import('./pages/ProductDetail'))
+const ProductsPage = lazy(() => import('./pages/ProductsPage'))
+const ShowcasePage = lazy(() => import('./pages/ShowcasePage'))
+const FeaturesPage = lazy(() => import('./pages/FeaturesPage'))
+const TestimonialsPage = lazy(() => import('./pages/TestimonialsPage'))
+const GalleryPage = lazy(() => import('./pages/GalleryPage'))
+const AboutPage = lazy(() => import('./pages/AboutPage'))
+const ContactPage = lazy(() => import('./pages/ContactPage'))
 
 function LoadingFallback() {
   return (
@@ -16,36 +23,6 @@ function LoadingFallback() {
       </div>
     </div>
   )
-}
-
-function RouteStateManager() {
-  const location = useLocation()
-
-  useEffect(() => {
-    const scrollToTarget = () => {
-      if (!location.hash) {
-        window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
-        return
-      }
-
-      const target = document.querySelector(location.hash)
-
-      if (!target) {
-        window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
-        return
-      }
-
-      target.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      })
-    }
-
-    const frameId = window.requestAnimationFrame(scrollToTarget)
-    return () => window.cancelAnimationFrame(frameId)
-  }, [location.hash, location.pathname])
-
-  return null
 }
 
 function RouteFallback() {
@@ -72,7 +49,6 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <RouteStateManager />
         <ErrorBoundary fallback={null}>
           <NeonCursor />
         </ErrorBoundary>
@@ -81,6 +57,13 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/landing" element={<Landing />} />
+              <Route path="/products" element={<ProductsPage />} />
+              <Route path="/showcase" element={<ShowcasePage />} />
+              <Route path="/features" element={<FeaturesPage />} />
+              <Route path="/testimonials" element={<TestimonialsPage />} />
+              <Route path="/gallery" element={<GalleryPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/contact" element={<ContactPage />} />
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

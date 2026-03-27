@@ -1,8 +1,11 @@
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Autoplay, Pagination, Navigation, EffectFade, EffectCoverflow } from "swiper/modules"
 import { motion } from "framer-motion"
+import { Link } from "react-router-dom"
 import "swiper/css"
 import "swiper/css/pagination"
+
+const MotionLink = motion.create(Link)
 import "swiper/css/navigation"
 import "swiper/css/effect-fade"
 import "swiper/css/effect-coverflow"
@@ -93,25 +96,25 @@ function HeroSlider(){
                           transition={{duration: 0.8, delay: 1.1}}
                           className="flex flex-wrap gap-5"
                         >
-                          <motion.a 
+                          <MotionLink
+                            to="/products"
                             whileHover={{scale: 1.05, boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.5)"}}
                             whileTap={{scale: 0.98}}
-                            href="#products" 
                             className="group relative bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 px-10 py-4 rounded-full font-bold text-lg transition-all shadow-lg shadow-blue-500/30 text-white overflow-hidden"
                           >
                             <span className="relative z-10">View Products</span>
                             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                          </motion.a>
+                          </MotionLink>
                           
-                          <motion.a 
+                          <MotionLink
+                            to="/contact"
                             whileHover={{scale: 1.05, backgroundColor: "rgba(255,255,255,0.15)"}}
                             whileTap={{scale: 0.98}}
-                            href="#contact" 
                             className="bg-white/5 hover:bg-white/10 backdrop-blur px-10 py-4 rounded-full font-bold text-lg transition-all border border-white/20 text-white flex items-center gap-2"
                           >
                             <span>Get Quote</span>
                             <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                          </motion.a>
+                          </MotionLink>
                         </motion.div>
                       </div>
                     </motion.div>

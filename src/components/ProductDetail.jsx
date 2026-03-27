@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { Link } from "react-router-dom"
 
 function ProductDetail({ product, onClose }){
   const [selectedImage, setSelectedImage] = useState(0)
@@ -188,15 +189,13 @@ function ProductDetail({ product, onClose }){
                 </div>
               </motion.div>
 
-              <motion.a 
-                href="#contact"
+              <Link
+                to="/contact"
                 onClick={onClose}
-                whileHover={{scale: 1.02, boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)"}}
-                whileTap={{scale: 0.98}}
-                className="block w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white text-center font-bold py-4 rounded-xl transition-all shadow-lg shadow-blue-500/30"
+                className="block w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white text-center font-bold py-4 rounded-xl transition-all shadow-lg shadow-blue-500/30 hover:scale-[1.02] active:scale-[0.98]"
               >
                 Get Quote
-              </motion.a>
+              </Link>
             </div>
           </div>
         </motion.div>
