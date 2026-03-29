@@ -71,7 +71,7 @@ function FeatureCard({ feature, index }) {
     <TiltCard tiltMax={8} scale={1.02} className="h-full">
       <RevealOnScroll variant="fadeUp" delay={index * 0.1} className="h-full">
         <GlowCard
-          className="relative p-8 glass rounded-3xl h-full overflow-hidden group hover-lift"
+          className="relative h-full overflow-hidden rounded-3xl p-6 glass group hover-lift md:p-8"
           glowColor={`${feature.gradient.includes('cyan') ? 'rgba(34,211,238,0.06)' : feature.gradient.includes('purple') ? 'rgba(139,92,246,0.06)' : 'rgba(34,211,238,0.06)'}`}
         >
           <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
@@ -86,7 +86,7 @@ function FeatureCard({ feature, index }) {
               {feature.icon}
             </motion.div>
 
-            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
+            <h3 className="mb-3 text-lg font-bold text-white transition-colors group-hover:text-cyan-400 md:text-xl">
               {feature.title}
             </h3>
             <p className="text-gray-400 leading-relaxed">
@@ -103,11 +103,11 @@ function FeatureCard({ feature, index }) {
 
 function Features() {
   return (
-    <section id="features" className="min-h-screen py-24 bg-[#030712] relative overflow-hidden flex items-center">
+    <section id="features" className="relative flex min-h-screen items-center overflow-hidden bg-[#030712] py-20 md:py-24">
       {/* Background */}
       <div className="absolute inset-0 grid-background opacity-20"></div>
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-purple-500/10 rounded-full blur-[200px]"></div>
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[200px]"></div>
+      <div className="absolute top-0 right-0 h-72 w-72 rounded-full bg-purple-500/10 blur-[140px] md:h-[600px] md:w-[600px] md:blur-[200px]"></div>
+      <div className="absolute bottom-0 left-0 h-72 w-72 rounded-full bg-cyan-500/10 blur-[140px] md:h-[600px] md:w-[600px] md:blur-[200px]"></div>
       
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
@@ -120,11 +120,11 @@ function Features() {
           >
             Why Choose Us
           </motion.span>
-          <h2 className="text-5xl md:text-6xl font-bold mb-4">
+          <h2 className="mb-4 text-4xl font-bold sm:text-5xl md:text-6xl">
             <span className="text-white">Premium </span>
             <span className="gradient-text">Features</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="mx-auto max-w-2xl text-base text-gray-400 sm:text-lg">
             Our windows and doors come packed with advanced features for superior performance and aesthetics
           </p>
         </RevealOnScroll>

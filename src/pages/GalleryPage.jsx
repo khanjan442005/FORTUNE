@@ -5,6 +5,7 @@ import PageHero from "../components/PageHero"
 import PageShell from "../components/PageShell"
 import Gallery from "../components/Gallery"
 import Footer from "../components/Footer"
+import { sectionIds, sectionLinks } from "../data/sectionLinks"
 
 const featuredProjects = [
   { title: "Luxury Villa - Ahmedabad", type: "Residential", items: "24 Windows + 6 Doors", desc: "Full home transformation with premium sliding and casement windows paired with French doors for seamless indoor-outdoor living." },
@@ -19,11 +20,9 @@ const projectStats = [
   { value: "10K+", label: "Doors Installed" },
 ]
 
-function GalleryPage() {
-  return (
-    <PageShell tone="emerald">
-      <Navbar />
-      <div className="pt-20">
+function GalleryPage({ embedded = false }) {
+  const content = (
+    <div className={embedded ? "" : "pt-20"}>
         <PageHero
           badge="Our Work"
           title="Project"
@@ -105,8 +104,8 @@ function GalleryPage() {
                   <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Start Your Dream Project</h2>
                   <p className="text-gray-400 mb-8 max-w-xl mx-auto">Whether it's a single window or a full building facade, we bring the same dedication to every project.</p>
                   <div className="flex flex-wrap gap-4 justify-center">
-                    <Link to="/contact" className="neon-button"><span>Request a Quote</span></Link>
-                    <Link to="/products" className="outline-button"><span>Explore Products</span></Link>
+                    <Link to={sectionLinks.contact} className="neon-button"><span>Request a Quote</span></Link>
+                    <Link to={sectionLinks.products} className="outline-button"><span>Explore Products</span></Link>
                   </div>
                 </div>
               </motion.div>
@@ -114,6 +113,23 @@ function GalleryPage() {
           </section>
 
       </div>
+  )
+
+  if (embedded) {
+    return (
+      <section
+        id={sectionIds.gallery}
+        className="relative min-h-screen scroll-mt-28 py-6 md:scroll-mt-32 md:py-10"
+      >
+        {content}
+      </section>
+    )
+  }
+
+  return (
+    <PageShell tone="emerald">
+      <Navbar />
+      {content}
       <Footer />
     </PageShell>
   )

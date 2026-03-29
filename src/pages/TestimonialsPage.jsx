@@ -5,6 +5,7 @@ import PageHero from "../components/PageHero"
 import PageShell from "../components/PageShell"
 import Testimonials from "../components/Testimonials"
 import Footer from "../components/Footer"
+import { sectionIds, sectionLinks } from "../data/sectionLinks"
 
 const highlights = [
   { title: "Professional Installation", desc: "Every project is handled by our certified installation team who ensure perfect fitting and finish.", author: "Multiple Clients" },
@@ -19,11 +20,9 @@ const trustMetrics = [
   { value: "10+", label: "Industry Awards", sublabel: "For quality & design" },
 ]
 
-function TestimonialsPage() {
-  return (
-    <PageShell tone="violet">
-      <Navbar />
-      <div className="pt-20">
+function TestimonialsPage({ embedded = false }) {
+  const content = (
+    <div className={embedded ? "" : "pt-20"}>
         <PageHero
           badge="Testimonials"
           title="What Our"
@@ -109,8 +108,8 @@ function TestimonialsPage() {
                   <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Join 500+ Happy Customers</h2>
                   <p className="text-gray-400 mb-8 max-w-xl mx-auto">Experience the same quality and service that our customers rave about. Start your project today.</p>
                   <div className="flex flex-wrap gap-4 justify-center">
-                    <Link to="/contact" className="neon-button"><span>Get Started</span></Link>
-                    <Link to="/gallery" className="outline-button"><span>See Our Work</span></Link>
+                    <Link to={sectionLinks.contact} className="neon-button"><span>Get Started</span></Link>
+                    <Link to={sectionLinks.gallery} className="outline-button"><span>See Our Work</span></Link>
                   </div>
                 </div>
               </motion.div>
@@ -118,6 +117,23 @@ function TestimonialsPage() {
           </section>
 
       </div>
+  )
+
+  if (embedded) {
+    return (
+      <section
+        id={sectionIds.testimonials}
+        className="relative min-h-screen scroll-mt-28 py-6 md:scroll-mt-32 md:py-10"
+      >
+        {content}
+      </section>
+    )
+  }
+
+  return (
+    <PageShell tone="violet">
+      <Navbar />
+      {content}
       <Footer />
     </PageShell>
   )

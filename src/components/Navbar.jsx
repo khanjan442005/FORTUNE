@@ -2,23 +2,33 @@ import { useState } from "react"
 import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motion"
 import { Link, useLocation } from "react-router-dom"
 import Logo3D from "./Logo3D"
+import { routeSectionIds, sectionLinks } from "../data/sectionLinks"
 
 const navItems = [
-  { name: "Home", to: "/" },
-  { name: "Products", to: "/products" },
-  { name: "Features", to: "/features" },
-  { name: "Testimonials", to: "/testimonials" },
-  { name: "Gallery", to: "/gallery" },
-  { name: "About", to: "/about" },
-  { name: "Contact", to: "/contact" },
+  { name: "Home", to: sectionLinks.home, hash: `#${routeSectionIds["/"]}` },
+  { name: "Products", to: sectionLinks.products, hash: `#${routeSectionIds["/products"]}` },
+  { name: "Features", to: sectionLinks.features, hash: `#${routeSectionIds["/features"]}` },
+  { name: "Testimonials", to: sectionLinks.testimonials, hash: `#${routeSectionIds["/testimonials"]}` },
+  { name: "Gallery", to: sectionLinks.gallery, hash: `#${routeSectionIds["/gallery"]}` },
+  { name: "About", to: sectionLinks.about, hash: `#${routeSectionIds["/about"]}` },
+  { name: "Contact", to: sectionLinks.contact, hash: `#${routeSectionIds["/contact"]}` },
 ]
 
-function isNavItemActive(pathname, itemPath) {
-  if (itemPath === "/products") {
-    return pathname === "/products" || pathname.startsWith("/product/")
+function resolveActiveHash(pathname, hash) {
+  if (pathname.startsWith("/product/")) {
+    return `#${routeSectionIds["/products"]}`
   }
 
-  return pathname === itemPath
+  const routeSectionId = routeSectionIds[pathname]
+  if (routeSectionId) {
+    return pathname === "/" ? hash || `#${routeSectionIds["/"]}` : `#${routeSectionId}`
+  }
+
+  return hash || `#${routeSectionIds["/"]}`
+}
+
+function isNavItemActive(pathname, hash, itemHash) {
+  return resolveActiveHash(pathname, hash) === itemHash
 }
 
 function DesktopNavItem({ item, isActive }) {
@@ -27,7 +37,7 @@ function DesktopNavItem({ item, isActive }) {
       <Link
         to={item.to}
         aria-current={isActive ? "page" : undefined}
-        className={`relative inline-flex h-11 items-center justify-center px-3 text-[13px] font-medium transition-all duration-300 nav-link-hover ${
+        className={`relative inline-flex h-12 items-center justify-center px-4 text-sm font-medium transition-all duration-300 nav-link-hover ${
           isActive
             ? "text-cyan-100 [text-shadow:0_0_16px_rgba(103,232,249,0.5)]"
             : "text-white/[0.66] hover:text-white hover:[text-shadow:0_0_14px_rgba(255,255,255,0.14)]"
@@ -77,9 +87,8 @@ function MobileNavItem({ item, isActive, onNavigate }) {
 }
 
 function Navbar() {
-  const [mobileMenuPath, setMobileMenuPath] = useState(null)
-  const { pathname } = useLocation()
-  const isMobileMenuOpen = mobileMenuPath === pathname
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const { pathname, hash } = useLocation()
   const tiltX = useMotionValue(0)
   const tiltY = useMotionValue(0)
   const rotateX = useSpring(tiltX, { stiffness: 190, damping: 18, mass: 0.6 })
@@ -101,7 +110,7 @@ function Navbar() {
 
   return (
     <nav
-      className="fixed left-1/2 top-4 z-50 w-[calc(100%-1rem)] max-w-[1180px] -translate-x-1/2 md:top-5 md:w-[calc(100%-2rem)]"
+      className="fixed left-1/2 top-4 z-50 w-[calc(100%-1rem)] max-w-[1380px] -translate-x-1/2 md:top-5 md:w-[calc(100%-2rem)]"
       style={{ perspective: 1800 }}
     >
       <motion.div
@@ -118,18 +127,20 @@ function Navbar() {
           backdropFilter: "blur(22px)",
           WebkitBackdropFilter: "blur(22px)",
         }}
-        className="relative overflow-hidden rounded-[1.15rem] border border-white/[0.08]"
+        className="relative overflow-hidden rounded-[1.35rem] border border-white/[0.08]"
       >
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(125,211,252,0.14),transparent_22%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.08),transparent_24%)]" />
         <div className="pointer-events-none absolute -left-8 top-2 h-16 w-24 rounded-full bg-cyan-300/[0.1] blur-3xl" />
         <div className="pointer-events-none absolute -right-8 bottom-0 h-20 w-28 rounded-full bg-blue-400/[0.1] blur-3xl" />
 
-        <div className="relative flex items-center gap-3 px-3 py-3 md:px-4">
+        <div className="relative flex items-center gap-4 px-4 py-3.5 md:px-5">
           <div
-            className="shrink-0 rounded-[0.95rem] bg-white/[0.04] px-3 py-2 shadow-[0_10px_24px_rgba(2,8,23,0.16),inset_0_1px_0_rgba(255,255,255,0.05)]"
+            className="shrink-0 rounded-[1.05rem] bg-white/[0.04] px-3.5 py-2.5 shadow-[0_10px_24px_rgba(2,8,23,0.16),inset_0_1px_0_rgba(255,255,255,0.05)]"
             style={{ transform: "translateZ(42px)" }}
           >
-            <Logo3D size="sm" showText={true} className="scale-[0.92] origin-left" />
+            <Link to={sectionLinks.home} aria-label="Go to home section">
+              <Logo3D size="sm" showText={true} className="origin-left scale-100" />
+            </Link>
           </div>
 
           <div className="hidden min-w-0 flex-1 items-center justify-center lg:flex">
@@ -142,7 +153,7 @@ function Navbar() {
                   <DesktopNavItem
                     key={item.to}
                     item={item}
-                    isActive={isNavItemActive(pathname, item.to)}
+                    isActive={isNavItemActive(pathname, hash, item.hash)}
                   />
                 ))}
               </div>
@@ -153,8 +164,8 @@ function Navbar() {
             <button
               type="button"
               aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-              className="flex h-11 w-11 items-center justify-center rounded-[0.95rem] bg-white/[0.05] text-white/[0.86] shadow-[0_10px_24px_rgba(2,8,23,0.14),inset_0_1px_0_rgba(255,255,255,0.05)] transition-colors duration-300 hover:bg-white/[0.08]"
-              onClick={() => setMobileMenuPath(isMobileMenuOpen ? null : pathname)}
+              className="flex h-12 w-12 items-center justify-center rounded-[1rem] bg-white/[0.05] text-white/[0.86] shadow-[0_10px_24px_rgba(2,8,23,0.14),inset_0_1px_0_rgba(255,255,255,0.05)] transition-colors duration-300 hover:bg-white/[0.08]"
+              onClick={() => setIsMobileMenuOpen((current) => !current)}
               style={{ transform: "translateZ(36px)" }}
             >
               <div className="flex w-5 flex-col gap-1.5">
@@ -198,8 +209,8 @@ function Navbar() {
                   <MobileNavItem
                     key={item.to}
                     item={item}
-                    isActive={isNavItemActive(pathname, item.to)}
-                    onNavigate={() => setMobileMenuPath(null)}
+                    isActive={isNavItemActive(pathname, hash, item.hash)}
+                    onNavigate={() => setIsMobileMenuOpen(false)}
                   />
                 ))}
               </div>

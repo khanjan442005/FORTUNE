@@ -5,6 +5,7 @@ import PageHero from "../components/PageHero"
 import PageShell from "../components/PageShell"
 import About from "../components/About"
 import Footer from "../components/Footer"
+import { sectionIds, sectionLinks } from "../data/sectionLinks"
 
 const coreValues = [
   { title: "Innovation", desc: "We continuously push boundaries with smart technology, modern designs, and sustainable materials.", icon: "M13 10V3L4 14h7v7l9-11h-7z" },
@@ -29,11 +30,9 @@ const milestones = [
   { year: "2025", event: "Industry Leader", detail: "Recognized as India's leading premium window manufacturer." },
 ]
 
-function AboutPage() {
-  return (
-    <PageShell tone="violet">
-      <Navbar />
-      <div className="pt-20">
+function AboutPage({ embedded = false }) {
+  const content = (
+    <div className={embedded ? "" : "pt-20"}>
         <PageHero
           badge="About Us"
           title="Crafting"
@@ -163,8 +162,8 @@ function AboutPage() {
                   <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Work With Us?</h2>
                   <p className="text-gray-400 mb-8 max-w-xl mx-auto">Let's discuss your project and create something extraordinary together.</p>
                   <div className="flex flex-wrap gap-4 justify-center">
-                    <Link to="/contact" className="neon-button"><span>Get in Touch</span></Link>
-                    <Link to="/products" className="outline-button"><span>View Products</span></Link>
+                    <Link to={sectionLinks.contact} className="neon-button"><span>Get in Touch</span></Link>
+                    <Link to={sectionLinks.products} className="outline-button"><span>View Products</span></Link>
                   </div>
                 </div>
               </motion.div>
@@ -172,6 +171,23 @@ function AboutPage() {
           </section>
 
       </div>
+  )
+
+  if (embedded) {
+    return (
+      <section
+        id={sectionIds.about}
+        className="relative min-h-screen scroll-mt-28 py-6 md:scroll-mt-32 md:py-10"
+      >
+        {content}
+      </section>
+    )
+  }
+
+  return (
+    <PageShell tone="violet">
+      <Navbar />
+      {content}
       <Footer />
     </PageShell>
   )

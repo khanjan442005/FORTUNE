@@ -77,15 +77,15 @@ function TestimonialCard({ testimonial, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
       viewport={{ once: true }}
-      className="fx-panel relative rounded-2xl p-8"
+      className="fx-panel relative rounded-2xl p-6 md:p-8"
     >
-      <div className="absolute top-6 right-6 text-6xl text-cyan-500/10 font-serif">"</div>
+      <div className="absolute right-5 top-5 text-5xl font-serif text-cyan-500/10 md:right-6 md:top-6 md:text-6xl">"</div>
       
-      <div className="flex items-start gap-4 mb-6">
+      <div className="mb-6 flex items-start gap-4">
         <img
           src={testimonial.image}
           alt={testimonial.name}
-          className="w-16 h-16 rounded-full object-cover border-2 border-cyan-500/30"
+          className="h-14 w-14 rounded-full border-2 border-cyan-500/30 object-cover sm:h-16 sm:w-16"
         />
         <div>
           <h4 className="text-lg font-bold text-white">{testimonial.name}</h4>
@@ -96,11 +96,11 @@ function TestimonialCard({ testimonial, index }) {
         </div>
       </div>
 
-      <p className="text-gray-300 leading-relaxed mb-6 relative z-10">
+      <p className="relative z-10 mb-6 text-sm leading-relaxed text-gray-300 sm:text-base">
         {testimonial.text}
       </p>
 
-      <div className="flex items-center justify-between pt-4 border-t border-white/10">
+      <div className="flex flex-col gap-2 border-t border-white/10 pt-4 text-left sm:flex-row sm:items-center sm:justify-between">
         <span className="text-sm text-cyan-400">{testimonial.product}</span>
         <span className="text-xs text-gray-500">Verified Customer</span>
       </div>
@@ -110,7 +110,7 @@ function TestimonialCard({ testimonial, index }) {
 
 function Testimonials() {
   return (
-    <section id="testimonials" className="min-h-screen py-24 bg-[#030712] relative overflow-hidden flex items-center">
+    <section id="testimonials" className="relative flex min-h-screen items-center overflow-hidden bg-[#030712] py-20 md:py-24">
       <div className="absolute inset-0 grid-background opacity-20"></div>
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[150px]"></div>
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[150px]"></div>
@@ -125,11 +125,11 @@ function Testimonials() {
           <span className="inline-block px-4 py-2 glass rounded-full text-cyan-400 text-sm font-medium mb-4">
             Testimonials
           </span>
-          <h2 className="text-5xl md:text-6xl font-bold mb-4">
+          <h2 className="mb-4 text-4xl font-bold sm:text-5xl md:text-6xl">
             <span className="text-white">What Our </span>
             <span className="gradient-text">Clients Say</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="mx-auto max-w-2xl text-base text-gray-400 sm:text-lg">
             Don't just take our word for it. Here's what our satisfied customers have to say about their experience with Dynamic Windows.
           </p>
         </motion.div>
@@ -217,6 +217,13 @@ function Testimonials() {
         }
         .testimonials-swiper .swiper-pagination-bullet-active {
           background: #00f0ff;
+        }
+
+        @media (max-width: 767px) {
+          .testimonials-swiper .swiper-button-next,
+          .testimonials-swiper .swiper-button-prev {
+            display: none;
+          }
         }
       `}</style>
     </section>

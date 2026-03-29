@@ -5,6 +5,7 @@ import products from "../data/products"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import PageShell from "../components/PageShell"
+import { sectionLinks } from "../data/sectionLinks"
 
 function saveToRecentlyViewed(product) {
   try {
@@ -51,16 +52,16 @@ function ProductDetailContent({ id }) {
     <PageShell tone="cyan">
       <Navbar />
 
-      <div className="pt-24 pb-16">
+      <div className="pb-16 pt-24">
         <div className="container mx-auto px-6">
-          <Link to="/products" className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 mb-8 font-semibold transition-colors">
+          <Link to={sectionLinks.products} className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 mb-8 font-semibold transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
             Back to Products
           </Link>
 
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-12">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
@@ -76,7 +77,7 @@ function ProductDetailContent({ id }) {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="w-full h-[500px] object-cover"
+                    className="h-[320px] w-full object-cover sm:h-[420px] lg:h-[500px]"
                   />
                 </AnimatePresence>
                 <div className="absolute top-4 right-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-4 py-2 rounded-full font-bold shadow-lg">
@@ -114,11 +115,11 @@ function ProductDetailContent({ id }) {
                 </span>
               </div>
 
-              <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              <h1 className="mb-6 text-3xl font-bold text-white sm:text-4xl md:text-5xl">
                 {product.name}
               </h1>
 
-              <p className="text-xl text-gray-400 mb-8 leading-relaxed">
+              <p className="mb-8 text-lg leading-relaxed text-gray-400 md:text-xl">
                 {product.description}
               </p>
 
@@ -161,11 +162,11 @@ function ProductDetailContent({ id }) {
                 </div>
               </div>
 
-              <div className="flex gap-4">
-                <Link to="/contact" className="flex-1 neon-button text-center">
+              <div className="flex flex-col gap-4 sm:flex-row">
+                <Link to={sectionLinks.contact} className="flex-1 text-center neon-button">
                   <span>Get Quote Now</span>
                 </Link>
-                <Link to="/products" className="px-6 py-3 glass rounded-xl font-semibold text-white hover:bg-white/10 transition-colors">
+                <Link to={sectionLinks.products} className="rounded-xl glass px-6 py-3 text-center font-semibold text-white transition-colors hover:bg-white/10">
                   View All Products
                 </Link>
               </div>

@@ -1,7 +1,8 @@
-import { useState, useRef, useMemo } from "react"
+import { useRef, useMemo } from "react"
 import { Link } from "react-router-dom"
 import { motion, useMotionValue, useTransform } from "framer-motion"
 import products from '../data/products'
+import { sectionLinks } from "../data/sectionLinks"
 import { useDebounce, useLocalStorage } from "../hooks/useInView"
 
 const categories = [
@@ -39,7 +40,6 @@ function serializeProductFilters(value) {
 }
 
 function ProductCard({ product, index }) {
-  const [isHovered, setIsHovered] = useState(false)
   const ref = useRef(null)
   
   const x = useMotionValue(0)
@@ -70,8 +70,7 @@ function ProductCard({ product, index }) {
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
       onMouseMove={handleMouseMove}
-      onMouseLeave={() => { handleMouseLeave(); setIsHovered(false); }}
-      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleMouseLeave}
       style={{ perspective: 1000 }}
     >
       <motion.div
@@ -112,18 +111,6 @@ function ProductCard({ product, index }) {
             </span>
           </motion.div>
           
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
-            transition={{ duration: 0.3 }}
-            className="absolute inset-x-4 bottom-4"
-          >
-              <Link to={`/product/${product.id}`} className="block w-full rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 py-3 text-center font-semibold text-white shadow-lg fx-press">
-                View Details
-              </Link>
-            </motion.div>
-          
-
         </div>
         
         <div className="p-6">
@@ -144,6 +131,13 @@ function ProductCard({ product, index }) {
               </span>
             ))}
           </div>
+
+          <Link
+            to={`/product/${product.id}`}
+            className="mt-5 block w-full rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 py-3 text-center font-semibold text-white shadow-lg fx-press"
+          >
+            View Details
+          </Link>
         </div>
         
         <div className="absolute inset-0 rounded-2xl pointer-events-none">
@@ -180,7 +174,7 @@ function Products() {
   }, [activeCategory, normalizedSearchQuery])
 
   return (
-    <section id="products" className="min-h-screen py-24 bg-[#030712] relative overflow-hidden flex items-center">
+    <section id="products" className="relative flex min-h-screen items-center overflow-hidden bg-[#030712] py-20 md:py-24">
       <div className="absolute inset-0 grid-background opacity-30"></div>
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[150px]"></div>
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[150px]"></div>
@@ -200,11 +194,11 @@ function Products() {
           >
             Our Products
           </motion.span>
-          <h2 className="text-5xl md:text-6xl font-bold mb-4">
+          <h2 className="text-4xl font-bold mb-4 sm:text-5xl md:text-6xl">
             <span className="text-white">Premium </span>
             <span className="gradient-text">Collection</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="mx-auto max-w-2xl text-base text-gray-400 sm:text-lg">
             Discover our extensive range of windows and doors crafted with cutting-edge technology and premium materials
           </p>
         </motion.div>
@@ -213,7 +207,7 @@ function Products() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-col md:flex-row items-center justify-between gap-4 mb-12"
+          className="mb-12 flex flex-col items-stretch justify-between gap-4 md:flex-row md:items-center"
         >
           <div className="flex flex-wrap justify-center gap-2">
             {categories.map((category) => (
@@ -225,7 +219,7 @@ function Products() {
                     activeCategory: category.id,
                   }))
                 }
-                className={`fx-press rounded-xl px-6 py-3 font-medium transition-all ${
+                className={`fx-press rounded-xl px-4 py-2.5 text-sm font-medium transition-all sm:px-6 sm:py-3 sm:text-base ${
                   activeCategory === category.id
                     ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/25'
                     : 'glass text-gray-400 hover:text-white hover:bg-white/10'
@@ -295,11 +289,11 @@ function Products() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mt-16"
+          className="mt-16 text-center"
         >
-          <button className="outline-button fx-press">
-            <span>View All Products</span>
-          </button>
+          <Link to={sectionLinks.contact} className="outline-button fx-press">
+            <span>Need A Custom Quote?</span>
+          </Link>
         </motion.div>
       </div>
     </section>

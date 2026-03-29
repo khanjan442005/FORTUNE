@@ -5,6 +5,7 @@ import PageHero from "../components/PageHero"
 import PageShell from "../components/PageShell"
 import Features from "../components/Features"
 import Footer from "../components/Footer"
+import { sectionIds, sectionLinks } from "../data/sectionLinks"
 
 const certifications = [
   { name: "ISO 9001", desc: "Quality Management System" },
@@ -31,11 +32,9 @@ const processHighlights = [
   { title: "Eco-Friendly", desc: "100% recyclable materials and energy-efficient production processes." },
 ]
 
-function FeaturesPage() {
-  return (
-    <PageShell tone="violet">
-      <Navbar />
-      <div className="pt-20">
+function FeaturesPage({ embedded = false }) {
+  const content = (
+    <div className={embedded ? "" : "pt-20"}>
         <PageHero
           badge="Why Choose Us"
           title="Premium"
@@ -157,8 +156,8 @@ function FeaturesPage() {
                   <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Experience the Quality Difference</h2>
                   <p className="text-gray-400 mb-8 max-w-xl mx-auto">Visit our showroom or schedule a free consultation to see our premium features firsthand.</p>
                   <div className="flex flex-wrap gap-4 justify-center">
-                    <Link to="/contact" className="neon-button"><span>Schedule a Visit</span></Link>
-                    <Link to="/products" className="outline-button"><span>View Products</span></Link>
+                    <Link to={sectionLinks.contact} className="neon-button"><span>Schedule a Visit</span></Link>
+                    <Link to={sectionLinks.products} className="outline-button"><span>View Products</span></Link>
                   </div>
                 </div>
               </motion.div>
@@ -166,6 +165,23 @@ function FeaturesPage() {
           </section>
 
       </div>
+  )
+
+  if (embedded) {
+    return (
+      <section
+        id={sectionIds.features}
+        className="relative min-h-screen scroll-mt-28 py-6 md:scroll-mt-32 md:py-10"
+      >
+        {content}
+      </section>
+    )
+  }
+
+  return (
+    <PageShell tone="violet">
+      <Navbar />
+      {content}
       <Footer />
     </PageShell>
   )

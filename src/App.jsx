@@ -4,15 +4,10 @@ import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-route
 import ErrorBoundary from './components/ErrorBoundary'
 import GlobalExperience from './components/GlobalExperience'
 import SmoothLoader from './components/SmoothLoader'
+import { sectionLinks } from './data/sectionLinks'
 
 const Home = lazy(() => import('./pages/Home'))
 const ProductDetail = lazy(() => import('./pages/ProductDetail'))
-const ProductsPage = lazy(() => import('./pages/ProductsPage'))
-const FeaturesPage = lazy(() => import('./pages/FeaturesPage'))
-const TestimonialsPage = lazy(() => import('./pages/TestimonialsPage'))
-const GalleryPage = lazy(() => import('./pages/GalleryPage'))
-const AboutPage = lazy(() => import('./pages/AboutPage'))
-const ContactPage = lazy(() => import('./pages/ContactPage'))
 
 function LoadingFallback() {
   return (
@@ -68,12 +63,12 @@ function RouteViewport() {
           <Suspense fallback={<LoadingFallback />}>
             <Routes location={location}>
               <Route path="/" element={<Home />} />
-              <Route path="/products" element={<ProductsPage />} />
-              <Route path="/features" element={<FeaturesPage />} />
-              <Route path="/testimonials" element={<TestimonialsPage />} />
-              <Route path="/gallery" element={<GalleryPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/products" element={<Navigate to={sectionLinks.products} replace />} />
+              <Route path="/features" element={<Navigate to={sectionLinks.features} replace />} />
+              <Route path="/testimonials" element={<Navigate to={sectionLinks.testimonials} replace />} />
+              <Route path="/gallery" element={<Navigate to={sectionLinks.gallery} replace />} />
+              <Route path="/about" element={<Navigate to={sectionLinks.about} replace />} />
+              <Route path="/contact" element={<Navigate to={sectionLinks.contact} replace />} />
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

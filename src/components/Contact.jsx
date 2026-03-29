@@ -752,11 +752,11 @@ function Contact() {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-gradient-to-br from-[#020617] via-[#07111f] to-[#030712] py-24"
+      className="relative overflow-hidden bg-gradient-to-br from-[#020617] via-[#07111f] to-[#030712] py-20 md:py-24"
     >
       <div className="hex-pattern absolute inset-0 opacity-25"></div>
-      <div className="absolute -right-24 -top-24 h-[420px] w-[420px] rounded-full bg-blue-500/15 blur-3xl"></div>
-      <div className="absolute -bottom-24 -left-24 h-[360px] w-[360px] rounded-full bg-cyan-500/15 blur-3xl"></div>
+      <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-blue-500/15 blur-3xl md:h-[420px] md:w-[420px]"></div>
+      <div className="absolute -bottom-24 -left-24 h-56 w-56 rounded-full bg-cyan-500/15 blur-3xl md:h-[360px] md:w-[360px]"></div>
 
       <div className="container relative z-10 mx-auto px-6">
         <motion.div
@@ -773,10 +773,10 @@ function Contact() {
           >
             Contact Us
           </motion.span>
-          <h2 className="mb-4 text-5xl font-bold text-white md:text-6xl">
+          <h2 className="mb-4 text-4xl font-bold text-white sm:text-5xl md:text-6xl">
             Let&apos;s Get In <span className="gradient-text">Touch</span>
           </h2>
-          <p className="mx-auto max-w-2xl text-lg text-slate-400">
+          <p className="mx-auto max-w-2xl text-base text-slate-400 md:text-lg">
             Ready to transform your home or workspace? Share your requirement and we will
             send the right recommendation and quote.
           </p>
@@ -787,9 +787,9 @@ function Contact() {
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-6 md:space-y-8"
           >
-            <div className="glass-strong rounded-[2rem] border border-white/10 p-8">
+            <div className="glass-strong rounded-[2rem] border border-white/10 p-6 md:p-8">
               <div className="mb-8 flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
                 <div>
                   <p className="text-sm uppercase tracking-[0.28em] text-cyan-300/80">
@@ -817,7 +817,7 @@ function Contact() {
                     href={item.href}
                     target={item.href.startsWith("http") ? "_blank" : undefined}
                     rel={item.href.startsWith("http") ? "noreferrer" : undefined}
-                    className="group flex items-center gap-5 rounded-2xl border border-white/10 bg-slate-950/35 p-5 transition-colors hover:border-cyan-400/30 hover:bg-slate-900/60 hover-lift"
+                    className="group flex items-start gap-4 rounded-2xl border border-white/10 bg-slate-950/35 p-4 transition-colors hover:border-cyan-400/30 hover:bg-slate-900/60 hover-lift sm:items-center sm:gap-5 sm:p-5"
                   >
                     <motion.div
                       className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500/80 to-cyan-500/80 text-[11px] font-bold tracking-[0.2em] text-white shadow-lg shadow-cyan-900/40 transition-transform group-hover:scale-110"
@@ -841,7 +841,7 @@ function Contact() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="glass rounded-3xl border border-white/10 p-6"
+                className="glass rounded-3xl border border-white/10 p-5 md:p-6"
               >
                 <h4 className="text-xl font-bold text-white">Business Hours</h4>
                 <div className="mt-5 space-y-3 text-sm text-slate-300">
@@ -861,7 +861,7 @@ function Contact() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="glass rounded-3xl border border-white/10 p-6"
+                className="glass rounded-3xl border border-white/10 p-5 md:p-6"
               >
                 <h4 className="text-xl font-bold text-white">Why This Form Works</h4>
                 <div className="mt-5 space-y-3 text-sm text-slate-400">
@@ -886,7 +886,7 @@ function Contact() {
           >
             <form
               onSubmit={handleSubmit}
-              className="glass-strong relative overflow-hidden rounded-[2rem] border border-white/10 p-8 md:p-10"
+              className="glass-strong relative overflow-hidden rounded-[2rem] border border-white/10 p-6 md:p-10"
             >
               <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500"></div>
 

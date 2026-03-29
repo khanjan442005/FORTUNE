@@ -5,6 +5,7 @@ import PageHero from "../components/PageHero"
 import PageShell from "../components/PageShell"
 import Products from "../components/Products"
 import Footer from "../components/Footer"
+import { sectionIds, sectionLinks } from "../data/sectionLinks"
 
 const trustBadges = [
   { icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z", label: "ISO Certified", desc: "9001:2015 Quality Management" },
@@ -27,11 +28,9 @@ const categories = [
   { name: "Custom Projects", count: "Unlimited", desc: "Bespoke designs for unique architectural requirements", icon: "M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z" },
 ]
 
-function ProductsPage() {
-  return (
-    <PageShell tone="cyan">
-      <Navbar />
-      <div className="pt-20">
+function ProductsPage({ embedded = false }) {
+  const content = (
+    <div className={embedded ? "" : "pt-20"}>
         <PageHero
           badge="Our Products"
           title="Premium"
@@ -173,10 +172,10 @@ function ProductsPage() {
                   <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Can't Find What You're Looking For?</h2>
                   <p className="text-gray-400 mb-8 max-w-xl mx-auto">Our team can create custom solutions tailored to your exact specifications. Get a free consultation today.</p>
                   <div className="flex flex-wrap gap-4 justify-center">
-                    <Link to="/contact" className="neon-button">
+                    <Link to={sectionLinks.contact} className="neon-button">
                       <span>Get Free Quote</span>
                     </Link>
-                    <Link to="/features" className="outline-button">
+                    <Link to={sectionLinks.features} className="outline-button">
                       <span>View Features</span>
                     </Link>
                   </div>
@@ -185,6 +184,23 @@ function ProductsPage() {
             </div>
         </section>
       </div>
+  )
+
+  if (embedded) {
+    return (
+      <section
+        id={sectionIds.products}
+        className="relative min-h-screen scroll-mt-28 py-6 md:scroll-mt-32 md:py-10"
+      >
+        {content}
+      </section>
+    )
+  }
+
+  return (
+    <PageShell tone="cyan">
+      <Navbar />
+      {content}
       <Footer />
     </PageShell>
   )

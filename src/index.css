@@ -32,6 +32,7 @@
 
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
 }
 
 html.custom-cursor-active,
@@ -62,6 +63,10 @@ button,
 textarea,
 select {
   font-feature-settings: "ss01" 1, "cv01" 1;
+}
+
+.container {
+  max-width: 88rem;
 }
 
 :is(a, button, input, textarea, select, [role="button"]) {
@@ -1422,5 +1427,21 @@ body:has(.neon-cursor) [role="button"] {
 
   .scroll-progress {
     display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 17px;
+  }
+}
+
+@media (min-width: 1280px) {
+  html {
+    font-size: 18px;
+  }
+
+  .container {
+    max-width: 92rem;
   }
 }

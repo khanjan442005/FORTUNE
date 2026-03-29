@@ -29,7 +29,7 @@ function GalleryImage({ image, index }) {
       <motion.div
         whileHover={{ scale: 1.05 }}
         transition={{ duration: 0.5 }}
-        className="relative h-full min-h-[250px] fx-image-zoom"
+        className="relative h-full min-h-[220px] fx-image-zoom sm:min-h-[250px]"
       >
         <img
           src={image.src}
@@ -43,19 +43,9 @@ function GalleryImage({ image, index }) {
 
         
         {/* Content */}
-        <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+        <div className="absolute inset-0 flex translate-y-0 flex-col justify-end p-5 opacity-100 transition-all duration-500 md:translate-y-4 md:p-6 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100">
           <span className="text-cyan-400 text-sm font-medium mb-1">{image.category}</span>
           <h3 className="text-white text-xl font-bold">{image.title}</h3>
-          
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="absolute top-4 right-4 w-10 h-10 glass rounded-full flex items-center justify-center"
-          >
-            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7" />
-            </svg>
-          </motion.button>
         </div>
         
         {/* Border Glow */}
@@ -67,10 +57,10 @@ function GalleryImage({ image, index }) {
 
 function Gallery() {
   return (
-    <section id="gallery" className="min-h-screen py-24 bg-[#030712] relative overflow-hidden flex items-center">
+    <section id="gallery" className="relative flex min-h-screen items-center overflow-hidden bg-[#030712] py-20 md:py-24">
       {/* Background */}
       <div className="absolute inset-0 hex-pattern opacity-20"></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/5 rounded-full blur-[200px]"></div>
+      <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/5 blur-[140px] md:h-[800px] md:w-[800px] md:blur-[200px]"></div>
       
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
@@ -88,11 +78,11 @@ function Gallery() {
           >
             Our Work
           </motion.span>
-          <h2 className="text-5xl md:text-6xl font-bold mb-4">
+          <h2 className="mb-4 text-4xl font-bold sm:text-5xl md:text-6xl">
             <span className="text-white">Project </span>
             <span className="gradient-text">Gallery</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="mx-auto max-w-2xl text-base text-gray-400 sm:text-lg">
             Explore our portfolio of stunning installations across residential and commercial projects
           </p>
         </motion.div>

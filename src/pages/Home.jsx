@@ -6,10 +6,17 @@ import HeroSlider from "../components/HeroSlider"
 import Footer from "../components/Footer"
 import PageShell from "../components/PageShell"
 import products from "../data/products"
+import { sectionIds, sectionLinks } from "../data/sectionLinks"
 import { RevealOnScroll, StaggerReveal } from "../components/RevealOnScroll"
 import TiltCard from "../components/TiltCard"
 import GlowCard from "../components/GlowCard"
 import { ParallaxLayer } from "../components/ParallaxLayer"
+import ProductsPage from "./ProductsPage"
+import FeaturesPage from "./FeaturesPage"
+import TestimonialsPage from "./TestimonialsPage"
+import GalleryPage from "./GalleryPage"
+import AboutPage from "./AboutPage"
+import ContactPage from "./ContactPage"
 
 function GlowDivider() {
   return (
@@ -65,7 +72,7 @@ function StatsSection() {
   ]
 
   return (
-    <section className="py-16 relative">
+    <section className="relative py-20 md:py-24">
       <div className="container mx-auto px-6">
         <StaggerReveal staggerDelay={0.12} className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {stats.map((stat, index) => (
@@ -156,7 +163,7 @@ function TrendingProducts() {
   const trending = useMemo(() => shuffleArray(products).slice(0, 4), [])
 
   return (
-    <section className="py-16 relative overflow-hidden">
+    <section className="relative overflow-hidden py-20 md:py-24">
       <div className="absolute inset-0 grid-background opacity-10"></div>
       <ParallaxLayer speed={0.15} className="absolute top-0 right-0 w-96 h-96 pointer-events-none">
         <div className="w-full h-full bg-cyan-500/10 rounded-full blur-[200px]"></div>
@@ -177,7 +184,7 @@ function TrendingProducts() {
               <span className="gradient-text">Products</span>
             </h2>
           </div>
-          <Link to="/products" className="hidden md:flex items-center gap-2 px-6 py-3 glass rounded-full text-cyan-400 hover:text-white hover:border-cyan-500/30 transition-all text-sm font-medium hover-lift">
+          <Link to={sectionLinks.products} className="hidden md:flex items-center gap-2 px-6 py-3 glass rounded-full text-cyan-400 hover:text-white hover:border-cyan-500/30 transition-all text-sm font-medium hover-lift">
             View All
             <motion.svg
               className="w-4 h-4"
@@ -197,7 +204,7 @@ function TrendingProducts() {
           ))}
         </div>
         <div className="md:hidden text-center mt-8">
-          <Link to="/products" className="inline-flex items-center gap-2 px-6 py-3 glass rounded-full text-cyan-400 hover:text-white transition-all text-sm font-medium hover-lift interact-press">
+          <Link to={sectionLinks.products} className="inline-flex items-center gap-2 px-6 py-3 glass rounded-full text-cyan-400 hover:text-white transition-all text-sm font-medium hover-lift interact-press">
             View All Products
           </Link>
         </div>
@@ -208,14 +215,14 @@ function TrendingProducts() {
 
 function QuickActions() {
   const actions = [
-    { label: "Browse Products", desc: "Explore our full range", to: "/products", icon: "M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z", gradient: "from-cyan-500 to-blue-600" },
-    { label: "Request Quote", desc: "Get a free estimate", to: "/contact", icon: "M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z", gradient: "from-purple-500 to-pink-600" },
-    { label: "Our Features", desc: "See what we offer", to: "/features", icon: "M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z", gradient: "from-emerald-500 to-teal-600" },
-    { label: "Contact Us", desc: "Talk to our team", to: "/contact", icon: "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z", gradient: "from-amber-500 to-orange-600" },
+    { label: "Browse Products", desc: "Explore our full range", to: sectionLinks.products, icon: "M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z", gradient: "from-cyan-500 to-blue-600" },
+    { label: "Request Quote", desc: "Get a free estimate", to: sectionLinks.contact, icon: "M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z", gradient: "from-purple-500 to-pink-600" },
+    { label: "Our Features", desc: "See what we offer", to: sectionLinks.features, icon: "M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z", gradient: "from-emerald-500 to-teal-600" },
+    { label: "Contact Us", desc: "Talk to our team", to: sectionLinks.contact, icon: "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z", gradient: "from-amber-500 to-orange-600" },
   ]
 
   return (
-    <section className="py-16 relative">
+    <section className="relative py-20 md:py-24">
       <div className="container mx-auto px-6">
         <RevealOnScroll variant="fadeUp" className="text-center mb-10">
           <h2 className="text-4xl md:text-5xl font-bold mb-3">
@@ -259,7 +266,7 @@ function WhyChooseUs() {
   ]
 
   return (
-    <section className="py-16 relative overflow-hidden">
+    <section className="relative overflow-hidden py-20 md:py-24">
       <ParallaxLayer speed={0.1} className="absolute bottom-0 left-0 w-96 h-96 pointer-events-none">
         <div className="w-full h-full bg-purple-500/10 rounded-full blur-[200px]"></div>
       </ParallaxLayer>
@@ -312,7 +319,7 @@ function RecentlyViewed() {
   if (recent.length === 0) return null
 
   return (
-    <section className="py-16 relative">
+    <section className="relative py-20 md:py-24">
       <div className="container mx-auto px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex items-center justify-between mb-10">
           <div>
@@ -349,10 +356,10 @@ function FloatingCartIcon() {
       initial={{ opacity: 0, scale: 0, rotate: -180 }}
       animate={{ opacity: 1, scale: 1, rotate: 0 }}
       transition={{ delay: 1.5, type: "spring", stiffness: 200, damping: 15 }}
-      className="fixed bottom-6 right-6 z-50"
+      className="fixed bottom-20 right-4 z-50 md:bottom-6 md:right-6"
     >
       <Link
-        to="/products"
+        to={sectionLinks.products}
         className="relative flex items-center justify-center w-14 h-14 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 hover:scale-110 transition-all group btn-glow-cyan"
       >
         <motion.svg
@@ -375,7 +382,7 @@ function FloatingCartIcon() {
             {count}
           </motion.span>
         )}
-        <div className="absolute right-full mr-3 px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+        <div className="absolute right-full mr-3 hidden whitespace-nowrap rounded-lg bg-white/10 px-3 py-1.5 text-xs text-white opacity-0 backdrop-blur-sm transition-opacity pointer-events-none group-hover:opacity-100 md:block">
           Browse Products
         </div>
       </Link>
@@ -383,64 +390,40 @@ function FloatingCartIcon() {
   )
 }
 
-function LiveNotification() {
-  const [msg, setMsg] = useState("")
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const notifications = [
-      "🔥 Someone from Mumbai just viewed Casement Windows",
-      "⭐ Sliding Door got a 5-star review",
-      "🏠 Bay Windows installed in Delhi today",
-      "🔥 Someone from Bangalore is viewing Products",
-      "💎 Premium French Door just got ordered",
-      "🎉 500+ happy customers and counting",
-      "🔨 New batch of Skylight Windows just arrived",
-      "⭐ Someone gave a 5-star testimonial",
-    ]
-
-    const show = () => {
-      const random = notifications[Math.floor(Math.random() * notifications.length)]
-      setMsg(random)
-      setVisible(true)
-      setTimeout(() => setVisible(false), 4000)
-    }
-    const timer = setTimeout(show, 5000)
-    const interval = setInterval(show, 12000)
-    return () => { clearTimeout(timer); clearInterval(interval) }
-  }, [])
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 50, x: -50 }}
-      animate={visible ? { opacity: 1, y: 0, x: 0 } : { opacity: 0, y: 50, x: -50 }}
-      transition={{ type: "spring", stiffness: 300, damping: 25 }}
-      className="fixed bottom-6 left-6 z-50 max-w-xs"
-    >
-      <div className="glass rounded-2xl px-5 py-3 border border-white/10 shadow-xl">
-        <p className="text-white text-sm font-medium">{msg}</p>
-      </div>
-    </motion.div>
-  )
-}
 
 function Home() {
   return (
     <PageShell tone="cyan">
       <Navbar />
-      <HeroSlider />
+      <section
+        id={sectionIds.home}
+        className="relative scroll-mt-28 md:scroll-mt-32"
+      >
+        <HeroSlider />
+        <GlowDivider />
+        <StatsSection />
+        <GlowDivider />
+        <TrendingProducts />
+        <QuickActions />
+        <GlowDivider />
+        <WhyChooseUs />
+        <RecentlyViewed />
+      </section>
       <GlowDivider />
-      <StatsSection />
+      <ProductsPage embedded />
       <GlowDivider />
-      <TrendingProducts />
-      <QuickActions />
+      <FeaturesPage embedded />
       <GlowDivider />
-      <WhyChooseUs />
-      <RecentlyViewed />
+      <TestimonialsPage embedded />
+      <GlowDivider />
+      <GalleryPage embedded />
+      <GlowDivider />
+      <AboutPage embedded />
+      <GlowDivider />
+      <ContactPage embedded />
       <GlowDivider />
       <Footer />
       <FloatingCartIcon />
-      <LiveNotification />
     </PageShell>
   )
 }
