@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import products from "../data/products"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
+import PageShell from "../components/PageShell"
 
 function saveToRecentlyViewed(product) {
   try {
@@ -31,7 +32,7 @@ function ProductDetailContent({ id }) {
       <div className="min-h-screen bg-[#030712] flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-4xl font-bold text-white mb-4">Product Not Found</h1>
-          <Link to="/home" className="text-cyan-400 hover:text-cyan-300">
+          <Link to="/" className="text-cyan-400 hover:text-cyan-300">
             ← Back to Home
           </Link>
         </div>
@@ -47,12 +48,12 @@ function ProductDetailContent({ id }) {
     .slice(0, 4)
 
   return (
-    <div className="min-h-screen bg-[#030712]">
+    <PageShell tone="cyan">
       <Navbar />
 
       <div className="pt-24 pb-16">
         <div className="container mx-auto px-6">
-          <Link to="/home" className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 mb-8 font-semibold transition-colors">
+          <Link to="/products" className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 mb-8 font-semibold transition-colors">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
@@ -164,7 +165,7 @@ function ProductDetailContent({ id }) {
                 <Link to="/contact" className="flex-1 neon-button text-center">
                   <span>Get Quote Now</span>
                 </Link>
-                <Link to="/home" className="px-6 py-3 glass rounded-xl font-semibold text-white hover:bg-white/10 transition-colors">
+                <Link to="/products" className="px-6 py-3 glass rounded-xl font-semibold text-white hover:bg-white/10 transition-colors">
                   View All Products
                 </Link>
               </div>
@@ -204,7 +205,7 @@ function ProductDetailContent({ id }) {
       </div>
 
       <Footer />
-    </div>
+    </PageShell>
   )
 }
 

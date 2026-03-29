@@ -1,77 +1,37 @@
-import { useEffect, Suspense, useState, useRef, useMemo } from "react"
-import { motion, useScroll, useMotionValue, useTransform, useInView } from "framer-motion"
+import { useEffect, useMemo, useRef, useState } from "react"
+import { motion, useInView } from "framer-motion"
 import { Link } from "react-router-dom"
 import Navbar from "../components/Navbar"
 import HeroSlider from "../components/HeroSlider"
 import Footer from "../components/Footer"
+import PageShell from "../components/PageShell"
 import products from "../data/products"
-
-function ScrollProgress() {
-  const { scrollYProgress } = useScroll()
-  return (
-    <motion.div
-      style={{ scaleX: scrollYProgress }}
-      className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 to-purple-500 z-[60] origin-left"
-    />
-  )
-}
-
-function LoadingFallback() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-[#030712]">
-      <div className="flex flex-col items-center gap-4">
-        <div className="w-16 h-16 border-4 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin"></div>
-        <p className="text-gray-400">Loading...</p>
-      </div>
-    </div>
-  )
-}
-
-function ParallaxBackground() {
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-  const [isParallaxEnabled, setIsParallaxEnabled] = useState(false)
-  const x = useTransform(mouseX, [-0.5, 0.5], [-30, 30])
-  const y = useTransform(mouseY, [-0.5, 0.5], [-30, 30])
-
-  useEffect(() => {
-    const inputQuery = window.matchMedia("(hover: hover) and (pointer: fine)")
-    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
-    const update = () => setIsParallaxEnabled(inputQuery.matches && !motionQuery.matches)
-    update()
-    inputQuery.addEventListener("change", update)
-    motionQuery.addEventListener("change", update)
-    return () => {
-      inputQuery.removeEventListener("change", update)
-      motionQuery.removeEventListener("change", update)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (!isParallaxEnabled) { mouseX.set(0); mouseY.set(0); return }
-    const handle = (e) => { mouseX.set(e.clientX / window.innerWidth - 0.5); mouseY.set(e.clientY / window.innerHeight - 0.5) }
-    window.addEventListener("pointermove", handle, { passive: true })
-    return () => window.removeEventListener("pointermove", handle)
-  }, [mouseX, mouseY, isParallaxEnabled])
-
-  return (
-    <motion.div className="fixed inset-0 pointer-events-none z-0" style={{ x, y }}>
-      <div className="absolute top-20 left-20 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-40 right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-3xl" />
-    </motion.div>
-  )
-}
+import { RevealOnScroll, StaggerReveal } from "../components/RevealOnScroll"
+import TiltCard from "../components/TiltCard"
+import GlowCard from "../components/GlowCard"
+import { ParallaxLayer } from "../components/ParallaxLayer"
 
 function GlowDivider() {
   return (
-    <motion.div
-      initial={{ opacity: 0, scaleX: 0 }}
-      whileInView={{ opacity: 1, scaleX: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8 }}
-      className="h-[2px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent my-2"
-    />
+    <RevealOnScroll variant="fadeScale" duration={1}>
+      <div className="relative py-2">
+        <motion.div
+          className="h-[1px] bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent"
+          initial={{ scaleX: 0, opacity: 0 }}
+          whileInView={{ scaleX: 1, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+        />
+        <motion.div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-cyan-500/50"
+          initial={{ scale: 0 }}
+          whileInView={{ scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.6, type: "spring" }}
+          style={{ boxShadow: '0 0 20px rgba(34,211,238,0.4)' }}
+        />
+      </div>
+    </RevealOnScroll>
   )
 }
 
@@ -107,24 +67,27 @@ function StatsSection() {
   return (
     <section className="py-16 relative">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <StaggerReveal staggerDelay={0.12} className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {stats.map((stat, index) => (
-            <motion.div
+            <GlowCard
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ scale: 1.08, y: -5 }}
-              className="glass rounded-2xl p-6 text-center cursor-default group hover:border-cyan-500/30 transition-colors"
+              className="glass rounded-2xl p-6 text-center cursor-default hover-lift hover-glow"
+              glowColor="rgba(34, 211, 238, 0.08)"
             >
-              <div className="text-4xl md:text-5xl font-black gradient-text mb-2">
-                <AnimatedCounter target={stat.value} suffix={stat.suffix} />
-              </div>
-              <div className="text-sm text-gray-400 font-medium">{stat.label}</div>
-            </motion.div>
+              <motion.div
+                initial={{ scale: 0.5, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, type: "spring", stiffness: 200 }}
+              >
+                <div className="text-4xl md:text-5xl font-black gradient-text mb-2">
+                  <AnimatedCounter target={stat.value} suffix={stat.suffix} />
+                </div>
+                <div className="text-sm text-gray-400 font-medium">{stat.label}</div>
+              </motion.div>
+            </GlowCard>
           ))}
-        </div>
+        </StaggerReveal>
       </div>
     </section>
   )
@@ -132,31 +95,51 @@ function StatsSection() {
 
 function MiniProductCard({ product }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      whileHover={{ y: -8, scale: 1.02 }}
-      className="glass rounded-2xl overflow-hidden group hover:border-cyan-500/30 transition-colors"
-    >
-      <div className="relative h-48 overflow-hidden">
-        <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-transparent"></div>
-        <span className="absolute top-3 left-3 px-3 py-1 bg-cyan-500/20 backdrop-blur-sm border border-cyan-500/30 rounded-full text-cyan-400 text-xs font-semibold capitalize">
-          {product.category}
-        </span>
-        <span className="absolute top-3 right-3 px-3 py-1 bg-purple-500/20 backdrop-blur-sm border border-purple-500/30 rounded-full text-purple-400 text-xs font-semibold">
-          {product.price}
-        </span>
-      </div>
-      <div className="p-5">
-        <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">{product.name}</h3>
-        <p className="text-gray-400 text-sm line-clamp-2 mb-4">{product.description}</p>
-        <Link to={`/product/${product.id}`} className="block w-full py-2.5 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 rounded-xl text-center text-cyan-400 text-sm font-semibold hover:from-cyan-500 hover:to-blue-600 hover:text-white hover:border-transparent transition-all">
-          View Details
-        </Link>
-      </div>
-    </motion.div>
+    <TiltCard tiltMax={8} scale={1.02} className="h-full">
+      <RevealOnScroll variant="fadeUp" className="h-full">
+        <div className="glass rounded-2xl overflow-hidden group hover-lift hover-glow hover-shine h-full flex flex-col">
+          <div className="relative h-48 overflow-hidden hover-img-zoom">
+            <motion.img
+              src={product.images[0]}
+              alt={product.name}
+              className="w-full h-full object-cover"
+              loading="lazy"
+              whileHover={{ scale: 1.1 }}
+              transition={{ duration: 0.6 }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-transparent"></div>
+            <motion.span
+              className="absolute top-3 left-3 px-3 py-1 bg-cyan-500/20 backdrop-blur-sm border border-cyan-500/30 rounded-full text-cyan-400 text-xs font-semibold capitalize"
+              initial={{ x: -20, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              {product.category}
+            </motion.span>
+            <motion.span
+              className="absolute top-3 right-3 px-3 py-1 bg-purple-500/20 backdrop-blur-sm border border-purple-500/30 rounded-full text-purple-400 text-xs font-semibold"
+              initial={{ x: 20, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+            >
+              {product.price}
+            </motion.span>
+          </div>
+          <div className="p-5 flex flex-col flex-1">
+            <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">{product.name}</h3>
+            <p className="text-gray-400 text-sm line-clamp-2 mb-4 flex-1">{product.description}</p>
+            <Link
+              to={`/product/${product.id}`}
+              className="block w-full py-2.5 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 rounded-xl text-center text-cyan-400 text-sm font-semibold hover:from-cyan-500 hover:to-blue-600 hover:text-white hover:border-transparent transition-all interact-press"
+            >
+              View Details
+            </Link>
+          </div>
+        </div>
+      </RevealOnScroll>
+    </TiltCard>
   )
 }
 
@@ -175,11 +158,18 @@ function TrendingProducts() {
   return (
     <section className="py-16 relative overflow-hidden">
       <div className="absolute inset-0 grid-background opacity-10"></div>
-      <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-[200px]"></div>
+      <ParallaxLayer speed={0.15} className="absolute top-0 right-0 w-96 h-96 pointer-events-none">
+        <div className="w-full h-full bg-cyan-500/10 rounded-full blur-[200px]"></div>
+      </ParallaxLayer>
       <div className="container mx-auto px-6 relative z-10">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex items-center justify-between mb-10">
+        <RevealOnScroll variant="fadeUp" className="flex items-center justify-between mb-10">
           <div>
-            <motion.span initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="inline-block px-4 py-2 glass rounded-full text-cyan-400 text-sm font-medium mb-3">
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-block px-4 py-2 glass rounded-full text-cyan-400 text-sm font-medium mb-3 hover-glow"
+            >
               Hot Picks
             </motion.span>
             <h2 className="text-4xl md:text-5xl font-bold">
@@ -187,18 +177,27 @@ function TrendingProducts() {
               <span className="gradient-text">Products</span>
             </h2>
           </div>
-          <Link to="/products" className="hidden md:flex items-center gap-2 px-6 py-3 glass rounded-full text-cyan-400 hover:text-white hover:border-cyan-500/30 transition-all text-sm font-medium">
+          <Link to="/products" className="hidden md:flex items-center gap-2 px-6 py-3 glass rounded-full text-cyan-400 hover:text-white hover:border-cyan-500/30 transition-all text-sm font-medium hover-lift">
             View All
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+            <motion.svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              whileHover={{ x: 5 }}
+              transition={{ type: "spring" }}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </motion.svg>
           </Link>
-        </motion.div>
+        </RevealOnScroll>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {trending.map((product) => (
             <MiniProductCard key={product.id} product={product} />
           ))}
         </div>
         <div className="md:hidden text-center mt-8">
-          <Link to="/products" className="inline-flex items-center gap-2 px-6 py-3 glass rounded-full text-cyan-400 hover:text-white transition-all text-sm font-medium">
+          <Link to="/products" className="inline-flex items-center gap-2 px-6 py-3 glass rounded-full text-cyan-400 hover:text-white transition-all text-sm font-medium hover-lift interact-press">
             View All Products
           </Link>
         </div>
@@ -211,42 +210,39 @@ function QuickActions() {
   const actions = [
     { label: "Browse Products", desc: "Explore our full range", to: "/products", icon: "M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z", gradient: "from-cyan-500 to-blue-600" },
     { label: "Request Quote", desc: "Get a free estimate", to: "/contact", icon: "M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z", gradient: "from-purple-500 to-pink-600" },
-    { label: "3D Showcase", desc: "See products in 3D", to: "/showcase", icon: "M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5", gradient: "from-emerald-500 to-teal-600" },
+    { label: "Our Features", desc: "See what we offer", to: "/features", icon: "M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z", gradient: "from-emerald-500 to-teal-600" },
     { label: "Contact Us", desc: "Talk to our team", to: "/contact", icon: "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z", gradient: "from-amber-500 to-orange-600" },
   ]
 
   return (
     <section className="py-16 relative">
       <div className="container mx-auto px-6">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-10">
+        <RevealOnScroll variant="fadeUp" className="text-center mb-10">
           <h2 className="text-4xl md:text-5xl font-bold mb-3">
             <span className="text-white">Quick </span>
             <span className="gradient-text">Actions</span>
           </h2>
           <p className="text-gray-400 max-w-md mx-auto">Jump straight to what you need</p>
-        </motion.div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        </RevealOnScroll>
+        <StaggerReveal staggerDelay={0.1} className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {actions.map((action, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -5, scale: 1.03 }}
-            >
-              <Link to={action.to} className="glass rounded-2xl p-6 block group hover:border-cyan-500/30 transition-colors text-center">
-                <div className={`w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br ${action.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform`}>
+            <TiltCard key={index} tiltMax={6} scale={1.03}>
+              <Link to={action.to} className="glass rounded-2xl p-6 block group hover-glow hover-lift text-center tilt-shine">
+                <motion.div
+                  className={`w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br ${action.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform icon-glow`}
+                  whileHover={{ rotate: [0, -5, 5, 0] }}
+                  transition={{ duration: 0.5 }}
+                >
                   <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d={action.icon} />
                   </svg>
-                </div>
-                <h3 className="text-white font-bold mb-1">{action.label}</h3>
+                </motion.div>
+                <h3 className="text-white font-bold mb-1 group-hover:text-cyan-400 transition-colors">{action.label}</h3>
                 <p className="text-gray-500 text-sm">{action.desc}</p>
               </Link>
-            </motion.div>
+            </TiltCard>
           ))}
-        </div>
+        </StaggerReveal>
       </div>
     </section>
   )
@@ -264,39 +260,43 @@ function WhyChooseUs() {
 
   return (
     <section className="py-16 relative overflow-hidden">
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-[200px]"></div>
+      <ParallaxLayer speed={0.1} className="absolute bottom-0 left-0 w-96 h-96 pointer-events-none">
+        <div className="w-full h-full bg-purple-500/10 rounded-full blur-[200px]"></div>
+      </ParallaxLayer>
       <div className="container mx-auto px-6 relative z-10">
-        <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
+        <RevealOnScroll variant="fadeUp" className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-3">
             <span className="text-white">Why Choose </span>
             <span className="gradient-text">Us</span>
           </h2>
           <p className="text-gray-400 max-w-md mx-auto">We deliver excellence at every step</p>
-        </motion.div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        </RevealOnScroll>
+        <StaggerReveal staggerDelay={0.08} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {points.map((point, index) => (
-            <motion.div
+            <GlowCard
               key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.08 }}
-              className="glass rounded-2xl p-6 group hover:border-cyan-500/30 transition-colors"
+              className="glass rounded-2xl p-6 group hover-lift"
+              glowColor="rgba(34, 211, 238, 0.06)"
             >
               <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                <motion.div
+                  className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform"
+                  whileHover={{ rotate: [0, -10, 10, 0] }}
+                  transition={{ duration: 0.5 }}
+                >
                   <svg className="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d={point.icon} />
                   </svg>
-                </div>
+                </motion.div>
                 <div>
                   <h3 className="text-lg font-bold text-white mb-1 group-hover:text-cyan-400 transition-colors">{point.title}</h3>
                   <p className="text-gray-400 text-sm leading-relaxed">{point.desc}</p>
                 </div>
               </div>
-            </motion.div>
+              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-cyan-500 to-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+            </GlowCard>
           ))}
-        </div>
+        </StaggerReveal>
       </div>
     </section>
   )
@@ -346,22 +346,34 @@ function FloatingCartIcon() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 1.5, type: "spring" }}
+      initial={{ opacity: 0, scale: 0, rotate: -180 }}
+      animate={{ opacity: 1, scale: 1, rotate: 0 }}
+      transition={{ delay: 1.5, type: "spring", stiffness: 200, damping: 15 }}
       className="fixed bottom-6 right-6 z-50"
     >
       <Link
         to="/products"
-        className="relative flex items-center justify-center w-14 h-14 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 hover:scale-110 transition-all group"
+        className="relative flex items-center justify-center w-14 h-14 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 hover:scale-110 transition-all group btn-glow-cyan"
       >
-        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+        <motion.svg
+          className="w-6 h-6 text-white"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          strokeWidth="2"
+          whileHover={{ y: -2 }}
+        >
           <path strokeLinecap="round" strokeLinejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-        </svg>
+        </motion.svg>
         {count > 0 && (
-          <span className="absolute -top-1 -right-1 w-5 h-5 bg-purple-500 rounded-full text-white text-xs flex items-center justify-center font-bold">
+          <motion.span
+            className="absolute -top-1 -right-1 w-5 h-5 bg-purple-500 rounded-full text-white text-xs flex items-center justify-center font-bold"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 500 }}
+          >
             {count}
-          </span>
+          </motion.span>
         )}
         <div className="absolute right-full mr-3 px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg text-white text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
           Browse Products
@@ -414,26 +426,22 @@ function LiveNotification() {
 
 function Home() {
   return (
-    <Suspense fallback={<LoadingFallback />}>
-      <div className="min-h-screen bg-[#030712]">
-        <ParallaxBackground />
-        <ScrollProgress />
-        <Navbar />
-        <HeroSlider />
-        <GlowDivider />
-        <StatsSection />
-        <GlowDivider />
-        <TrendingProducts />
-        <QuickActions />
-        <GlowDivider />
-        <WhyChooseUs />
-        <RecentlyViewed />
-        <GlowDivider />
-        <Footer />
-        <FloatingCartIcon />
-        <LiveNotification />
-      </div>
-    </Suspense>
+    <PageShell tone="cyan">
+      <Navbar />
+      <HeroSlider />
+      <GlowDivider />
+      <StatsSection />
+      <GlowDivider />
+      <TrendingProducts />
+      <QuickActions />
+      <GlowDivider />
+      <WhyChooseUs />
+      <RecentlyViewed />
+      <GlowDivider />
+      <Footer />
+      <FloatingCartIcon />
+      <LiveNotification />
+    </PageShell>
   )
 }
 

@@ -1,6 +1,7 @@
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useDebounce, useLocalStorage } from "../hooks/useInView";
+import { RevealOnScroll, StaggerReveal } from "./RevealOnScroll";
 
 const CONTACT_API_URL = import.meta.env.VITE_CONTACT_API_URL || "/api/contact";
 const CONTACT_DRAFT_KEY = "dynamic-windows.contact-form.draft";
@@ -816,11 +817,15 @@ function Contact() {
                     href={item.href}
                     target={item.href.startsWith("http") ? "_blank" : undefined}
                     rel={item.href.startsWith("http") ? "noreferrer" : undefined}
-                    className="group flex items-center gap-5 rounded-2xl border border-white/10 bg-slate-950/35 p-5 transition-colors hover:border-cyan-400/30 hover:bg-slate-900/60"
+                    className="group flex items-center gap-5 rounded-2xl border border-white/10 bg-slate-950/35 p-5 transition-colors hover:border-cyan-400/30 hover:bg-slate-900/60 hover-lift"
                   >
-                    <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500/80 to-cyan-500/80 text-[11px] font-bold tracking-[0.2em] text-white shadow-lg shadow-cyan-900/40 transition-transform group-hover:scale-110">
+                    <motion.div
+                      className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500/80 to-cyan-500/80 text-[11px] font-bold tracking-[0.2em] text-white shadow-lg shadow-cyan-900/40 transition-transform group-hover:scale-110"
+                      whileHover={{ rotate: [0, -5, 5, 0] }}
+                      transition={{ duration: 0.5 }}
+                    >
                       {item.badge}
-                    </div>
+                    </motion.div>
                     <div>
                       <p className="font-semibold text-cyan-300">{item.title}</p>
                       <p className="mt-1 text-white">{item.desc}</p>
@@ -1143,8 +1148,9 @@ function Contact() {
                   scale: isSubmitting ? 1 : 1.02,
                   boxShadow: isSubmitting ? "none" : "0 20px 40px rgba(59, 130, 246, 0.3)",
                 }}
-                whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                className={`neon-button mt-8 w-full ${isSubmitting ? "opacity-70" : ""}`}
+                whileTap={{ scale: isSubmitting ? 1 : 0.97 }}
+                transition={{ type: "spring", stiffness: 300 }}
+                className={`neon-button mt-8 w-full ${isSubmitting ? "opacity-70" : ""} btn-glow-cyan`}
               >
                 <span className="flex items-center justify-center gap-2">
                   {isSubmitting ? (

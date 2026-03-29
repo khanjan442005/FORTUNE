@@ -1,142 +1,254 @@
 import { Swiper, SwiperSlide } from "swiper/react"
-import { Autoplay, Pagination, Navigation, EffectFade, EffectCoverflow } from "swiper/modules"
+import { Autoplay, Pagination, Navigation, EffectFade } from "swiper/modules"
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
+import { RevealOnScroll } from "./RevealOnScroll"
 import "swiper/css"
 import "swiper/css/pagination"
-
-const MotionLink = motion.create(Link)
 import "swiper/css/navigation"
 import "swiper/css/effect-fade"
-import "swiper/css/effect-coverflow"
 
-function HeroSlider(){
-  const slides = [
-    { image: "/assets/1-Sliding Window/1.1.png", title: "Premium Sliding Windows", subtitle: "Smooth gliding mechanism for modern homes" },
-    { image: "/assets/2-Casement Window/2.1.png", title: "Elegant Casement Windows", subtitle: "Maximum ventilation with stunning views" },
-    { image: "/assets/12. Sliding Door/121.jpg", title: "Modern Sliding Doors", subtitle: "Space-saving solution for your home" },
-    { image: "/assets/4-Bay Window/4.1.png", title: "Beautiful Bay Windows", subtitle: "Add architectural beauty to your home" },
-    { image: "/assets/15. French Door/151.jpg", title: "French Doors", subtitle: "Classic elegance for your space" },
-    { image: "/assets/7-Tilt & Turn Window/7.1.png", title: "Tilt & Turn Windows", subtitle: "European technology for superior performance" },
-    { image: "/assets/14. Pivot Door/141.jpg", title: "Luxury Pivot Doors", subtitle: "Modern design with elegant style" },
-    { image: "/assets/8-Skylight Window/8.1.png", title: "Skylight Windows", subtitle: "Bring natural light from above" }
-  ]
+const MotionLink = motion.create(Link)
 
-  return(
-    <div className="pt-20 relative">
-      <div className="hero-3d-slider">
-        <Swiper 
-          modules={[Autoplay, Pagination, Navigation, EffectFade]}
-          effect="fade"
-          autoplay={{ delay: 5000, disableOnInteraction: false }}
-          pagination={{ clickable: true, el: '.custom-pagination' }}
-          navigation
-          loop={true}
-          className="h-[750px]"
+const slides = [
+  {
+    image: "/assets/1-Sliding Window/1.1.png",
+    eyebrow: "Sliding Series",
+    title: "Premium Sliding Windows",
+    subtitle: "Smooth gliding mechanism with a cleaner frame profile for modern homes.",
+  },
+  {
+    image: "/assets/2-Casement Window/2.1.png",
+    eyebrow: "Casement Series",
+    title: "Elegant Casement Windows",
+    subtitle: "Fresh airflow, clean detailing, and sharp elevation lines for premium spaces.",
+  },
+  {
+    image: "/assets/12. Sliding Door/121.jpg",
+    eyebrow: "Door Systems",
+    title: "Modern Sliding Doors",
+    subtitle: "Wide openings with a calm luxury finish for balconies, patios, and living areas.",
+  },
+  {
+    image: "/assets/4-Bay Window/4.1.png",
+    eyebrow: "Architectural Style",
+    title: "Beautiful Bay Windows",
+    subtitle: "A sculpted projection that adds light, depth, and visual character to the room.",
+  },
+  {
+    image: "/assets/15. French Door/151.jpg",
+    eyebrow: "Classic Collection",
+    title: "French Doors",
+    subtitle: "Elegant framed openings designed to bring in light while keeping a timeless look.",
+  },
+  {
+    image: "/assets/7-Tilt & Turn Window/7.1.png",
+    eyebrow: "European Tech",
+    title: "Tilt & Turn Windows",
+    subtitle: "Two opening modes in one refined system for ventilation and full easy access.",
+  },
+  {
+    image: "/assets/14. Pivot Door/141.jpg",
+    eyebrow: "Statement Entry",
+    title: "Luxury Pivot Doors",
+    subtitle: "A bold front-door experience with modern balance, scale, and premium finishes.",
+  },
+  {
+    image: "/assets/8-Skylight Window/8.1.png",
+    eyebrow: "Natural Light",
+    title: "Skylight Windows",
+    subtitle: "Bring daylight deeper into your interior with a cleaner overhead window solution.",
+  },
+]
+
+function HeroSlider() {
+  return (
+    <section className="relative px-4 pb-8 pt-28 md:px-6 lg:px-8">
+      <div className="mx-auto max-w-[1220px]">
+        <div
+          className="hero-showcase-slider relative overflow-hidden rounded-[1.75rem] border border-white/10 p-3 md:p-4"
+          style={{
+            background:
+              "linear-gradient(135deg, rgba(8,15,29,0.72), rgba(255,255,255,0.05) 48%, rgba(8,15,29,0.66))",
+            boxShadow:
+              "0 28px 70px rgba(2, 8, 23, 0.36), inset 0 1px 0 rgba(255,255,255,0.08)",
+            backdropFilter: "blur(18px)",
+            WebkitBackdropFilter: "blur(18px)",
+          }}
         >
-          {slides.map((slide, index) => (
-            <SwiperSlide key={index}>
-              <div className="h-[750px] relative overflow-hidden">
-                <div className="slide-3d-wrapper">
-                  <motion.img 
-                    initial={{scale: 1.3, rotateY: 15}}
-                    animate={{scale: 1, rotateY: 0}}
-                    transition={{duration: 1.5, ease: "easeOut"}}
-                    src={slide.image} 
-                    alt={slide.title} 
-                    className="w-full h-full object-cover slide-image-3d"
-                  />
-                </div>
-                
-                <div className="absolute inset-0 bg-gradient-to-r from-slate-900/95 via-slate-900/70 to-slate-900/50"></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-900/50"></div>
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(125,211,252,0.12),transparent_22%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.1),transparent_24%)]" />
 
-                
-                <div className="absolute inset-0 flex items-center">
-                  <div className="container mx-auto px-6">
-                    <motion.div 
-                      initial={{opacity: 0, y: 80, rotateX: -30}}
-                      animate={{opacity: 1, y: 0, rotateX: 0}}
-                      transition={{duration: 1, delay: 0.3, ease: [0.22, 1, 0.36, 1]}}
-                      className="max-w-3xl perspective-1000"
-                    >
-                      <div className="text-white">
-                        <motion.div 
-                          initial={{opacity: 0, x: -50, rotateY: 20}}
-                          animate={{opacity: 1, x: 0, rotateY: 0}}
-                          transition={{duration: 0.6, delay: 0.5}}
-                          className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-500/20 backdrop-blur-sm rounded-full border border-blue-400/30 mb-8"
-                        >
-                          <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></span>
-                          <span className="text-blue-300 font-medium text-sm tracking-wide">Premium Quality</span>
-                        </motion.div>
-                        
-                        <motion.h1 
-                          initial={{opacity: 0, y: 40, rotateY: 10}}
-                          animate={{opacity: 1, y: 0, rotateY: 0}}
-                          transition={{duration: 0.8, delay: 0.7}}
-                          className="text-6xl md:text-8xl font-bold mb-6 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-blue-200 drop-shadow-2xl"
+          <Swiper
+            modules={[Autoplay, Pagination, Navigation, EffectFade]}
+            effect="fade"
+            fadeEffect={{ crossFade: true }}
+            speed={900}
+            autoplay={{ delay: 4800, disableOnInteraction: false }}
+            pagination={{ clickable: true, el: ".hero-slider-pagination" }}
+            navigation
+            loop
+            className="overflow-hidden rounded-[1.4rem]"
+          >
+            {slides.map((slide, index) => (
+              <SwiperSlide key={slide.title}>
+                <div className="relative min-h-[460px] overflow-hidden rounded-[1.4rem] md:min-h-[520px] lg:min-h-[560px]">
+                  <motion.img
+                    initial={{ scale: 1.08 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 1.4, ease: "easeOut" }}
+                    src={slide.image}
+                    alt={slide.title}
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+
+                  <div className="absolute inset-0 bg-gradient-to-r from-slate-950/92 via-slate-950/55 to-slate-950/18" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(255,255,255,0.16),transparent_18%)]" />
+
+                  <div className="relative z-10 flex h-full items-end lg:items-center">
+                    <div className="grid w-full gap-6 lg:grid-cols-[minmax(0,480px)_1fr] lg:items-end">
+                      <motion.div
+                        initial={{ opacity: 0, y: 28 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.15 }}
+                        className="fx-panel-soft m-4 rounded-[1.5rem] border border-white/10 bg-slate-950/48 p-6 shadow-[0_20px_40px_rgba(2,8,23,0.28)] backdrop-blur-xl md:m-6 md:p-8"
+                      >
+                        <span className="inline-flex items-center rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-cyan-100/90">
+                          {slide.eyebrow}
+                        </span>
+
+                        <motion.h1
+                          initial={{ opacity: 0, y: 24 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.8, delay: 0.25 }}
+                          className="mt-5 max-w-2xl text-4xl font-bold leading-[0.98] text-white md:text-6xl lg:text-[5rem]"
                         >
                           {slide.title}
                         </motion.h1>
-                        
-                        <motion.p 
-                          initial={{opacity: 0, y: 30}}
-                          animate={{opacity: 1, y: 0}}
-                          transition={{duration: 0.8, delay: 0.9}}
-                          className="text-xl md:text-2xl text-blue-100 mb-10 max-w-xl leading-relaxed"
+
+                        <motion.p
+                          initial={{ opacity: 0, y: 24 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.8, delay: 0.35 }}
+                          className="mt-5 max-w-lg text-base leading-relaxed text-slate-200/90 md:text-lg"
                         >
                           {slide.subtitle}
                         </motion.p>
-                        
-                        <motion.div 
-                          initial={{opacity: 0, y: 30}}
-                          animate={{opacity: 1, y: 0}}
-                          transition={{duration: 0.8, delay: 1.1}}
-                          className="flex flex-wrap gap-5"
+
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.8, delay: 0.45 }}
+                          className="mt-8 flex flex-wrap gap-3"
                         >
                           <MotionLink
                             to="/products"
-                            whileHover={{scale: 1.05, boxShadow: "0 25px 50px -12px rgba(59, 130, 246, 0.5)"}}
-                            whileTap={{scale: 0.98}}
-                            className="group relative bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 px-10 py-4 rounded-full font-bold text-lg transition-all shadow-lg shadow-blue-500/30 text-white overflow-hidden"
+                            whileHover={{ y: -3, scale: 1.03, boxShadow: "0 14px 34px rgba(56,189,248,0.4)" }}
+                            whileTap={{ scale: 0.97 }}
+                            transition={{ type: "spring", stiffness: 300 }}
+                            className="btn-glow-cyan inline-flex items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_14px_34px_rgba(56,189,248,0.3)] transition-colors hover:from-blue-600 hover:to-cyan-500 md:px-8"
                           >
-                            <span className="relative z-10">View Products</span>
-                            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                            View Products
                           </MotionLink>
-                          
+
                           <MotionLink
                             to="/contact"
-                            whileHover={{scale: 1.05, backgroundColor: "rgba(255,255,255,0.15)"}}
-                            whileTap={{scale: 0.98}}
-                            className="bg-white/5 hover:bg-white/10 backdrop-blur px-10 py-4 rounded-full font-bold text-lg transition-all border border-white/20 text-white flex items-center gap-2"
+                            whileHover={{ y: -3, scale: 1.03 }}
+                            whileTap={{ scale: 0.97 }}
+                            transition={{ type: "spring", stiffness: 300 }}
+                            className="hover-glow inline-flex items-center justify-center rounded-full border border-white/16 bg-white/6 px-7 py-3.5 text-sm font-semibold text-white backdrop-blur-md transition-colors hover:bg-white/10 md:px-8"
                           >
-                            <span>Get Quote</span>
-                            <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                            Get Quote
                           </MotionLink>
                         </motion.div>
+                      </motion.div>
+
+                      <div className="hidden items-end justify-end p-6 lg:flex">
+                        <div className="fx-panel-soft rounded-[1.35rem] border border-white/10 bg-slate-950/34 px-5 py-4 text-right shadow-[0_18px_34px_rgba(2,8,23,0.2)] backdrop-blur-lg">
+                          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-white/45">
+                            Slide
+                          </p>
+                          <p className="mt-2 text-3xl font-semibold text-white">
+                            {String(index + 1).padStart(2, "0")}
+                            <span className="ml-1 text-lg text-white/35">/ {String(slides.length).padStart(2, "0")}</span>
+                          </p>
+                        </div>
                       </div>
-                    </motion.div>
+                    </div>
                   </div>
                 </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
 
-                <motion.div 
-                  initial={{opacity: 0}}
-                  animate={{opacity: 1}}
-                  transition={{delay: 1.5}}
-                  className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-                >
-                  <div className="custom-pagination flex gap-2"></div>
-                </motion.div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+          <div className="relative z-10 mt-4 flex items-center justify-between gap-4 px-2 md:px-3">
+            <p className="text-[11px] font-medium uppercase tracking-[0.24em] text-white/40 md:text-xs">
+              Curated Premium Window & Door Systems
+            </p>
+            <div className="hero-slider-pagination flex items-center gap-2" />
+          </div>
+        </div>
       </div>
-      
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
-    </div>
+
+      <style>{`
+        .hero-showcase-slider .swiper-button-next,
+        .hero-showcase-slider .swiper-button-prev {
+          width: 44px;
+          height: 44px;
+          border-radius: 999px;
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          background: rgba(15, 23, 42, 0.44);
+          color: #f8fafc;
+          backdrop-filter: blur(14px);
+          box-shadow: 0 12px 24px rgba(2, 8, 23, 0.18);
+        }
+
+        .hero-showcase-slider .swiper-button-next::after,
+        .hero-showcase-slider .swiper-button-prev::after {
+          font-size: 16px;
+          font-weight: 800;
+        }
+
+        .hero-showcase-slider .swiper-button-next {
+          right: 16px;
+        }
+
+        .hero-showcase-slider .swiper-button-prev {
+          left: 16px;
+        }
+
+        .hero-showcase-slider .swiper-pagination-bullet {
+          width: 10px;
+          height: 10px;
+          margin: 0 !important;
+          border-radius: 999px;
+          background: rgba(255, 255, 255, 0.18);
+          opacity: 1;
+          transition: all 0.25s ease;
+        }
+
+        .hero-showcase-slider .swiper-pagination-bullet-active {
+          width: 28px;
+          background: linear-gradient(90deg, #3b82f6, #22d3ee);
+        }
+
+        @media (max-width: 768px) {
+          .hero-showcase-slider .swiper-button-next,
+          .hero-showcase-slider .swiper-button-prev {
+            width: 38px;
+            height: 38px;
+          }
+
+          .hero-showcase-slider .swiper-button-next {
+            right: 10px;
+          }
+
+          .hero-showcase-slider .swiper-button-prev {
+            left: 10px;
+          }
+        }
+      `}</style>
+    </section>
   )
 }
 

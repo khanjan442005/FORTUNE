@@ -78,7 +78,7 @@ function ProductCard({ product, index }) {
         style={{ rotateX, rotateY }}
         className="gaming-card group"
       >
-        <div className="relative h-64 overflow-hidden rounded-t-2xl">
+        <div className="relative h-64 overflow-hidden rounded-t-2xl fx-image-zoom">
           <motion.img
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.5 }}
@@ -118,10 +118,10 @@ function ProductCard({ product, index }) {
             transition={{ duration: 0.3 }}
             className="absolute inset-x-4 bottom-4"
           >
-            <Link to={`/product/${product.id}`} className="block w-full py-3 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-xl font-semibold text-white shadow-lg text-center">
-              View Details
-            </Link>
-          </motion.div>
+              <Link to={`/product/${product.id}`} className="block w-full rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 py-3 text-center font-semibold text-white shadow-lg fx-press">
+                View Details
+              </Link>
+            </motion.div>
           
 
         </div>
@@ -225,7 +225,7 @@ function Products() {
                     activeCategory: category.id,
                   }))
                 }
-                className={`px-6 py-3 rounded-xl font-medium transition-all ${
+                className={`fx-press rounded-xl px-6 py-3 font-medium transition-all ${
                   activeCategory === category.id
                     ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/25'
                     : 'glass text-gray-400 hover:text-white hover:bg-white/10'
@@ -297,7 +297,7 @@ function Products() {
           viewport={{ once: true }}
           className="text-center mt-16"
         >
-          <button className="outline-button">
+          <button className="outline-button fx-press">
             <span>View All Products</span>
           </button>
         </motion.div>

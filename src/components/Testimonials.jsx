@@ -77,7 +77,7 @@ function TestimonialCard({ testimonial, index }) {
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
       viewport={{ once: true }}
-      className="glass rounded-2xl p-8 relative"
+      className="fx-panel relative rounded-2xl p-8"
     >
       <div className="absolute top-6 right-6 text-6xl text-cyan-500/10 font-serif">"</div>
       

@@ -1,4 +1,7 @@
 import { motion } from "framer-motion"
+import TiltCard from "./TiltCard"
+import GlowCard from "./GlowCard"
+import { RevealOnScroll, StaggerReveal } from "./RevealOnScroll"
 
 const features = [
   {
@@ -65,42 +68,36 @@ const features = [
 
 function FeatureCard({ feature, index }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
-      className="group"
-    >
-      <div className="relative p-8 glass rounded-3xl h-full overflow-hidden">
-        {/* Background Gradient */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
-        
-        {/* Glow Effect */}
-        <div className={`absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br ${feature.gradient} rounded-full blur-[80px] opacity-0 group-hover:opacity-30 transition-opacity duration-500`}></div>
-        
-        <div className="relative z-10">
-          {/* Icon */}
-          <motion.div
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            className={`icon-glow mb-6 bg-gradient-to-br ${feature.gradient}`}
-          >
-            {feature.icon}
-          </motion.div>
-          
-          {/* Content */}
-          <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
-            {feature.title}
-          </h3>
-          <p className="text-gray-400 leading-relaxed">
-            {feature.description}
-          </p>
-        </div>
-        
-        {/* Hover Border Effect */}
-        <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${feature.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500`}></div>
-      </div>
-    </motion.div>
+    <TiltCard tiltMax={8} scale={1.02} className="h-full">
+      <RevealOnScroll variant="fadeUp" delay={index * 0.1} className="h-full">
+        <GlowCard
+          className="relative p-8 glass rounded-3xl h-full overflow-hidden group hover-lift"
+          glowColor={`${feature.gradient.includes('cyan') ? 'rgba(34,211,238,0.06)' : feature.gradient.includes('purple') ? 'rgba(139,92,246,0.06)' : 'rgba(34,211,238,0.06)'}`}
+        >
+          <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+          <div className={`absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br ${feature.gradient} rounded-full blur-[80px] opacity-0 group-hover:opacity-30 transition-opacity duration-500`}></div>
+
+          <div className="relative z-10">
+            <motion.div
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className={`icon-glow mb-6 bg-gradient-to-br ${feature.gradient}`}
+            >
+              {feature.icon}
+            </motion.div>
+
+            <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
+              {feature.title}
+            </h3>
+            <p className="text-gray-400 leading-relaxed">
+              {feature.description}
+            </p>
+          </div>
+
+          <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${feature.gradient} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`}></div>
+        </GlowCard>
+      </RevealOnScroll>
+    </TiltCard>
   )
 }
 
@@ -114,17 +111,12 @@ function Features() {
       
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
+        <RevealOnScroll variant="fadeUp" className="text-center mb-16">
           <motion.span
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-block px-4 py-2 glass rounded-full text-cyan-400 text-sm font-medium mb-4"
+            className="inline-block px-4 py-2 glass rounded-full text-cyan-400 text-sm font-medium mb-4 hover-glow"
           >
             Why Choose Us
           </motion.span>
@@ -135,7 +127,7 @@ function Features() {
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
             Our windows and doors come packed with advanced features for superior performance and aesthetics
           </p>
-        </motion.div>
+        </RevealOnScroll>
         
         {/* Features Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

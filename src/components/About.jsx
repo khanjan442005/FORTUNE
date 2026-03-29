@@ -65,7 +65,7 @@ function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="glass rounded-2xl p-4 text-center"
+                  className="fx-panel rounded-2xl p-4 text-center"
                 >
                   <div className="text-3xl font-bold gradient-text">
                     {stat.value}
@@ -104,12 +104,12 @@ function About() {
                 <img
                   src="/assets/1-Sliding Window/1.1.png"
                   alt="Window"
-                  className="rounded-2xl w-full h-48 object-cover"
+                  className="h-48 w-full rounded-2xl object-cover"
                 />
                 <img
                   src="/assets/12. Sliding Door/121.jpg"
                   alt="Door"
-                  className="rounded-2xl w-full h-32 object-cover"
+                  className="h-32 w-full rounded-2xl object-cover"
                 />
               </motion.div>
               <motion.div
@@ -122,18 +122,18 @@ function About() {
                 <img
                   src="/assets/4-Bay Window/4.1.png"
                   alt="Bay Window"
-                  className="rounded-2xl w-full h-32 object-cover"
+                  className="h-32 w-full rounded-2xl object-cover"
                 />
                 <img
                   src="/assets/15. French Door/151.jpg"
                   alt="French Door"
-                  className="rounded-2xl w-full h-48 object-cover"
+                  className="h-48 w-full rounded-2xl object-cover"
                 />
               </motion.div>
             </div>
             
             {/* Timeline */}
-            <div className="glass rounded-3xl p-8">
+            <div className="fx-panel rounded-3xl p-8">
               <h3 className="text-xl font-bold text-white mb-6">Our Journey</h3>
               <div className="space-y-6">
                 {timeline.map((item, index) => (
@@ -145,7 +145,7 @@ function About() {
                     transition={{ delay: index * 0.1 }}
                     className="flex items-center gap-4"
                   >
-                    <div className="w-16 h-16 glass rounded-xl flex items-center justify-center flex-shrink-0">
+                    <div className="fx-panel-soft flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-xl">
                       <span className="text-cyan-400 font-bold">{item.year}</span>
                     </div>
                     <div>

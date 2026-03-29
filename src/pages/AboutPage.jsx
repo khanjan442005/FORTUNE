@@ -1,20 +1,10 @@
-import { Suspense } from "react"
 import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 import Navbar from "../components/Navbar"
+import PageHero from "../components/PageHero"
+import PageShell from "../components/PageShell"
 import About from "../components/About"
 import Footer from "../components/Footer"
-
-function LoadingFallback() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-[#030712]">
-      <div className="flex flex-col items-center gap-4">
-        <div className="w-16 h-16 border-4 border-cyan-500/20 border-t-cyan-500 rounded-full animate-spin"></div>
-        <p className="text-gray-400">Loading...</p>
-      </div>
-    </div>
-  )
-}
 
 const coreValues = [
   { title: "Innovation", desc: "We continuously push boundaries with smart technology, modern designs, and sustainable materials.", icon: "M13 10V3L4 14h7v7l9-11h-7z" },
@@ -39,39 +29,22 @@ const milestones = [
   { year: "2025", event: "Industry Leader", detail: "Recognized as India's leading premium window manufacturer." },
 ]
 
-function PageHero({ badge, title, titleAccent, description }) {
-  return (
-    <section className="relative py-20 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 to-transparent"></div>
-      <div className="absolute top-1/2 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[150px]"></div>
-      <div className="absolute top-1/2 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[150px]"></div>
-      <div className="container mx-auto px-6 relative z-10 text-center">
-        <motion.span initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="inline-block px-4 py-2 glass rounded-full text-cyan-400 text-sm font-medium mb-6">
-          {badge}
-        </motion.span>
-        <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-5xl md:text-7xl font-bold mb-6">
-          <span className="text-white">{title} </span><span className="gradient-text">{titleAccent}</span>
-        </motion.h1>
-        <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-          {description}
-        </motion.p>
-      </div>
-    </section>
-  )
-}
-
 function AboutPage() {
   return (
-    <Suspense fallback={<LoadingFallback />}>
-      <div className="min-h-screen bg-[#030712]">
-        <Navbar />
-        <div className="pt-20">
-          <PageHero
-            badge="About Us"
-            title="Crafting"
-            titleAccent="Excellence"
-            description="Since 2010, Dynamic Windows has been transforming spaces with premium windows and doors that blend innovation, quality, and timeless design."
-          />
+    <PageShell tone="violet">
+      <Navbar />
+      <div className="pt-20">
+        <PageHero
+          badge="About Us"
+          title="Crafting"
+          titleAccent="Excellence"
+          description="Since 2010, Dynamic Windows has been transforming spaces with premium windows and doors that blend innovation, quality, and timeless design."
+          stats={[
+            { value: "2010", label: "Company Founded" },
+            { value: "1000+", label: "Projects Milestone" },
+            { value: "15+", label: "Years of Growth" },
+          ]}
+        />
 
           <About />
 
@@ -93,7 +66,7 @@ function AboutPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="glass rounded-2xl p-8 group hover:border-cyan-500/30 transition-colors"
+                    className="fx-panel rounded-2xl p-8 group"
                   >
                     <div className="w-14 h-14 mb-6 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                       <svg className="w-7 h-7 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
@@ -130,7 +103,7 @@ function AboutPage() {
                       className={`flex flex-col lg:flex-row items-center gap-6 ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'}`}
                     >
                       <div className={`flex-1 ${index % 2 === 0 ? 'lg:text-right' : 'lg:text-left'}`}>
-                        <div className="glass rounded-2xl p-6 inline-block">
+                        <div className="fx-panel rounded-2xl p-6 inline-block">
                           <div className="text-cyan-400 font-bold text-lg mb-1">{milestone.year}</div>
                           <h3 className="text-white font-bold text-lg mb-2">{milestone.event}</h3>
                           <p className="text-gray-400 text-sm">{milestone.detail}</p>
@@ -162,7 +135,7 @@ function AboutPage() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="glass rounded-2xl p-8 text-center group hover:border-cyan-500/30 transition-colors"
+                    className="fx-panel rounded-2xl p-8 text-center group"
                   >
                     <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-2xl font-bold group-hover:scale-110 transition-transform">
                       {member.name.split(' ').map(n => n[0]).join('')}
@@ -183,7 +156,7 @@ function AboutPage() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="glass rounded-3xl p-12 md:p-16 text-center border border-white/10 relative overflow-hidden"
+                className="fx-panel rounded-3xl p-12 md:p-16 text-center relative overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-purple-500/5"></div>
                 <div className="relative z-10">
@@ -198,10 +171,9 @@ function AboutPage() {
             </div>
           </section>
 
-        </div>
-        <Footer />
       </div>
-    </Suspense>
+      <Footer />
+    </PageShell>
   )
 }
 

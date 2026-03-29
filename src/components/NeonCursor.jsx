@@ -6,6 +6,9 @@ import {
   useSpring,
 } from "framer-motion";
 
+const TRAIL_LENGTH = 12;
+const TRAIL_FADE_SPEED = 0.08;
+
 const INTERACTIVE_SELECTOR = [
   "a",
   "button",
@@ -23,34 +26,65 @@ const INTERACTIVE_SELECTOR = [
   "[data-cursor='interactive']",
 ].join(", ");
 
-const TRAIL_LIMIT = 10;
-const TRAIL_INTERVAL = 22;
-const CLICK_PARTICLES = 10;
-const CLICK_LIFETIME = 520;
+const CLICK_PARTICLES = 8;
+const CLICK_LIFETIME = 480;
+const MAX_CURSOR_TEXT = 10;
 
 const palettes = {
   default: {
     primary: "#22d3ee",
-    secondary: "#60a5fa",
-    glow: "rgba(34, 211, 238, 0.38)",
+    secondary: "#0891b2",
+    accent: "#ecfeff",
     fill: "rgba(34, 211, 238, 0.14)",
+    edge: "rgba(165, 243, 252, 0.42)",
+    glow: "rgba(34, 211, 238, 0.26)",
+    textBg: "rgba(8, 15, 29, 0.88)",
+    frame: "rgba(34, 211, 238, 0.12)",
   },
   interactive: {
-    primary: "#67e8f9",
-    secondary: "#c084fc",
-    glow: "rgba(103, 232, 249, 0.42)",
-    fill: "rgba(103, 232, 249, 0.16)",
+    primary: "#f59e0b",
+    secondary: "#f97316",
+    accent: "#fff7ed",
+    fill: "rgba(245, 158, 11, 0.14)",
+    edge: "rgba(254, 215, 170, 0.42)",
+    glow: "rgba(249, 115, 22, 0.26)",
+    textBg: "rgba(67, 20, 7, 0.9)",
+    frame: "rgba(249, 115, 22, 0.12)",
   },
   enemy: {
-    primary: "#fb7185",
-    secondary: "#f97316",
-    glow: "rgba(251, 113, 133, 0.42)",
-    fill: "rgba(251, 113, 133, 0.15)",
+    primary: "#ef4444",
+    secondary: "#f43f5e",
+    accent: "#fff1f2",
+    fill: "rgba(239, 68, 68, 0.15)",
+    edge: "rgba(254, 205, 211, 0.44)",
+    glow: "rgba(244, 63, 94, 0.28)",
+    textBg: "rgba(69, 10, 10, 0.92)",
+    frame: "rgba(244, 63, 94, 0.13)",
   },
 };
 
 function getPalette(mode) {
   return palettes[mode] ?? palettes.default;
+}
+
+function getCursorText(element, mode) {
+  if (!(element instanceof Element)) {
+    return "";
+  }
+
+  if (mode === "enemy") {
+    return element.getAttribute("data-cursor-text")?.trim() || "TARGET";
+  }
+
+  const explicitText =
+    element.getAttribute("data-cursor-text") ||
+    element.getAttribute("aria-label") ||
+    element.getAttribute("title");
+
+  const fallbackText =
+    explicitText || element.textContent?.replace(/\s+/g, " ").trim() || "OPEN";
+
+  return fallbackText.slice(0, MAX_CURSOR_TEXT).toUpperCase();
 }
 
 function getRectData(element) {
@@ -78,6 +112,24 @@ function getRectData(element) {
   };
 }
 
+function applyMagnetic(element, x, y) {
+  if (!(element instanceof Element)) {
+    return { x, y };
+  }
+
+  const rect = element.getBoundingClientRect();
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+  const deltaX = x - centerX;
+  const deltaY = y - centerY;
+  const strength = element.closest(".enemy") ? 0.14 : 0.22;
+
+  return {
+    x: x - deltaX * strength,
+    y: y - deltaY * strength,
+  };
+}
+
 function createBurst(x, y, mode) {
   const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 
@@ -88,40 +140,41 @@ function createBurst(x, y, mode) {
     mode,
     particles: Array.from({ length: CLICK_PARTICLES }, (_, index) => {
       const angle = (index / CLICK_PARTICLES) * Math.PI * 2;
-      const distance = 22 + (index % 3) * 10;
+      const distance = 18 + (index % 2) * 10;
 
       return {
         id: `${id}-${index}`,
         x: Math.cos(angle) * distance,
         y: Math.sin(angle) * distance,
-        size: index % 2 === 0 ? 5 : 3,
+        rotate: (angle * 180) / Math.PI,
+        width: index % 2 === 0 ? 10 : 7,
+        height: index % 2 === 0 ? 3 : 2,
       };
     }),
   };
 }
 
-const GamingCursor = () => {
+function NeonCursor() {
   const [enabled, setEnabled] = useState(false);
   const [visible, setVisible] = useState(false);
   const [pressed, setPressed] = useState(false);
   const [mode, setMode] = useState("default");
+  const [cursorText, setCursorText] = useState("");
+  const [speed, setSpeed] = useState(0);
   const [hoverRect, setHoverRect] = useState(null);
-  const [trail, setTrail] = useState([]);
   const [bursts, setBursts] = useState([]);
+  const [trail, setTrail] = useState([]);
+  const trailRef = useRef([]);
 
   const pointerX = useMotionValue(-100);
   const pointerY = useMotionValue(-100);
-  const coreX = useSpring(pointerX, { stiffness: 900, damping: 42, mass: 0.16 });
-  const coreY = useSpring(pointerY, { stiffness: 900, damping: 42, mass: 0.16 });
-  const auraX = useSpring(pointerX, { stiffness: 280, damping: 28, mass: 0.7 });
-  const auraY = useSpring(pointerY, { stiffness: 280, damping: 28, mass: 0.7 });
-  const scopeX = useSpring(pointerX, { stiffness: 180, damping: 24, mass: 0.95 });
-  const scopeY = useSpring(pointerY, { stiffness: 180, damping: 24, mass: 0.95 });
+  const coreX = useSpring(pointerX, { stiffness: 860, damping: 38, mass: 0.18 });
+  const coreY = useSpring(pointerY, { stiffness: 860, damping: 38, mass: 0.18 });
 
   const pointerRef = useRef({ x: -100, y: -100 });
-  const modeRef = useRef("default");
+  const lastPositionRef = useRef({ x: -100, y: -100, time: 0 });
   const activeElementRef = useRef(null);
-  const lastTrailTimeRef = useRef(0);
+  const modeRef = useRef("default");
   const burstTimersRef = useRef([]);
 
   useEffect(() => {
@@ -156,6 +209,7 @@ const GamingCursor = () => {
         activeElementRef.current = null;
         modeRef.current = "default";
         setMode("default");
+        setCursorText("");
         setHoverRect(null);
         return;
       }
@@ -168,10 +222,11 @@ const GamingCursor = () => {
           ? "interactive"
           : "default";
 
-      if (modeRef.current !== nextMode) {
-        modeRef.current = nextMode;
-        setMode(nextMode);
-      }
+      modeRef.current = nextMode;
+      setMode(nextMode);
+      setCursorText(
+        interactiveElement ? getCursorText(interactiveElement, nextMode) : ""
+      );
 
       if (activeElementRef.current !== interactiveElement) {
         activeElementRef.current = interactiveElement;
@@ -191,34 +246,55 @@ const GamingCursor = () => {
 
     const handleMove = (event) => {
       const { clientX, clientY, target } = event;
+      const interactiveTarget =
+        target instanceof Element
+          ? target.closest(".enemy") ?? target.closest(INTERACTIVE_SELECTOR)
+          : null;
+      const magneticPosition = applyMagnetic(interactiveTarget, clientX, clientY);
+      const now = performance.now();
 
-      pointerRef.current = { x: clientX, y: clientY };
-      pointerX.set(clientX);
-      pointerY.set(clientY);
+      pointerRef.current = magneticPosition;
+      pointerX.set(magneticPosition.x);
+      pointerY.set(magneticPosition.y);
       setVisible(true);
       updateHoverState(target);
 
-      const now = performance.now();
-      if (now - lastTrailTimeRef.current >= TRAIL_INTERVAL) {
-        lastTrailTimeRef.current = now;
-        setTrail((previous) => [
-          ...previous.slice(-(TRAIL_LIMIT - 1)),
-          { id: now, x: clientX, y: clientY },
-        ]);
+      if (lastPositionRef.current.time > 0) {
+        const dx = clientX - lastPositionRef.current.x;
+        const dy = clientY - lastPositionRef.current.y;
+        const dt = Math.max(now - lastPositionRef.current.time, 1);
+        const nextSpeed = Math.min(Math.sqrt(dx * dx + dy * dy) / dt, 4);
+
+        setSpeed(nextSpeed);
       }
+
+      lastPositionRef.current = { x: clientX, y: clientY, time: now };
+
+      trailRef.current = [
+        { x: magneticPosition.x, y: magneticPosition.y, id: now, opacity: 1 },
+        ...trailRef.current.slice(0, TRAIL_LENGTH - 1).map((p) => ({
+          ...p,
+          opacity: Math.max(p.opacity - TRAIL_FADE_SPEED, 0),
+        })),
+      ].filter((p) => p.opacity > 0);
+      setTrail([...trailRef.current]);
     };
 
-    const handleMouseDown = (event) => {
-      const x = typeof event.clientX === "number" ? event.clientX : pointerRef.current.x;
-      const y = typeof event.clientY === "number" ? event.clientY : pointerRef.current.y;
-      const burst = createBurst(x, y, modeRef.current);
+    const handleMouseDown = () => {
+      const burst = createBurst(
+        pointerRef.current.x,
+        pointerRef.current.y,
+        modeRef.current
+      );
 
       setPressed(true);
       setBursts((previous) => [...previous, burst]);
 
       const timerId = window.setTimeout(() => {
         setBursts((previous) => previous.filter((item) => item.id !== burst.id));
-        burstTimersRef.current = burstTimersRef.current.filter((item) => item !== timerId);
+        burstTimersRef.current = burstTimersRef.current.filter(
+          (item) => item !== timerId
+        );
       }, CLICK_LIFETIME);
 
       burstTimersRef.current.push(timerId);
@@ -236,10 +312,11 @@ const GamingCursor = () => {
       activeElementRef.current = null;
       modeRef.current = "default";
       setMode("default");
-      setHoverRect(null);
       setPressed(false);
       setVisible(false);
-      setTrail([]);
+      setCursorText("");
+      setSpeed(0);
+      setHoverRect(null);
     };
 
     html.classList.add("custom-cursor-active");
@@ -289,12 +366,37 @@ const GamingCursor = () => {
   }
 
   const palette = getPalette(mode);
-  const coreSize = mode === "enemy" ? 56 : mode === "interactive" ? 36 : pressed ? 24 : 20;
-  const auraSize = mode === "enemy" ? 120 : mode === "interactive" ? 82 : pressed ? 68 : 58;
-  const centerDotSize = mode === "enemy" ? 8 : 6;
+  const speedFactor = Math.min(speed, 2.2);
+  const coreSize = mode === "enemy" ? 46 : mode === "interactive" ? 40 : 34;
+  const ringInset = mode === "interactive" ? 3 : 4;
+  const innerInset = mode === "interactive" ? 9 : 10;
+  const primaryRingMask =
+    "radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px))";
+  const secondaryRingMask =
+    "radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px))";
 
   return (
     <>
+      {trail.map((point, index) => (
+        <motion.div
+          key={point.id}
+          className="cursor-trail-dot"
+          style={{
+            position: 'fixed',
+            left: point.x - 2,
+            top: point.y - 2,
+            width: 4 - index * 0.25,
+            height: 4 - index * 0.25,
+            borderRadius: '50%',
+            background: `radial-gradient(circle, ${palette.primary}, transparent)`,
+            boxShadow: `0 0 ${6 - index * 0.4}px ${palette.glow}`,
+            opacity: point.opacity * 0.6,
+            pointerEvents: 'none',
+            zIndex: 9998,
+          }}
+        />
+      ))}
+
       <AnimatePresence>
         {hoverRect && (
           <motion.div
@@ -306,12 +408,9 @@ const GamingCursor = () => {
               width: hoverRect.width,
               height: hoverRect.height,
               borderRadius: hoverRect.radius,
-              border: `1px solid ${palette.primary}`,
-              background:
-                mode === "enemy"
-                  ? "linear-gradient(135deg, rgba(251, 113, 133, 0.1), rgba(249, 115, 22, 0.05))"
-                  : "linear-gradient(135deg, rgba(34, 211, 238, 0.08), rgba(192, 132, 252, 0.04))",
-              boxShadow: `0 0 0 1px ${palette.fill}, 0 0 24px ${palette.glow}`,
+              border: `1px solid ${palette.edge}`,
+              background: `linear-gradient(135deg, ${palette.frame}, transparent 60%)`,
+              boxShadow: `0 0 0 1px ${palette.fill}, 0 0 26px ${palette.glow}`,
               pointerEvents: "none",
               zIndex: 9997,
             }}
@@ -319,109 +418,19 @@ const GamingCursor = () => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.98 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-          />
+          >
+            <div
+              style={{
+                position: "absolute",
+                inset: 6,
+                borderRadius: Math.max(hoverRect.radius - 6, 10),
+                border: `1px dashed ${palette.fill}`,
+                opacity: 0.7,
+              }}
+            />
+          </motion.div>
         )}
       </AnimatePresence>
-
-      {trail.map((point, index) => {
-        const strength = (index + 1) / trail.length;
-
-        return (
-          <motion.div
-            key={point.id}
-            style={{
-              position: "fixed",
-              top: point.y,
-              left: point.x,
-              width: 6 + strength * 10,
-              height: 6 + strength * 10,
-              borderRadius: "999px",
-              background: `radial-gradient(circle, ${palette.primary} 0%, transparent 72%)`,
-              boxShadow: `0 0 ${10 + strength * 18}px ${palette.glow}`,
-              opacity: 0.18 + strength * 0.4,
-              pointerEvents: "none",
-              zIndex: 9998,
-              translateX: "-50%",
-              translateY: "-50%",
-            }}
-            animate={{ scale: pressed ? 1.08 : 1 }}
-            transition={{ duration: 0.15 }}
-          />
-        );
-      })}
-
-      <motion.div
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: auraSize,
-          height: auraSize,
-          borderRadius: "999px",
-          background:
-            mode === "enemy"
-              ? `radial-gradient(circle, rgba(251, 113, 133, 0.2) 0%, rgba(249, 115, 22, 0.08) 40%, transparent 72%)`
-              : `radial-gradient(circle, ${palette.fill} 0%, transparent 72%)`,
-          border: `1px solid ${palette.fill}`,
-          boxShadow: `0 0 35px ${palette.glow}`,
-          pointerEvents: "none",
-          zIndex: 9998,
-          x: auraX,
-          y: auraY,
-          translateX: "-50%",
-          translateY: "-50%",
-          opacity: visible ? 1 : 0,
-        }}
-        animate={{
-          scale: pressed ? 0.92 : mode === "interactive" ? 1.08 : 1,
-        }}
-        transition={{ duration: 0.16 }}
-      />
-
-      {mode === "enemy" && (
-        <motion.div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            width: 152,
-            height: 152,
-            borderRadius: "999px",
-            border: `1px solid ${palette.primary}`,
-            boxShadow: `0 0 40px ${palette.glow}`,
-            pointerEvents: "none",
-            zIndex: 9998,
-            x: scopeX,
-            y: scopeY,
-            translateX: "-50%",
-            translateY: "-50%",
-            opacity: visible ? 0.9 : 0,
-          }}
-          animate={{ scale: pressed ? 0.94 : 1, rotate: pressed ? 8 : 0 }}
-          transition={{ duration: 0.18 }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              inset: "50% auto auto 50%",
-              width: 1,
-              height: 152,
-              background: `linear-gradient(180deg, transparent, ${palette.primary}, transparent)`,
-              transform: "translate(-50%, -50%)",
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              inset: "50% auto auto 50%",
-              width: 152,
-              height: 1,
-              background: `linear-gradient(90deg, transparent, ${palette.primary}, transparent)`,
-              transform: "translate(-50%, -50%)",
-            }}
-          />
-        </motion.div>
-      )}
 
       <motion.div
         style={{
@@ -430,13 +439,6 @@ const GamingCursor = () => {
           left: 0,
           width: coreSize,
           height: coreSize,
-          borderRadius: "999px",
-          border: `1.5px solid ${palette.primary}`,
-          background: `radial-gradient(circle, ${palette.fill} 0%, transparent 74%)`,
-          boxShadow: `0 0 22px ${palette.glow}, inset 0 0 14px ${palette.fill}`,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
           pointerEvents: "none",
           zIndex: 10000,
           x: coreX,
@@ -446,25 +448,162 @@ const GamingCursor = () => {
           opacity: visible ? 1 : 0,
         }}
         animate={{
-          scale: pressed ? 0.82 : mode === "interactive" ? 1.12 : 1,
-          rotate: pressed ? 16 : 0,
+          scale:
+            pressed
+              ? 0.86
+              : mode === "interactive"
+                ? 1.08 + speedFactor * 0.04
+                : 1 + speedFactor * 0.03,
         }}
         transition={{ duration: 0.14 }}
       >
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            borderRadius: "999px",
+            border: `1px solid ${palette.edge}`,
+            boxShadow: `0 0 18px ${palette.glow}`,
+          }}
+        />
+
         <motion.div
           style={{
-            width: centerDotSize,
-            height: centerDotSize,
+            position: "absolute",
+            inset: ringInset,
             borderRadius: "999px",
-            background: palette.primary,
-            boxShadow: `0 0 12px ${palette.primary}, 0 0 24px ${palette.glow}`,
+            background: `conic-gradient(from 90deg, transparent 0deg 26deg, ${palette.primary} 26deg 110deg, transparent 110deg 202deg, ${palette.secondary} 202deg 262deg, transparent 262deg 360deg)`,
+            WebkitMask: primaryRingMask,
+            mask: primaryRingMask,
           }}
-          animate={{
-            scale: pressed ? 1.5 : mode === "interactive" ? 1.18 : 1,
-          }}
-          transition={{ type: "spring", stiffness: 340, damping: 22 }}
+          animate={{ rotate: 360 }}
+          transition={{ duration: mode === "interactive" ? 4.8 : 7.5, ease: "linear", repeat: Infinity }}
         />
+
+        <motion.div
+          style={{
+            position: "absolute",
+            inset: innerInset,
+            borderRadius: "999px",
+            background: `conic-gradient(from 0deg, transparent 0deg 46deg, ${palette.accent} 46deg 88deg, transparent 88deg 220deg, ${palette.primary} 220deg 260deg, transparent 260deg 360deg)`,
+            WebkitMask: secondaryRingMask,
+            mask: secondaryRingMask,
+            opacity: 0.95,
+          }}
+          animate={{ rotate: -360 }}
+          transition={{ duration: mode === "interactive" ? 3.4 : 5.6, ease: "linear", repeat: Infinity }}
+        />
+
+        <div
+          style={{
+            position: "absolute",
+            inset: mode === "interactive" ? 12 : 10,
+            borderRadius: 8,
+            background: `linear-gradient(135deg, ${palette.primary}, ${palette.secondary})`,
+            border: `1px solid ${palette.edge}`,
+            boxShadow: `0 0 12px ${palette.glow}`,
+            transform: "rotate(45deg)",
+          }}
+        />
+
+        <div
+          style={{
+            position: "absolute",
+            inset: mode === "interactive" ? 15 : 13,
+            borderRadius: "999px",
+            background: palette.accent,
+            boxShadow: `0 0 10px ${palette.accent}`,
+          }}
+        />
+
+        {mode === "enemy" && (
+          <>
+            <div
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: 2,
+                width: 8,
+                height: 1,
+                background: palette.accent,
+                transform: "translateY(-50%)",
+                opacity: 0.8,
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                top: "50%",
+                right: 2,
+                width: 8,
+                height: 1,
+                background: palette.accent,
+                transform: "translateY(-50%)",
+                opacity: 0.8,
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                left: "50%",
+                top: 2,
+                width: 1,
+                height: 8,
+                background: palette.accent,
+                transform: "translateX(-50%)",
+                opacity: 0.8,
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                left: "50%",
+                bottom: 2,
+                width: 1,
+                height: 8,
+                background: palette.accent,
+                transform: "translateX(-50%)",
+                opacity: 0.8,
+              }}
+            />
+          </>
+        )}
       </motion.div>
+
+      <AnimatePresence>
+        {cursorText && visible && (
+          <motion.div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              padding: "0.38rem 0.62rem",
+              borderRadius: "999px",
+              border: `1px solid ${palette.edge}`,
+              background: palette.textBg,
+              boxShadow: `0 0 18px ${palette.glow}`,
+              color: palette.accent,
+              fontSize: "10px",
+              fontWeight: 700,
+              letterSpacing: "0.18em",
+              whiteSpace: "nowrap",
+              textTransform: "uppercase",
+              pointerEvents: "none",
+              zIndex: 10001,
+              x: coreX,
+              y: coreY,
+              translateX: "-50%",
+              translateY: "-210%",
+            }}
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.14 }}
+          >
+            {cursorText}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         {bursts.map((burst) => {
@@ -478,7 +617,7 @@ const GamingCursor = () => {
                 top: burst.y,
                 left: burst.x,
                 pointerEvents: "none",
-                zIndex: 10001,
+                zIndex: 10002,
               }}
               initial={{ opacity: 1 }}
               animate={{ opacity: 1 }}
@@ -488,16 +627,16 @@ const GamingCursor = () => {
                 style={{
                   position: "absolute",
                   inset: 0,
-                  width: 16,
-                  height: 16,
+                  width: 18,
+                  height: 18,
                   borderRadius: "999px",
-                  border: `1px solid ${burstPalette.primary}`,
-                  boxShadow: `0 0 18px ${burstPalette.glow}`,
+                  border: `1px solid ${burstPalette.edge}`,
+                  boxShadow: `0 0 16px ${burstPalette.glow}`,
                   translateX: "-50%",
                   translateY: "-50%",
                 }}
-                initial={{ scale: 0.4, opacity: 0.85 }}
-                animate={{ scale: 3.2, opacity: 0 }}
+                initial={{ scale: 0.5, opacity: 0.8 }}
+                animate={{ scale: 2.8, opacity: 0 }}
                 transition={{ duration: 0.4, ease: "easeOut" }}
               />
 
@@ -508,13 +647,14 @@ const GamingCursor = () => {
                     position: "absolute",
                     top: 0,
                     left: 0,
-                    width: particle.size,
-                    height: particle.size,
+                    width: particle.width,
+                    height: particle.height,
                     borderRadius: "999px",
-                    background: burstPalette.primary,
-                    boxShadow: `0 0 12px ${burstPalette.primary}`,
+                    background: `linear-gradient(90deg, ${burstPalette.primary}, ${burstPalette.accent})`,
+                    boxShadow: `0 0 10px ${burstPalette.glow}`,
                     translateX: "-50%",
                     translateY: "-50%",
+                    rotate: particle.rotate,
                   }}
                   initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
                   animate={{
@@ -522,8 +662,9 @@ const GamingCursor = () => {
                     y: particle.y,
                     opacity: 0,
                     scale: 0.2,
+                    rotate: particle.rotate + 18,
                   }}
-                  transition={{ duration: 0.45, ease: "easeOut" }}
+                  transition={{ duration: 0.42, ease: "easeOut" }}
                 />
               ))}
             </motion.div>
@@ -532,6 +673,6 @@ const GamingCursor = () => {
       </AnimatePresence>
     </>
   );
-};
+}
 
-export default GamingCursor;
+export default NeonCursor;

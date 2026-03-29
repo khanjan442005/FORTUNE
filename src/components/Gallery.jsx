@@ -24,12 +24,12 @@ function GalleryImage({ image, index }) {
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      className={`group relative overflow-hidden rounded-2xl ${sizeClasses[image.size]}`}
+      className={`group relative overflow-hidden rounded-2xl fx-panel ${sizeClasses[image.size]}`}
     >
       <motion.div
         whileHover={{ scale: 1.05 }}
         transition={{ duration: 0.5 }}
-        className="relative h-full min-h-[250px]"
+        className="relative h-full min-h-[250px] fx-image-zoom"
       >
         <img
           src={image.src}
@@ -111,7 +111,7 @@ function Gallery() {
           viewport={{ once: true }}
           className="text-center mt-16"
         >
-          <button className="outline-button">
+          <button className="outline-button fx-press">
             <span>View All Projects</span>
           </button>
         </motion.div>

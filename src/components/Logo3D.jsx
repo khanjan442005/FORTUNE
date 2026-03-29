@@ -39,7 +39,7 @@ function Logo3D({ size = "md", showText = true, className = "" }) {
 
   return (
     <Link
-      to="/home"
+      to="/"
       className={`flex items-center ${cfg.gap} group no-underline ${className}`}
       ref={containerRef}
       onMouseMove={handleMouseMove}
