@@ -1,11 +1,10 @@
 import { motion } from "framer-motion"
-import { Link } from "react-router-dom"
 import Navbar from "../components/Navbar"
 import PageHero from "../components/PageHero"
 import PageShell from "../components/PageShell"
 import Contact from "../components/Contact"
 import Footer from "../components/Footer"
-import { sectionIds, sectionLinks } from "../data/sectionLinks"
+import { sectionIds } from "../data/sectionLinks"
 
 const faqs = [
   { q: "How long does installation take?", a: "Most residential installations are completed within 1-3 days depending on the number of windows and doors. Commercial projects are scheduled based on scope and complexity." },
@@ -123,25 +122,6 @@ function ContactPage({ embedded = false }) {
                   </motion.div>
                 ))}
               </div>
-            </div>
-          </section>
-
-          {/* CTA */}
-          <section className="py-20 relative">
-            <div className="container mx-auto px-6">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="fx-panel rounded-3xl p-12 md:p-16 text-center relative overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-purple-500/5"></div>
-                <div className="relative z-10">
-                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Prefer a Call Back?</h2>
-                  <p className="text-gray-400 mb-8 max-w-xl mx-auto">Leave your number and our team will call you back within 24 hours to discuss your project.</p>
-                  <Link to={sectionLinks.contact} className="neon-button"><span>Request Call Back</span></Link>
-                </div>
-              </motion.div>
             </div>
           </section>
 

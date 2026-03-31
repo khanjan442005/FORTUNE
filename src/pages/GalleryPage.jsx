@@ -1,11 +1,10 @@
 import { motion } from "framer-motion"
-import { Link } from "react-router-dom"
 import Navbar from "../components/Navbar"
 import PageHero from "../components/PageHero"
 import PageShell from "../components/PageShell"
 import Gallery from "../components/Gallery"
 import Footer from "../components/Footer"
-import { sectionIds, sectionLinks } from "../data/sectionLinks"
+import { sectionIds } from "../data/sectionLinks"
 
 const featuredProjects = [
   { title: "Luxury Villa - Ahmedabad", type: "Residential", items: "24 Windows + 6 Doors", desc: "Full home transformation with premium sliding and casement windows paired with French doors for seamless indoor-outdoor living." },
@@ -89,29 +88,6 @@ function GalleryPage({ embedded = false }) {
               </div>
             </div>
           </section>
-
-          {/* CTA */}
-          <section className="py-20 relative">
-            <div className="container mx-auto px-6">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="fx-panel rounded-3xl p-12 md:p-16 text-center relative overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-purple-500/5"></div>
-                <div className="relative z-10">
-                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Start Your Dream Project</h2>
-                  <p className="text-gray-400 mb-8 max-w-xl mx-auto">Whether it's a single window or a full building facade, we bring the same dedication to every project.</p>
-                  <div className="flex flex-wrap gap-4 justify-center">
-                    <Link to={sectionLinks.contact} className="neon-button"><span>Request a Quote</span></Link>
-                    <Link to={sectionLinks.products} className="outline-button"><span>Explore Products</span></Link>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </section>
-
       </div>
   )
 

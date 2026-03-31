@@ -1,24 +1,16 @@
 import { motion } from "framer-motion"
-import { Link } from "react-router-dom"
 import Navbar from "../components/Navbar"
 import PageHero from "../components/PageHero"
 import PageShell from "../components/PageShell"
 import About from "../components/About"
 import Footer from "../components/Footer"
-import { sectionIds, sectionLinks } from "../data/sectionLinks"
+import { sectionIds } from "../data/sectionLinks"
 
 const coreValues = [
   { title: "Innovation", desc: "We continuously push boundaries with smart technology, modern designs, and sustainable materials.", icon: "M13 10V3L4 14h7v7l9-11h-7z" },
   { title: "Quality", desc: "Every product passes through rigorous quality checks to ensure it meets the highest global standards.", icon: "M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" },
   { title: "Sustainability", desc: "100% recyclable materials and energy-efficient production reflect our commitment to the environment.", icon: "M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
   { title: "Customer First", desc: "From consultation to post-installation support, we prioritize your satisfaction at every step.", icon: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" },
-]
-
-const teamMembers = [
-  { name: "Rajesh Mehta", role: "Founder & CEO", desc: "20+ years in architectural solutions" },
-  { name: "Priya Desai", role: "Head of Design", desc: "Former lead architect at top firms" },
-  { name: "Amit Shah", role: "Technical Director", desc: "Expert in thermal & acoustic engineering" },
-  { name: "Sneha Patel", role: "Operations Manager", desc: "15+ years in manufacturing excellence" },
 ]
 
 const milestones = [
@@ -116,60 +108,6 @@ function AboutPage({ embedded = false }) {
               </div>
             </div>
           </section>
-
-          {/* Team */}
-          <section className="py-20 relative">
-            <div className="container mx-auto px-6">
-              <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-                <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                  <span className="text-white">Meet the </span><span className="gradient-text">Team</span>
-                </h2>
-                <p className="text-gray-400 max-w-xl mx-auto">The passionate professionals driving Dynamic Windows forward.</p>
-              </motion.div>
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {teamMembers.map((member, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="fx-panel rounded-2xl p-8 text-center group"
-                  >
-                    <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white text-2xl font-bold group-hover:scale-110 transition-transform">
-                      {member.name.split(' ').map(n => n[0]).join('')}
-                    </div>
-                    <h3 className="text-lg font-bold text-white mb-1">{member.name}</h3>
-                    <p className="text-cyan-400 text-sm mb-2">{member.role}</p>
-                    <p className="text-gray-500 text-sm">{member.desc}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </section>
-
-          {/* CTA */}
-          <section className="py-20 relative">
-            <div className="container mx-auto px-6">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="fx-panel rounded-3xl p-12 md:p-16 text-center relative overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-purple-500/5"></div>
-                <div className="relative z-10">
-                  <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Work With Us?</h2>
-                  <p className="text-gray-400 mb-8 max-w-xl mx-auto">Let's discuss your project and create something extraordinary together.</p>
-                  <div className="flex flex-wrap gap-4 justify-center">
-                    <Link to={sectionLinks.contact} className="neon-button"><span>Get in Touch</span></Link>
-                    <Link to={sectionLinks.products} className="outline-button"><span>View Products</span></Link>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </section>
-
       </div>
   )
 
