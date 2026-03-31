@@ -72,10 +72,11 @@ function ProductCard({ product, index }) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{ perspective: 1000 }}
+      className="h-full"
     >
       <motion.div
         style={{ rotateX, rotateY }}
-        className="gaming-card group"
+        className="gaming-card group flex h-full flex-col"
       >
         <div className="relative media-ratio-card overflow-hidden rounded-t-2xl fx-image-zoom">
           <motion.img
@@ -113,15 +114,15 @@ function ProductCard({ product, index }) {
           
         </div>
         
-        <div className="p-6">
+        <div className="flex flex-1 flex-col p-6">
           <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
             {product.name}
           </h3>
-          <p className="text-gray-400 text-sm mb-4 line-clamp-2">
+          <p className="min-h-[3.5rem] text-gray-400 text-sm mb-4 line-clamp-2">
             {product.description}
           </p>
           
-          <div className="flex flex-wrap gap-2">
+          <div className="mb-5 flex min-h-[5.75rem] flex-wrap content-start gap-2">
             {product.features.slice(0, 3).map((feature, i) => (
               <span
                 key={i}
@@ -134,7 +135,7 @@ function ProductCard({ product, index }) {
 
           <Link
             to={`/product/${product.id}`}
-            className="mt-5 block w-full rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 py-3 text-center font-semibold text-white shadow-lg fx-press"
+            className="mt-auto block w-full rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 py-3 text-center font-semibold text-white shadow-lg fx-press"
           >
             View Details
           </Link>
