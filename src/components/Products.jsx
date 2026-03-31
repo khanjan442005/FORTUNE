@@ -77,13 +77,13 @@ function ProductCard({ product, index }) {
         style={{ rotateX, rotateY }}
         className="gaming-card group"
       >
-        <div className="relative h-64 overflow-hidden rounded-t-2xl fx-image-zoom">
+        <div className="relative media-ratio-card overflow-hidden rounded-t-2xl fx-image-zoom">
           <motion.img
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.5 }}
             src={product.images[0]}
             alt={product.name}
-            className="w-full h-full object-cover"
+            className="media-image"
             loading="lazy"
           />
           

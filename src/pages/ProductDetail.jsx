@@ -67,7 +67,7 @@ function ProductDetailContent({ id }) {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <div className="relative mb-6 glass rounded-3xl overflow-hidden">
+              <div className="relative mb-6 glass media-ratio-detail rounded-3xl overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={`${product.id}-${resolvedImageIndex}`}
@@ -77,7 +77,7 @@ function ProductDetailContent({ id }) {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="h-[320px] w-full object-cover sm:h-[420px] lg:h-[500px]"
+                    className="media-image"
                   />
                 </AnimatePresence>
                 <div className="absolute top-4 right-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-4 py-2 rounded-full font-bold shadow-lg">
@@ -91,13 +91,13 @@ function ProductDetailContent({ id }) {
                     <button
                       key={index}
                       onClick={() => setSelectedImage(index)}
-                      className={`flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border-2 transition-all ${
+                      className={`media-ratio-square w-20 flex-shrink-0 rounded-xl overflow-hidden border-2 transition-all ${
                         resolvedImageIndex === index 
                           ? 'border-cyan-400 shadow-lg shadow-cyan-400/30' 
                           : 'border-transparent hover:border-gray-600'
                       }`}
                     >
-                      <img src={img} alt={`${product.name} ${index + 1}`} className="w-full h-full object-cover" />
+                      <img src={img} alt={`${product.name} ${index + 1}`} className="media-image" />
                     </button>
                   ))}
                 </div>
@@ -186,11 +186,11 @@ function ProductDetailContent({ id }) {
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {relatedProducts.map((item) => (
                   <Link key={item.id} to={`/product/${item.id}`} className="glass rounded-2xl overflow-hidden group">
-                    <div className="h-48 overflow-hidden">
+                    <div className="media-ratio-card overflow-hidden">
                       <img 
                         src={item.images[0]} 
                         alt={item.name} 
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                        className="media-image transition-transform duration-500 group-hover:scale-110" 
                       />
                     </div>
                     <div className="p-4">

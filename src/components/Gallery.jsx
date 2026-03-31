@@ -12,29 +12,24 @@ const galleryImages = [
 ]
 
 function GalleryImage({ image, index }) {
-  const sizeClasses = {
-    small: "md:col-span-1",
-    medium: "md:col-span-1 lg:col-span-1",
-    large: "md:col-span-2 lg:col-span-2"
-  }
-
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.8 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      className={`group relative overflow-hidden rounded-2xl fx-panel ${sizeClasses[image.size]}`}
+      className="group relative overflow-hidden rounded-2xl fx-panel"
     >
       <motion.div
         whileHover={{ scale: 1.05 }}
         transition={{ duration: 0.5 }}
-        className="relative h-full min-h-[220px] fx-image-zoom sm:min-h-[250px]"
+        className="relative media-ratio-gallery fx-image-zoom"
       >
         <img
           src={image.src}
           alt={image.title}
-          className="w-full h-full object-cover"
+          className="media-image"
+          loading="lazy"
         />
         
         {/* Overlay */}
@@ -88,7 +83,7 @@ function Gallery() {
         </motion.div>
         
         {/* Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {galleryImages.map((image, index) => (
             <GalleryImage key={image.id} image={image} index={index} />
           ))}

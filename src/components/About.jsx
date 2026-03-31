@@ -101,34 +101,46 @@ function About() {
                 transition={{ delay: 0.2 }}
                 className="space-y-4"
               >
-                <img
-                  src="/assets/1-Sliding Window/1.1.png"
-                  alt="Window"
-                  className="h-36 w-full rounded-2xl object-cover sm:h-48"
-                />
-                <img
-                  src="/assets/12. Sliding Door/121.jpg"
-                  alt="Door"
-                  className="h-24 w-full rounded-2xl object-cover sm:h-32"
-                />
+                <div className="media-ratio-card overflow-hidden rounded-2xl">
+                  <img
+                    src="/assets/1-Sliding Window/1.1.png"
+                    alt="Window"
+                    className="media-image"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="media-ratio-card overflow-hidden rounded-2xl">
+                  <img
+                    src="/assets/12. Sliding Door/121.jpg"
+                    alt="Door"
+                    className="media-image"
+                    loading="lazy"
+                  />
+                </div>
               </motion.div>
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4 }}
-                className="space-y-3 pt-4 sm:space-y-4 sm:pt-8"
+                className="space-y-4"
               >
-                <img
-                  src="/assets/4-Bay Window/4.1.png"
-                  alt="Bay Window"
-                  className="h-24 w-full rounded-2xl object-cover sm:h-32"
-                />
-                <img
-                  src="/assets/15. French Door/151.jpg"
-                  alt="French Door"
-                  className="h-36 w-full rounded-2xl object-cover sm:h-48"
-                />
+                <div className="media-ratio-card overflow-hidden rounded-2xl">
+                  <img
+                    src="/assets/4-Bay Window/4.1.png"
+                    alt="Bay Window"
+                    className="media-image"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="media-ratio-card overflow-hidden rounded-2xl">
+                  <img
+                    src="/assets/15. French Door/151.jpg"
+                    alt="French Door"
+                    className="media-image"
+                    loading="lazy"
+                  />
+                </div>
               </motion.div>
             </div>
             

@@ -101,11 +101,11 @@ function MiniProductCard({ product }) {
     <TiltCard tiltMax={8} scale={1.02} className="h-full">
       <RevealOnScroll variant="fadeUp" className="h-full">
         <div className="glass rounded-2xl overflow-hidden group hover-lift hover-glow hover-shine h-full flex flex-col">
-          <div className="relative h-48 overflow-hidden hover-img-zoom">
+          <div className="relative media-ratio-card overflow-hidden hover-img-zoom">
             <motion.img
               src={product.images[0]}
               alt={product.name}
-              className="w-full h-full object-cover"
+              className="media-image"
               loading="lazy"
               whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.6 }}
