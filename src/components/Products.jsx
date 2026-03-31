@@ -148,7 +148,7 @@ function ProductCard({ product, index }) {
   )
 }
 
-function Products() {
+function Products({ embedded = false }) {
   const [productFilters, setProductFilters] = useLocalStorage(
     PRODUCT_FILTERS_KEY,
     createDefaultProductFilters,
@@ -174,40 +174,49 @@ function Products() {
   }, [activeCategory, normalizedSearchQuery])
 
   return (
-    <section id="products" className="relative flex min-h-screen items-center overflow-hidden bg-[#030712] py-20 md:py-24">
+    <section
+      id="products"
+      className={`relative overflow-hidden bg-[#030712] ${
+        embedded
+          ? "scroll-mt-28 py-12 md:scroll-mt-32 md:py-16"
+          : "flex min-h-screen items-center py-20 md:py-24"
+      }`}
+    >
       <div className="absolute inset-0 grid-background opacity-30"></div>
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[150px]"></div>
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[150px]"></div>
       
       <div className="container mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
+        {!embedded && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-block px-4 py-2 glass rounded-full text-cyan-400 text-sm font-medium mb-4"
+            className="text-center mb-16"
           >
-            Our Products
-          </motion.span>
-          <h2 className="text-4xl font-bold mb-4 sm:text-5xl md:text-6xl">
-            <span className="text-white">Premium </span>
-            <span className="gradient-text">Collection</span>
-          </h2>
-          <p className="mx-auto max-w-2xl text-base text-gray-400 sm:text-lg">
-            Discover our extensive range of windows and doors crafted with cutting-edge technology and premium materials
-          </p>
-        </motion.div>
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-block px-4 py-2 glass rounded-full text-cyan-400 text-sm font-medium mb-4"
+            >
+              Our Products
+            </motion.span>
+            <h2 className="text-4xl font-bold mb-4 sm:text-5xl md:text-6xl">
+              <span className="text-white">Premium </span>
+              <span className="gradient-text">Collection</span>
+            </h2>
+            <p className="mx-auto max-w-2xl text-base text-gray-400 sm:text-lg">
+              Discover our extensive range of windows and doors crafted with cutting-edge technology and premium materials
+            </p>
+          </motion.div>
+        )}
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-12 flex flex-col items-stretch justify-between gap-4 md:flex-row md:items-center"
+          className={`${embedded ? "mb-10" : "mb-12"} flex flex-col items-stretch justify-between gap-4 md:flex-row md:items-center`}
         >
           <div className="flex flex-wrap justify-center gap-2">
             {categories.map((category) => (
@@ -285,16 +294,18 @@ function Products() {
           </motion.div>
         )}
         
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-16 text-center"
-        >
-          <Link to={sectionLinks.contact} className="outline-button fx-press">
-            <span>Need A Custom Quote?</span>
-          </Link>
-        </motion.div>
+        {!embedded && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-16 text-center"
+          >
+            <Link to={sectionLinks.contact} className="outline-button fx-press">
+              <span>Need A Custom Quote?</span>
+            </Link>
+          </motion.div>
+        )}
       </div>
     </section>
   )

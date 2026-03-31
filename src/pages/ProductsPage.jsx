@@ -29,6 +29,10 @@ const categories = [
 ]
 
 function ProductsPage({ embedded = false }) {
+  if (embedded) {
+    return <Products embedded />
+  }
+
   const content = (
     <div className={embedded ? "" : "pt-20"}>
         <PageHero
@@ -185,17 +189,6 @@ function ProductsPage({ embedded = false }) {
         </section>
       </div>
   )
-
-  if (embedded) {
-    return (
-      <section
-        id={sectionIds.products}
-        className="relative min-h-screen scroll-mt-28 py-6 md:scroll-mt-32 md:py-10"
-      >
-        {content}
-      </section>
-    )
-  }
 
   return (
     <PageShell tone="cyan">

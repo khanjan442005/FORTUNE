@@ -404,9 +404,6 @@ function Home() {
         <StatsSection />
         <GlowDivider />
         <TrendingProducts />
-        <QuickActions />
-        <GlowDivider />
-        <WhyChooseUs />
         <RecentlyViewed />
       </section>
       <GlowDivider />
