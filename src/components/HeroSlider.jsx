@@ -64,10 +64,10 @@ const slides = [
 
 function HeroSlider() {
   return (
-    <section className="relative px-4 pb-10 pt-24 md:px-6 md:pb-16 md:pt-32 lg:px-8">
-      <div className="mx-auto max-w-[1400px]">
+    <section className="relative px-4 pb-10 pt-20 md:px-6 md:pb-16 md:pt-28 lg:px-8">
+      <div className="mx-auto max-w-[1280px]">
         <div
-          className="hero-showcase-slider relative overflow-hidden rounded-[1.5rem] border border-white/10 p-2.5 md:rounded-[2rem] md:p-4"
+          className="hero-showcase-slider relative overflow-hidden rounded-[2rem] border border-white/10 p-2 md:rounded-[3rem] md:p-3"
           style={{
             background:
               "linear-gradient(135deg, rgba(8,15,29,0.72), rgba(255,255,255,0.05) 48%, rgba(8,15,29,0.66))",
@@ -88,11 +88,11 @@ function HeroSlider() {
             pagination={{ clickable: true, el: ".hero-slider-pagination" }}
             navigation
             loop
-            className="overflow-hidden rounded-[1.2rem] md:rounded-[1.4rem]"
+            className="overflow-hidden rounded-[1.6rem] md:rounded-[2.7rem]"
           >
             {slides.map((slide, index) => (
               <SwiperSlide key={slide.title}>
-                <div className="relative min-h-[430px] overflow-hidden rounded-[1.2rem] sm:min-h-[500px] md:min-h-[640px] md:rounded-[1.6rem] lg:min-h-[760px]">
+                <div className="relative min-h-[360px] overflow-hidden rounded-[1.6rem] sm:min-h-[430px] md:min-h-[520px] md:rounded-[2.7rem] lg:min-h-[600px]">
                   <motion.img
                     initial={{ scale: 1.08 }}
                     animate={{ scale: 1 }}
@@ -107,14 +107,14 @@ function HeroSlider() {
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_72%_18%,rgba(255,255,255,0.16),transparent_18%)]" />
 
                   <div className="relative z-10 flex h-full items-end lg:items-center">
-                    <div className="grid w-full gap-4 lg:grid-cols-[minmax(0,560px)_1fr] lg:items-end">
+                    <div className="grid w-full gap-4 lg:grid-cols-[minmax(0,500px)_1fr] lg:items-end">
                       <motion.div
                         initial={{ opacity: 0, y: 28 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.15 }}
-                        className="fx-panel-soft m-3 rounded-[1.25rem] border border-white/10 bg-slate-950/48 p-5 shadow-[0_20px_40px_rgba(2,8,23,0.28)] backdrop-blur-xl sm:m-4 sm:p-6 md:m-8 md:rounded-[1.75rem] md:p-10"
+                        className="fx-panel-soft m-3 max-w-[min(100%,28rem)] rounded-[1.9rem] border border-white/12 bg-[linear-gradient(155deg,rgba(15,23,42,0.78),rgba(15,23,42,0.38)_55%,rgba(255,255,255,0.12))] p-5 shadow-[0_20px_40px_rgba(2,8,23,0.28)] backdrop-blur-xl sm:m-4 sm:max-w-[30rem] sm:p-6 md:m-6 md:rounded-[2.75rem] md:p-8"
                       >
-                        <span className="inline-flex items-center rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-cyan-100/90 sm:px-5 sm:py-2.5 sm:text-xs">
+                        <span className="inline-flex items-center rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-cyan-100/90 sm:px-5 sm:py-2.5 sm:text-[11px]">
                           {slide.eyebrow}
                         </span>
 
@@ -122,7 +122,7 @@ function HeroSlider() {
                           initial={{ opacity: 0, y: 24 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.8, delay: 0.25 }}
-                          className="mt-5 max-w-3xl text-3xl font-bold leading-[0.98] text-white sm:text-4xl md:mt-6 md:text-7xl lg:text-[6rem]"
+                          className="mt-5 max-w-3xl text-[2.35rem] font-bold leading-[0.96] text-white sm:text-5xl md:mt-6 md:text-[4.3rem] lg:text-[4.8rem]"
                         >
                           {slide.title}
                         </motion.h1>
@@ -131,7 +131,7 @@ function HeroSlider() {
                           initial={{ opacity: 0, y: 24 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.8, delay: 0.35 }}
-                          className="mt-4 max-w-2xl text-sm leading-7 text-slate-200/90 sm:text-base md:mt-6 md:text-xl"
+                          className="mt-4 max-w-lg text-sm leading-6 text-slate-200/90 sm:text-base md:mt-5 md:text-lg md:leading-7"
                         >
                           {slide.subtitle}
                         </motion.p>
@@ -140,14 +140,14 @@ function HeroSlider() {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.8, delay: 0.45 }}
-                          className="mt-7 flex flex-col gap-3 sm:mt-8 sm:flex-row sm:flex-wrap sm:gap-4 md:mt-10"
+                          className="mt-6 flex flex-col gap-3 sm:mt-7 sm:flex-row sm:flex-wrap sm:gap-4 md:mt-8"
                         >
                           <MotionLink
                             to={sectionLinks.products}
                             whileHover={{ y: -3, scale: 1.03, boxShadow: "0 14px 34px rgba(56,189,248,0.4)" }}
                             whileTap={{ scale: 0.97 }}
                             transition={{ type: "spring", stiffness: 300 }}
-                            className="btn-glow-cyan inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_34px_rgba(56,189,248,0.3)] transition-colors hover:from-blue-600 hover:to-cyan-500 sm:w-auto sm:px-7 sm:py-3.5 sm:text-base md:px-10 md:py-4"
+                            className="btn-glow-cyan inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_34px_rgba(56,189,248,0.3)] transition-colors hover:from-blue-600 hover:to-cyan-500 sm:w-auto sm:px-7 sm:py-3.5 sm:text-base md:px-8 md:py-3.5"
                           >
                             View Products
                           </MotionLink>
@@ -157,21 +157,21 @@ function HeroSlider() {
                             whileHover={{ y: -3, scale: 1.03 }}
                             whileTap={{ scale: 0.97 }}
                             transition={{ type: "spring", stiffness: 300 }}
-                            className="hover-glow inline-flex w-full items-center justify-center rounded-full border border-white/16 bg-white/6 px-5 py-3 text-sm font-semibold text-white backdrop-blur-md transition-colors hover:bg-white/10 sm:w-auto sm:px-7 sm:py-3.5 sm:text-base md:px-10 md:py-4"
+                            className="hover-glow inline-flex w-full items-center justify-center rounded-full border border-white/16 bg-white/6 px-5 py-3 text-sm font-semibold text-white backdrop-blur-md transition-colors hover:bg-white/10 sm:w-auto sm:px-7 sm:py-3.5 sm:text-base md:px-8 md:py-3.5"
                           >
                             Get Quote
                           </MotionLink>
                         </motion.div>
                       </motion.div>
 
-                      <div className="hidden items-end justify-end p-8 lg:flex">
-                        <div className="fx-panel-soft rounded-[1.5rem] border border-white/10 bg-slate-950/34 px-6 py-5 text-right shadow-[0_18px_34px_rgba(2,8,23,0.2)] backdrop-blur-lg">
+                      <div className="hidden items-end justify-end p-6 lg:flex">
+                        <div className="fx-panel-soft rounded-[2rem] border border-white/10 bg-slate-950/34 px-5 py-4 text-right shadow-[0_18px_34px_rgba(2,8,23,0.2)] backdrop-blur-lg">
                           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white/45">
                             Slide
                           </p>
-                          <p className="mt-3 text-4xl font-semibold text-white">
+                          <p className="mt-2 text-3xl font-semibold text-white">
                             {String(index + 1).padStart(2, "0")}
-                            <span className="ml-1 text-xl text-white/35">/ {String(slides.length).padStart(2, "0")}</span>
+                            <span className="ml-1 text-lg text-white/35">/ {String(slides.length).padStart(2, "0")}</span>
                           </p>
                         </div>
                       </div>
@@ -194,8 +194,8 @@ function HeroSlider() {
       <style>{`
         .hero-showcase-slider .swiper-button-next,
         .hero-showcase-slider .swiper-button-prev {
-          width: 44px;
-          height: 44px;
+          width: 42px;
+          height: 42px;
           border-radius: 999px;
           border: 1px solid rgba(255, 255, 255, 0.14);
           background: rgba(15, 23, 42, 0.44);
@@ -211,11 +211,11 @@ function HeroSlider() {
         }
 
         .hero-showcase-slider .swiper-button-next {
-          right: 16px;
+          right: 18px;
         }
 
         .hero-showcase-slider .swiper-button-prev {
-          left: 16px;
+          left: 18px;
         }
 
         .hero-showcase-slider .swiper-pagination-bullet {
@@ -236,8 +236,8 @@ function HeroSlider() {
         @media (max-width: 768px) {
           .hero-showcase-slider .swiper-button-next,
           .hero-showcase-slider .swiper-button-prev {
-            width: 38px;
-            height: 38px;
+            width: 36px;
+            height: 36px;
           }
 
           .hero-showcase-slider .swiper-button-next {
