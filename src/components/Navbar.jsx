@@ -7,8 +7,6 @@ import { routeSectionIds, sectionLinks } from "../data/sectionLinks"
 const navItems = [
   { name: "Home", to: sectionLinks.home, hash: `#${routeSectionIds["/"]}` },
   { name: "Products", to: sectionLinks.products, hash: `#${routeSectionIds["/products"]}` },
-  { name: "Features", to: sectionLinks.features, hash: `#${routeSectionIds["/features"]}` },
-  { name: "Testimonials", to: sectionLinks.testimonials, hash: `#${routeSectionIds["/testimonials"]}` },
   { name: "Gallery", to: sectionLinks.gallery, hash: `#${routeSectionIds["/gallery"]}` },
   { name: "About", to: sectionLinks.about, hash: `#${routeSectionIds["/about"]}` },
   { name: "Contact", to: sectionLinks.contact, hash: `#${routeSectionIds["/contact"]}` },
