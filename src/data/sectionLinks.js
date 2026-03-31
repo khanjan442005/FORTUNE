@@ -10,12 +10,12 @@ export const sectionIds = Object.freeze({
 
 export const sectionLinks = Object.freeze({
   home: `/#${sectionIds.home}`,
-  products: `/#${sectionIds.products}`,
+  products: "/products",
   features: `/#${sectionIds.features}`,
   testimonials: `/#${sectionIds.testimonials}`,
-  gallery: `/#${sectionIds.gallery}`,
-  about: `/#${sectionIds.about}`,
-  contact: `/#${sectionIds.contact}`,
+  gallery: "/gallery",
+  about: "/about",
+  contact: "/contact",
 });
 
 export const routeSectionIds = Object.freeze({

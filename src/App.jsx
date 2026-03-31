@@ -7,6 +7,10 @@ import SmoothLoader from './components/SmoothLoader'
 import { sectionLinks } from './data/sectionLinks'
 
 const Home = lazy(() => import('./pages/Home'))
+const ProductsPage = lazy(() => import('./pages/ProductsPage'))
+const GalleryPage = lazy(() => import('./pages/GalleryPage'))
+const AboutPage = lazy(() => import('./pages/AboutPage'))
+const ContactPage = lazy(() => import('./pages/ContactPage'))
 const ProductDetail = lazy(() => import('./pages/ProductDetail'))
 
 function LoadingFallback() {
@@ -63,12 +67,12 @@ function RouteViewport() {
           <Suspense fallback={<LoadingFallback />}>
             <Routes location={location}>
               <Route path="/" element={<Home />} />
-              <Route path="/products" element={<Navigate to={sectionLinks.products} replace />} />
+              <Route path="/products" element={<ProductsPage />} />
               <Route path="/features" element={<Navigate to={sectionLinks.features} replace />} />
               <Route path="/testimonials" element={<Navigate to={sectionLinks.testimonials} replace />} />
-              <Route path="/gallery" element={<Navigate to={sectionLinks.gallery} replace />} />
-              <Route path="/about" element={<Navigate to={sectionLinks.about} replace />} />
-              <Route path="/contact" element={<Navigate to={sectionLinks.contact} replace />} />
+              <Route path="/gallery" element={<GalleryPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/contact" element={<ContactPage />} />
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

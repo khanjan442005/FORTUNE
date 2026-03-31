@@ -11,12 +11,8 @@ import { RevealOnScroll, StaggerReveal } from "../components/RevealOnScroll"
 import TiltCard from "../components/TiltCard"
 import GlowCard from "../components/GlowCard"
 import { ParallaxLayer } from "../components/ParallaxLayer"
-import ProductsPage from "./ProductsPage"
 import FeaturesPage from "./FeaturesPage"
 import TestimonialsPage from "./TestimonialsPage"
-import GalleryPage from "./GalleryPage"
-import AboutPage from "./AboutPage"
-import ContactPage from "./ContactPage"
 
 function GlowDivider() {
   return (
@@ -407,17 +403,9 @@ function Home() {
         <RecentlyViewed />
       </section>
       <GlowDivider />
-      <ProductsPage embedded />
-      <GlowDivider />
       <FeaturesPage embedded />
       <GlowDivider />
       <TestimonialsPage embedded />
-      <GlowDivider />
-      <GalleryPage embedded />
-      <GlowDivider />
-      <AboutPage embedded />
-      <GlowDivider />
-      <ContactPage embedded />
       <GlowDivider />
       <Footer />
       <FloatingCartIcon />
