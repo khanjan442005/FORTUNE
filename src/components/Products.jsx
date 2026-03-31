@@ -4,6 +4,7 @@ import { motion, useMotionValue, useTransform } from "framer-motion"
 import products from '../data/products'
 import { sectionLinks } from "../data/sectionLinks"
 import { useDebounce, useLocalStorage } from "../hooks/useInView"
+import { formatProductPrice, getProductDetailLink } from "../utils/products"
 
 const categories = [
   { id: 'all', name: 'All Products' },
@@ -108,7 +109,7 @@ function ProductCard({ product, index }) {
             className="absolute top-4 right-4"
           >
             <span className="px-3 py-1 bg-purple-500/20 backdrop-blur-sm border border-purple-500/30 rounded-full text-purple-400 text-xs font-semibold">
-              {product.price}
+              {formatProductPrice(product.price)}
             </span>
           </motion.div>
           
@@ -134,7 +135,7 @@ function ProductCard({ product, index }) {
           </div>
 
           <Link
-            to={`/product/${product.id}`}
+            to={getProductDetailLink(product.id)}
             className="mt-auto block w-full rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 py-3 text-center font-semibold text-white shadow-lg fx-press"
           >
             View Details

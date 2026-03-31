@@ -1,17 +1,25 @@
-import { useParams, Link } from "react-router-dom"
-import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useEffect, useState } from "react"
+import { Link, useParams } from "react-router-dom"
+import { AnimatePresence, motion } from "framer-motion"
 import products from "../data/products"
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import PageShell from "../components/PageShell"
 import { sectionLinks } from "../data/sectionLinks"
+import { formatProductPrice, getProductDetailLink } from "../utils/products"
 
 function saveToRecentlyViewed(product) {
   try {
     const stored = JSON.parse(localStorage.getItem("dw_recently_viewed") || "[]")
-    const filtered = stored.filter(p => p.id !== product.id)
-    const minimal = { id: product.id, name: product.name, images: product.images, category: product.category, price: product.price, description: product.description }
+    const filtered = stored.filter((item) => item.id !== product.id)
+    const minimal = {
+      id: product.id,
+      name: product.name,
+      images: product.images,
+      category: product.category,
+      price: product.price,
+      description: product.description,
+    }
     const updated = [minimal, ...filtered].slice(0, 8)
     localStorage.setItem("dw_recently_viewed", JSON.stringify(updated))
   } catch (err) {
@@ -19,22 +27,36 @@ function saveToRecentlyViewed(product) {
   }
 }
 
+function FeatureCheck() {
+  return (
+    <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-cyan-500/20 text-cyan-400">
+      <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+      </svg>
+    </span>
+  )
+}
+
 function ProductDetailContent({ id }) {
-  const product = products.find(p => p.id === parseInt(id))
+  const productId = Number(id)
+  const product = Number.isInteger(productId)
+    ? products.find((item) => item.id === productId)
+    : undefined
   const [selectedImage, setSelectedImage] = useState(0)
 
   useEffect(() => {
-    if (product) saveToRecentlyViewed(product)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [product?.id])
+    if (product) {
+      saveToRecentlyViewed(product)
+    }
+  }, [product])
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-[#030712] flex items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center bg-[#030712]">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-white mb-4">Product Not Found</h1>
-          <Link to="/" className="text-cyan-400 hover:text-cyan-300">
-            ← Back to Home
+          <h1 className="mb-4 text-4xl font-bold text-white">Product Not Found</h1>
+          <Link to={sectionLinks.products} className="text-cyan-400 transition-colors hover:text-cyan-300">
+            Back to Products
           </Link>
         </div>
       </div>
@@ -45,7 +67,7 @@ function ProductDetailContent({ id }) {
   const resolvedImageIndex = Math.min(selectedImage, Math.max(images.length - 1, 0))
   const activeImage = images[resolvedImageIndex] || images[0]
   const relatedProducts = products
-    .filter(p => p.category === product.category && p.id !== product.id)
+    .filter((item) => item.category === product.category && item.id !== product.id)
     .slice(0, 4)
 
   return (
@@ -54,7 +76,10 @@ function ProductDetailContent({ id }) {
 
       <div className="pb-16 pt-24">
         <div className="container mx-auto px-6">
-          <Link to={sectionLinks.products} className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 mb-8 font-semibold transition-colors">
+          <Link
+            to={sectionLinks.products}
+            className="mb-8 inline-flex items-center gap-2 font-semibold text-cyan-400 transition-colors hover:text-cyan-300"
+          >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
@@ -67,7 +92,7 @@ function ProductDetailContent({ id }) {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <div className="relative mb-6 glass media-ratio-detail rounded-3xl overflow-hidden">
+              <div className="relative mb-6 overflow-hidden rounded-3xl glass media-ratio-detail">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={`${product.id}-${resolvedImageIndex}`}
@@ -80,8 +105,8 @@ function ProductDetailContent({ id }) {
                     className="media-image"
                   />
                 </AnimatePresence>
-                <div className="absolute top-4 right-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white px-4 py-2 rounded-full font-bold shadow-lg">
-                  {product.price}
+                <div className="absolute right-4 top-4 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 font-bold text-white shadow-lg">
+                  {formatProductPrice(product.price)}
                 </div>
               </div>
 
@@ -89,15 +114,16 @@ function ProductDetailContent({ id }) {
                 <div className="flex gap-3 overflow-x-auto pb-2">
                   {images.map((img, index) => (
                     <button
+                      type="button"
                       key={index}
                       onClick={() => setSelectedImage(index)}
-                      className={`media-ratio-square w-20 flex-shrink-0 rounded-xl overflow-hidden border-2 transition-all ${
-                        resolvedImageIndex === index 
-                          ? 'border-cyan-400 shadow-lg shadow-cyan-400/30' 
-                          : 'border-transparent hover:border-gray-600'
+                      className={`media-ratio-square w-20 flex-shrink-0 overflow-hidden rounded-xl border-2 transition-all ${
+                        resolvedImageIndex === index
+                          ? "border-cyan-400 shadow-lg shadow-cyan-400/30"
+                          : "border-transparent hover:border-gray-600"
                       }`}
                     >
-                      <img src={img} alt={`${product.name} ${index + 1}`} className="media-image" />
+                      <img src={img} alt={`${product.name} ${index + 1}`} className="media-image" loading="lazy" />
                     </button>
                   ))}
                 </div>
@@ -110,7 +136,7 @@ function ProductDetailContent({ id }) {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <div className="mb-6">
-                <span className="inline-block px-4 py-1 glass rounded-full text-cyan-400 text-sm font-semibold">
+                <span className="inline-block rounded-full px-4 py-1 text-sm font-semibold text-cyan-400 glass">
                   {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
                 </span>
               </div>
@@ -123,38 +149,38 @@ function ProductDetailContent({ id }) {
                 {product.description}
               </p>
 
-              <div className="glass rounded-3xl p-6 mb-6">
-                <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                  <span className="w-2 h-2 bg-cyan-400 rounded-full"></span>
+              <div className="mb-6 rounded-3xl p-6 glass">
+                <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-white">
+                  <span className="h-2 w-2 rounded-full bg-cyan-400"></span>
                   Key Features
                 </h3>
                 <ul className="space-y-3">
                   {product.features?.map((feature, index) => (
                     <li key={index} className="flex items-center gap-3">
-                      <span className="w-6 h-6 bg-cyan-500/20 text-cyan-400 rounded-full flex items-center justify-center text-sm flex-shrink-0">✓</span>
+                      <FeatureCheck />
                       <span className="text-gray-300">{feature}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-4 mb-6">
-                <div className="glass rounded-2xl p-5">
-                  <h3 className="text-lg font-bold text-white mb-3">Available Sizes</h3>
+              <div className="mb-6 grid gap-4 md:grid-cols-2">
+                <div className="rounded-2xl p-5 glass">
+                  <h3 className="mb-3 text-lg font-bold text-white">Available Sizes</h3>
                   <div className="flex flex-wrap gap-2">
                     {product.sizes?.map((size, index) => (
-                      <span key={index} className="bg-white/5 border border-white/10 text-gray-300 px-3 py-1.5 rounded-lg text-sm">
+                      <span key={index} className="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-gray-300">
                         {size}
                       </span>
                     ))}
                   </div>
                 </div>
 
-                <div className="glass rounded-2xl p-5">
-                  <h3 className="text-lg font-bold text-white mb-3">Available Colors</h3>
+                <div className="rounded-2xl p-5 glass">
+                  <h3 className="mb-3 text-lg font-bold text-white">Available Colors</h3>
                   <div className="flex flex-wrap gap-2">
                     {product.colors?.map((color, index) => (
-                      <span key={index} className="bg-white/5 border border-white/10 text-gray-300 px-3 py-1.5 rounded-lg text-sm">
+                      <span key={index} className="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-gray-300">
                         {color}
                       </span>
                     ))}
@@ -166,7 +192,10 @@ function ProductDetailContent({ id }) {
                 <Link to={sectionLinks.contact} className="flex-1 text-center neon-button">
                   <span>Get Quote Now</span>
                 </Link>
-                <Link to={sectionLinks.products} className="rounded-xl glass px-6 py-3 text-center font-semibold text-white transition-colors hover:bg-white/10">
+                <Link
+                  to={sectionLinks.products}
+                  className="rounded-xl px-6 py-3 text-center font-semibold text-white transition-colors hover:bg-white/10 glass"
+                >
                   View All Products
                 </Link>
               </div>
@@ -180,22 +209,18 @@ function ProductDetailContent({ id }) {
               viewport={{ once: true }}
               className="mt-20"
             >
-              <h2 className="text-3xl font-bold text-white mb-8">
+              <h2 className="mb-8 text-3xl font-bold text-white">
                 Related <span className="gradient-text">Products</span>
               </h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
                 {relatedProducts.map((item) => (
-                  <Link key={item.id} to={`/product/${item.id}`} className="glass rounded-2xl overflow-hidden group">
-                    <div className="media-ratio-card overflow-hidden">
-                      <img 
-                        src={item.images[0]} 
-                        alt={item.name} 
-                        className="media-image transition-transform duration-500 group-hover:scale-110" 
-                      />
+                  <Link key={item.id} to={getProductDetailLink(item.id)} className="group overflow-hidden rounded-2xl glass">
+                    <div className="overflow-hidden media-ratio-card">
+                      <img src={item.images[0]} alt={item.name} className="media-image transition-transform duration-500 group-hover:scale-110" loading="lazy" />
                     </div>
                     <div className="p-4">
-                      <h3 className="text-white font-semibold mb-1 group-hover:text-cyan-400 transition-colors">{item.name}</h3>
-                      <p className="text-cyan-400 font-bold">{item.price}</p>
+                      <h3 className="mb-1 font-semibold text-white transition-colors group-hover:text-cyan-400">{item.name}</h3>
+                      <p className="font-bold text-cyan-400">{formatProductPrice(item.price)}</p>
                     </div>
                   </Link>
                 ))}

@@ -13,6 +13,7 @@ import GlowCard from "../components/GlowCard"
 import { ParallaxLayer } from "../components/ParallaxLayer"
 import FeaturesPage from "./FeaturesPage"
 import TestimonialsPage from "./TestimonialsPage"
+import { formatProductPrice, getProductDetailLink } from "../utils/products"
 
 function GlowDivider() {
   return (
@@ -127,14 +128,14 @@ function MiniProductCard({ product }) {
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
             >
-              {product.price}
+              {formatProductPrice(product.price)}
             </motion.span>
           </div>
           <div className="p-5 flex flex-col flex-1">
             <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">{product.name}</h3>
             <p className="text-gray-400 text-sm line-clamp-2 mb-4 flex-1">{product.description}</p>
             <Link
-              to={`/product/${product.id}`}
+              to={getProductDetailLink(product.id)}
               className="block w-full py-2.5 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 rounded-xl text-center text-cyan-400 text-sm font-semibold hover:from-cyan-500 hover:to-blue-600 hover:text-white hover:border-transparent transition-all interact-press"
             >
               View Details
