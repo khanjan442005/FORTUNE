@@ -52,7 +52,7 @@ function ProductDetailContent({ id }) {
 
   if (!product) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#030712]">
+      <div className="flex min-h-screen items-center justify-center bg-[#f8fafc]">
         <div className="text-center">
           <h1 className="mb-4 text-4xl font-bold text-white">Product Not Found</h1>
           <Link to={sectionLinks.products} className="text-blue-400 transition-colors hover:text-blue-300">

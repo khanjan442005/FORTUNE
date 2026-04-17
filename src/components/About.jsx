@@ -18,7 +18,7 @@ function About() {
   ]
 
   return (
-    <section id="about" className="relative flex min-h-screen items-center overflow-hidden bg-[#030712] py-20 md:py-24">
+    <section id="about" className="relative flex min-h-screen items-center overflow-hidden bg-[#f8fafc] py-20 md:py-24">
       {/* Background */}
       <div className="absolute inset-0 grid-background opacity-20"></div>
       <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-blue-500/5 to-transparent"></div>

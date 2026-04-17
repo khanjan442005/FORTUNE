@@ -97,8 +97,8 @@ function AmbientBackdrop({ tone = "cyan" }) {
           background: `radial-gradient(circle, rgba(${palette.tertiary}, 0.15) 0%, rgba(${palette.tertiary}, 0.04) 35%, transparent 76%)`,
         }}
       />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_28%),linear-gradient(180deg,rgba(7,17,31,0.22),rgba(7,17,31,0.7)_45%,rgba(5,11,22,0.96))]" />
-      <div className="absolute inset-0 opacity-[0.15] mix-blend-screen">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(37,99,235,0.08),transparent_30%),linear-gradient(180deg,rgba(255,255,255,0.9),rgba(248,250,252,0.88)_45%,rgba(241,245,249,0.95))]" />
+      <div className="absolute inset-0 opacity-[0.12] mix-blend-normal">
         <div className="absolute inset-0 grid-background" />
       </div>
       <div className="absolute inset-0 opacity-[0.05] noise-overlay" />
@@ -122,7 +122,7 @@ function PageShell({
   });
 
   return (
-    <div className={`relative min-h-screen overflow-x-hidden bg-[#07111f] ${className}`}>
+    <div className={`relative min-h-screen overflow-x-hidden bg-[#f8fafc] ${className}`}>
       {showProgress && (
         <motion.div className="scroll-progress" style={{ scaleX: progress }} />
       )}

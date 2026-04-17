@@ -103,7 +103,7 @@ function FeatureCard({ feature, index }) {
 
 function Features() {
   return (
-    <section id="features" className="relative flex min-h-screen items-center overflow-hidden bg-[#030712] py-20 md:py-24">
+    <section id="features" className="relative flex min-h-screen items-center overflow-hidden bg-[#f8fafc] py-20 md:py-24">
       {/* Background */}
       <div className="absolute inset-0 grid-background opacity-20"></div>
       <div className="absolute top-0 right-0 h-72 w-72 rounded-full bg-amber-500/10 blur-[140px] md:h-[600px] md:w-[600px] md:blur-[200px]"></div>

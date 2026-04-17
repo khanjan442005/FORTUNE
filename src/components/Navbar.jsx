@@ -92,17 +92,17 @@ function Navbar() {
       <motion.div
         style={{
           background:
-            "linear-gradient(135deg, rgba(7,14,27,0.92), rgba(255,255,255,0.05) 46%, rgba(7,14,27,0.82))",
+            "linear-gradient(135deg, rgba(255,255,255,0.96), rgba(248,250,252,0.92) 46%, rgba(241,245,249,0.9))",
           boxShadow:
-            "0 28px 70px rgba(3, 8, 20, 0.42), 0 10px 26px rgba(59,130,246,0.06), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+            "0 18px 45px rgba(15, 23, 42, 0.1), 0 8px 20px rgba(37,99,235,0.05), inset 0 1px 0 rgba(255, 255, 255, 0.8)",
           backdropFilter: "blur(22px)",
           WebkitBackdropFilter: "blur(22px)",
         }}
-        className="relative overflow-hidden rounded-[1.35rem] border border-white/[0.08]"
+        className="relative overflow-hidden rounded-[1.35rem] border border-slate-300/50"
       >
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(96,165,250,0.14),transparent_22%),radial-gradient(circle_at_bottom_right,rgba(245,158,11,0.08),transparent_24%)]" />
-        <div className="pointer-events-none absolute -left-8 top-2 h-16 w-24 rounded-full bg-blue-300/[0.08] blur-3xl" />
-        <div className="pointer-events-none absolute -right-8 bottom-0 h-20 w-28 rounded-full bg-amber-400/[0.08] blur-3xl" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(96,165,250,0.1),transparent_24%),radial-gradient(circle_at_bottom_right,rgba(14,165,233,0.06),transparent_24%)]" />
+        <div className="pointer-events-none absolute -left-8 top-2 h-16 w-24 rounded-full bg-blue-300/[0.06] blur-3xl" />
+        <div className="pointer-events-none absolute -right-8 bottom-0 h-20 w-28 rounded-full bg-sky-300/[0.05] blur-3xl" />
 
         <div className="relative flex items-center gap-4 px-4 py-3.5 md:px-5">
           <div className="shrink-0 rounded-[1.05rem] bg-white/[0.04] px-3.5 py-2.5 shadow-[0_10px_24px_rgba(2,8,23,0.16),inset_0_1px_0_rgba(255,255,255,0.05)]">

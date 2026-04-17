@@ -32,7 +32,7 @@ class ErrorBoundary extends Component {
       }
 
       return (
-        <div className="flex min-h-screen items-center justify-center bg-[#07111f] px-6">
+        <div className="flex min-h-screen items-center justify-center bg-[#f8fafc] px-6">
           <div className="glass w-full max-w-xl rounded-3xl border border-white/10 p-8 text-center">
             <p className="text-sm uppercase tracking-[0.28em] text-blue-300/80">Runtime Error</p>
             <h2 className="mt-4 text-3xl font-bold text-white">This screen could not load.</h2>

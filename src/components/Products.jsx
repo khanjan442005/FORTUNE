@@ -178,7 +178,7 @@ function Products({ embedded = false }) {
   return (
     <section
       id="products"
-      className={`relative overflow-hidden bg-[#030712] ${
+      className={`relative overflow-hidden bg-[#f8fafc] ${
         embedded
           ? "scroll-mt-28 py-12 md:scroll-mt-32 md:py-16"
           : "flex min-h-screen items-center py-20 md:py-24"

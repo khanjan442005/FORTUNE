@@ -112,7 +112,7 @@ function Footer() {
   };
 
   return (
-    <footer className="relative overflow-hidden bg-[#07111f]">
+    <footer className="relative overflow-hidden bg-[#ffffff]">
       <div className="absolute inset-0 grid-background opacity-10"></div>
       <div className="absolute left-1/2 top-0 h-px w-full -translate-x-1/2 bg-gradient-to-r from-transparent via-blue-500/30 to-transparent"></div>
 

@@ -52,7 +52,7 @@ function GalleryImage({ image, index }) {
 
 function Gallery() {
   return (
-    <section id="gallery" className="relative flex min-h-screen items-center overflow-hidden bg-[#030712] py-20 md:py-24">
+    <section id="gallery" className="relative flex min-h-screen items-center overflow-hidden bg-[#f8fafc] py-20 md:py-24">
       {/* Background */}
       <div className="absolute inset-0 hex-pattern opacity-20"></div>
       <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/5 blur-[140px] md:h-[800px] md:w-[800px] md:blur-[200px]"></div>

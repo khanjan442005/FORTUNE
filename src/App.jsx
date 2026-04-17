@@ -14,7 +14,7 @@ const ProductDetail = lazy(() => import('./pages/ProductDetail'))
 
 function LoadingFallback() {
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#07111f] px-6">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#f8fafc] px-6">
       <div className="absolute inset-0 grid-background opacity-20" />
       <div className="absolute left-1/4 top-1/4 h-72 w-72 rounded-full bg-blue-500/10 blur-[150px]" />
       <div className="absolute bottom-0 right-1/4 h-72 w-72 rounded-full bg-amber-500/10 blur-[170px]" />
@@ -61,7 +61,7 @@ function RouteViewport() {
 
 function RouteFallback() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#07111f] px-6">
+    <div className="flex min-h-screen items-center justify-center bg-[#f8fafc] px-6">
       <div className="glass w-full max-w-xl rounded-3xl border border-white/10 p-8 text-center">
         <p className="text-sm uppercase tracking-[0.28em] text-blue-300/80">Page Error</p>
         <h2 className="mt-4 text-3xl font-bold text-white">This page could not load.</h2>
