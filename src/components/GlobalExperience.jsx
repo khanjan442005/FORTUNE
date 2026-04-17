@@ -19,9 +19,7 @@ function GlobalExperience() {
 
         if (target) {
           target.scrollIntoView({
-            behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-              ? "auto"
-              : "smooth",
+            behavior: "auto",
             block: "start",
           });
           return;
@@ -30,9 +28,7 @@ function GlobalExperience() {
 
       window.scrollTo({
         top: 0,
-        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-          ? "auto"
-          : "smooth",
+        behavior: "auto",
       });
     });
 

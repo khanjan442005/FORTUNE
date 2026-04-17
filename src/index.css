@@ -31,8 +31,16 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   font-size: 16px;
+}
+
+/* Keep interactions calm and professional across the entire app. */
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transition: none !important;
 }
 
 html.custom-cursor-active,
