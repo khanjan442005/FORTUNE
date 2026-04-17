@@ -23,6 +23,7 @@
   --surface-glow: rgba(37, 99, 235, 0.08);
   --text-primary: #111827;
   --text-secondary: #374151;
+  --text-accent: #1e3a8a;
   --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -419,9 +420,9 @@ body:has(.neon-cursor) [role="button"] {
 .gradient-text {
   background: none;
   -webkit-background-clip: border-box;
-  -webkit-text-fill-color: var(--text-primary);
+  -webkit-text-fill-color: var(--text-accent);
   background-clip: border-box;
-  color: var(--text-primary);
+  color: var(--text-accent);
 }
 
 .gradient-text-white {
@@ -1410,7 +1411,7 @@ body:has(.neon-cursor) [role="button"] {
 .text-amber-500,
 .text-purple-400,
 .text-indigo-400 {
-  color: var(--text-primary) !important;
+  color: var(--text-accent) !important;
 }
 
 .text-gray-400,
@@ -1418,6 +1419,54 @@ body:has(.neon-cursor) [role="button"] {
 .text-slate-400,
 .text-slate-500 {
   color: var(--text-secondary) !important;
+}
+
+/* Keep accent backgrounds and borders visually consistent across components. */
+[class*="bg-cyan-"][class*="/"],
+[class*="bg-blue-"][class*="/"],
+[class*="bg-sky-"][class*="/"],
+[class*="bg-indigo-"][class*="/"],
+[class*="bg-purple-"][class*="/"],
+[class*="bg-amber-"][class*="/"] {
+  background-color: rgba(30, 58, 138, 0.08) !important;
+}
+
+[class*="border-cyan-"][class*="/"],
+[class*="border-blue-"][class*="/"],
+[class*="border-sky-"][class*="/"],
+[class*="border-indigo-"][class*="/"],
+[class*="border-purple-"][class*="/"],
+[class*="border-amber-"][class*="/"] {
+  border-color: rgba(30, 58, 138, 0.22) !important;
+}
+
+/* Normalize colorful gradients into one premium blue-charcoal combination. */
+[class*="from-cyan-"],
+[class*="from-blue-"],
+[class*="from-sky-"],
+[class*="from-indigo-"],
+[class*="from-purple-"],
+[class*="from-amber-"] {
+  --tw-gradient-from: #1e3a8a var(--tw-gradient-from-position) !important;
+  --tw-gradient-to: rgb(30 58 138 / 0) var(--tw-gradient-to-position) !important;
+}
+
+[class*="via-cyan-"],
+[class*="via-blue-"],
+[class*="via-sky-"],
+[class*="via-indigo-"],
+[class*="via-purple-"],
+[class*="via-amber-"] {
+  --tw-gradient-stops: var(--tw-gradient-from), #334155 var(--tw-gradient-via-position), var(--tw-gradient-to) !important;
+}
+
+[class*="to-cyan-"],
+[class*="to-blue-"],
+[class*="to-sky-"],
+[class*="to-indigo-"],
+[class*="to-purple-"],
+[class*="to-amber-"] {
+  --tw-gradient-to: #334155 var(--tw-gradient-to-position) !important;
 }
 
 .fx-press {
