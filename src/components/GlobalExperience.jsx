@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import NeonCursor from "./NeonCursor";
 
 function GlobalExperience() {
   const location = useLocation();
@@ -42,7 +41,7 @@ function GlobalExperience() {
     };
   }, [location.hash, location.pathname]);
 
-  return <NeonCursor />;
+  return null;
 }
 
 export default GlobalExperience;

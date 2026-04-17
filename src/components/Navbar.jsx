@@ -1,7 +1,6 @@
 import { useState } from "react"
-import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import { Link, useLocation } from "react-router-dom"
-import Logo3D from "./Logo3D"
 import { routeSectionIds, sectionLinks } from "../data/sectionLinks"
 
 const navItems = [
@@ -87,37 +86,11 @@ function MobileNavItem({ item, isActive, onNavigate }) {
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { pathname, hash } = useLocation()
-  const tiltX = useMotionValue(0)
-  const tiltY = useMotionValue(0)
-  const rotateX = useSpring(tiltX, { stiffness: 190, damping: 18, mass: 0.6 })
-  const rotateY = useSpring(tiltY, { stiffness: 190, damping: 18, mass: 0.6 })
-
-  const handleMouseMove = (event) => {
-    const rect = event.currentTarget.getBoundingClientRect()
-    const x = (event.clientX - rect.left) / rect.width - 0.5
-    const y = (event.clientY - rect.top) / rect.height - 0.5
-
-    tiltX.set(-y * 5)
-    tiltY.set(x * 7)
-  }
-
-  const resetTilt = () => {
-    tiltX.set(0)
-    tiltY.set(0)
-  }
 
   return (
-    <nav
-      className="fixed left-1/2 top-4 z-50 w-[calc(100%-1rem)] max-w-[1380px] -translate-x-1/2 md:top-5 md:w-[calc(100%-2rem)]"
-      style={{ perspective: 1800 }}
-    >
+    <nav className="fixed left-1/2 top-4 z-50 w-[calc(100%-1rem)] max-w-[1380px] -translate-x-1/2 md:top-5 md:w-[calc(100%-2rem)]">
       <motion.div
-        onMouseMove={handleMouseMove}
-        onMouseLeave={resetTilt}
         style={{
-          rotateX,
-          rotateY,
-          transformStyle: "preserve-3d",
           background:
             "linear-gradient(135deg, rgba(7,14,27,0.92), rgba(255,255,255,0.05) 46%, rgba(7,14,27,0.82))",
           boxShadow:
@@ -132,20 +105,21 @@ function Navbar() {
         <div className="pointer-events-none absolute -right-8 bottom-0 h-20 w-28 rounded-full bg-amber-400/[0.08] blur-3xl" />
 
         <div className="relative flex items-center gap-4 px-4 py-3.5 md:px-5">
-          <div
-            className="shrink-0 rounded-[1.05rem] bg-white/[0.04] px-3.5 py-2.5 shadow-[0_10px_24px_rgba(2,8,23,0.16),inset_0_1px_0_rgba(255,255,255,0.05)]"
-            style={{ transform: "translateZ(42px)" }}
-          >
+          <div className="shrink-0 rounded-[1.05rem] bg-white/[0.04] px-3.5 py-2.5 shadow-[0_10px_24px_rgba(2,8,23,0.16),inset_0_1px_0_rgba(255,255,255,0.05)]">
             <Link to={sectionLinks.home} aria-label="Go to home section">
-              <Logo3D size="sm" showText={true} className="origin-left scale-100" />
+              <div className="flex items-center gap-2">
+                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-sm font-black text-white">
+                  FT
+                </span>
+                <span className="bg-gradient-to-r from-blue-400 via-sky-500 to-amber-400 bg-clip-text text-lg font-bold text-transparent">
+                  FORTUNE
+                </span>
+              </div>
             </Link>
           </div>
 
           <div className="hidden min-w-0 flex-1 items-center justify-center lg:flex">
-            <div
-              className="px-4 py-1"
-              style={{ transform: "translateZ(28px)" }}
-            >
+            <div className="px-4 py-1">
               <div className="flex items-center gap-6">
                 {navItems.map((item) => (
                   <DesktopNavItem
@@ -164,7 +138,6 @@ function Navbar() {
               aria-label={isMobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               className="flex h-12 w-12 items-center justify-center rounded-[1rem] bg-white/[0.05] text-white/[0.86] shadow-[0_10px_24px_rgba(2,8,23,0.14),inset_0_1px_0_rgba(255,255,255,0.05)] transition-colors duration-300 hover:bg-white/[0.08]"
               onClick={() => setIsMobileMenuOpen((current) => !current)}
-              style={{ transform: "translateZ(36px)" }}
             >
               <div className="flex w-5 flex-col gap-1.5">
                 <motion.span
