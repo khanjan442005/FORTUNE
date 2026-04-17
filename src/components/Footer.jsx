@@ -77,7 +77,7 @@ function FooterLinkColumn({ title, links }) {
             viewport={{ once: true }}
             transition={{ delay: index * 0.05 }}
           >
-            <Link to={link.to} className="text-gray-400 transition-colors hover:text-cyan-400 hover-underline">
+            <Link to={link.to} className="text-gray-400 transition-colors hover:text-blue-400 hover-underline">
               {link.label}
             </Link>
           </motion.li>
@@ -112,17 +112,17 @@ function Footer() {
   };
 
   return (
-    <footer className="relative overflow-hidden bg-[#020712]">
+    <footer className="relative overflow-hidden bg-[#07111f]">
       <div className="absolute inset-0 grid-background opacity-10"></div>
-      <div className="absolute left-1/2 top-0 h-px w-full -translate-x-1/2 bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent"></div>
+      <div className="absolute left-1/2 top-0 h-px w-full -translate-x-1/2 bg-gradient-to-r from-transparent via-blue-500/30 to-transparent"></div>
 
       <div className="container relative z-10 mx-auto px-6 pt-20">
         <RevealOnScroll variant="fadeUp" className="mb-16 grid gap-12 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
             <Link to={sectionLinks.home} className="mb-6 flex items-center gap-3">
               <motion.div whileHover={{ scale: 1.08, rotate: -4 }} transition={{ duration: 0.45 }} className="relative">
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 opacity-50 blur-md"></div>
-                <div className="relative flex h-12 w-12 items-center justify-center rounded-xl border border-cyan-400/30 bg-gradient-to-br from-cyan-500 via-blue-500 to-purple-600 shadow-lg shadow-cyan-500/20">
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500 to-amber-500 opacity-40 blur-md"></div>
+                <div className="relative flex h-12 w-12 items-center justify-center rounded-xl border border-blue-400/30 bg-gradient-to-br from-blue-500 via-sky-500 to-amber-500 shadow-lg shadow-blue-500/20">
                   <span className="text-xl font-black tracking-tight text-white">DW</span>
                 </div>
               </motion.div>
@@ -131,7 +131,7 @@ function Footer() {
                   <span className="text-white">Dynamic</span>
                   <span className="gradient-text ml-1">Windows</span>
                 </h2>
-                <p className="text-xs uppercase tracking-[0.24em] text-cyan-200/60">
+                <p className="text-xs uppercase tracking-[0.24em] text-blue-200/60">
                   Precision Crafted Openings
                 </p>
               </div>
@@ -184,7 +184,7 @@ function Footer() {
                 <Link
                   key={link}
                   to={sectionLinks.contact}
-                  className="text-sm text-gray-500 transition-colors hover:text-cyan-400"
+                  className="text-sm text-gray-500 transition-colors hover:text-blue-400"
                 >
                   {link}
                 </Link>
@@ -207,12 +207,12 @@ function Footer() {
         whileHover={{ scale: 1.12, rotate: 5 }}
         whileTap={{ scale: 0.88 }}
         transition={{ type: "spring", stiffness: 300 }}
-        className={`btn-glow-cyan fixed bottom-4 right-4 z-50 flex h-12 w-12 items-center justify-center rounded-full glass shadow-lg shadow-cyan-500/20 transition-[visibility] md:bottom-8 md:right-8 ${
+        className={`btn-glow-cyan fixed bottom-4 right-4 z-50 flex h-12 w-12 items-center justify-center rounded-full glass shadow-lg shadow-blue-500/20 transition-[visibility] md:bottom-8 md:right-8 ${
           showScrollTop ? "visible pointer-events-auto" : "invisible pointer-events-none"
         }`}
       >
         <motion.svg
-          className="h-6 w-6 text-cyan-400"
+          className="h-6 w-6 text-blue-400"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

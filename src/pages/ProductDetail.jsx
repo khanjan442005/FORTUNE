@@ -29,7 +29,7 @@ function saveToRecentlyViewed(product) {
 
 function FeatureCheck() {
   return (
-    <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-cyan-500/20 text-cyan-400">
+    <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-blue-500/20 text-blue-400">
       <svg className="h-3.5 w-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
       </svg>
@@ -55,7 +55,7 @@ function ProductDetailContent({ id }) {
       <div className="flex min-h-screen items-center justify-center bg-[#030712]">
         <div className="text-center">
           <h1 className="mb-4 text-4xl font-bold text-white">Product Not Found</h1>
-          <Link to={sectionLinks.products} className="text-cyan-400 transition-colors hover:text-cyan-300">
+          <Link to={sectionLinks.products} className="text-blue-400 transition-colors hover:text-blue-300">
             Back to Products
           </Link>
         </div>
@@ -78,7 +78,7 @@ function ProductDetailContent({ id }) {
         <div className="container mx-auto px-6">
           <Link
             to={sectionLinks.products}
-            className="mb-8 inline-flex items-center gap-2 font-semibold text-cyan-400 transition-colors hover:text-cyan-300"
+            className="mb-8 inline-flex items-center gap-2 font-semibold text-blue-400 transition-colors hover:text-blue-300"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -105,7 +105,7 @@ function ProductDetailContent({ id }) {
                     className="media-image"
                   />
                 </AnimatePresence>
-                <div className="absolute right-4 top-4 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 px-4 py-2 font-bold text-white shadow-lg">
+                <div className="absolute right-4 top-4 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 px-4 py-2 font-bold text-white shadow-lg">
                   {formatProductPrice(product.price)}
                 </div>
               </div>
@@ -119,7 +119,7 @@ function ProductDetailContent({ id }) {
                       onClick={() => setSelectedImage(index)}
                       className={`media-ratio-square w-20 flex-shrink-0 overflow-hidden rounded-xl border-2 transition-all ${
                         resolvedImageIndex === index
-                          ? "border-cyan-400 shadow-lg shadow-cyan-400/30"
+                          ? "border-blue-400 shadow-lg shadow-blue-400/30"
                           : "border-transparent hover:border-gray-600"
                       }`}
                     >
@@ -136,7 +136,7 @@ function ProductDetailContent({ id }) {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <div className="mb-6">
-                <span className="inline-block rounded-full px-4 py-1 text-sm font-semibold text-cyan-400 glass">
+                <span className="inline-block rounded-full px-4 py-1 text-sm font-semibold text-blue-400 glass">
                   {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
                 </span>
               </div>
@@ -151,7 +151,7 @@ function ProductDetailContent({ id }) {
 
               <div className="mb-6 rounded-3xl p-6 glass">
                 <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-white">
-                  <span className="h-2 w-2 rounded-full bg-cyan-400"></span>
+                  <span className="h-2 w-2 rounded-full bg-blue-400"></span>
                   Key Features
                 </h3>
                 <ul className="space-y-3">
@@ -219,8 +219,8 @@ function ProductDetailContent({ id }) {
                       <img src={item.images[0]} alt={item.name} className="media-image transition-transform duration-500 group-hover:scale-110" loading="lazy" />
                     </div>
                     <div className="p-4">
-                      <h3 className="mb-1 font-semibold text-white transition-colors group-hover:text-cyan-400">{item.name}</h3>
-                      <p className="font-bold text-cyan-400">{formatProductPrice(item.price)}</p>
+                      <h3 className="mb-1 font-semibold text-white transition-colors group-hover:text-blue-400">{item.name}</h3>
+                      <p className="font-bold text-blue-400">{formatProductPrice(item.price)}</p>
                     </div>
                   </Link>
                 ))}

@@ -9,19 +9,19 @@ import {
 
 const toneMap = {
   cyan: {
-    primary: "34, 211, 238",
-    secondary: "59, 130, 246",
-    tertiary: "168, 85, 247",
+    primary: "59, 130, 246",
+    secondary: "29, 78, 216",
+    tertiary: "245, 158, 11",
   },
   violet: {
-    primary: "125, 211, 252",
-    secondary: "99, 102, 241",
-    tertiary: "217, 70, 239",
+    primary: "96, 165, 250",
+    secondary: "59, 130, 246",
+    tertiary: "245, 158, 11",
   },
   emerald: {
     primary: "16, 185, 129",
-    secondary: "34, 197, 94",
-    tertiary: "56, 189, 248",
+    secondary: "59, 130, 246",
+    tertiary: "245, 158, 11",
   },
 };
 
@@ -97,7 +97,7 @@ function AmbientBackdrop({ tone = "cyan" }) {
           background: `radial-gradient(circle, rgba(${palette.tertiary}, 0.15) 0%, rgba(${palette.tertiary}, 0.04) 35%, transparent 76%)`,
         }}
       />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.08),transparent_28%),linear-gradient(180deg,rgba(3,7,18,0.22),rgba(3,7,18,0.72)_45%,rgba(3,7,18,0.96))]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_28%),linear-gradient(180deg,rgba(7,17,31,0.22),rgba(7,17,31,0.7)_45%,rgba(5,11,22,0.96))]" />
       <div className="absolute inset-0 opacity-[0.15] mix-blend-screen">
         <div className="absolute inset-0 grid-background" />
       </div>
@@ -122,7 +122,7 @@ function PageShell({
   });
 
   return (
-    <div className={`relative min-h-screen overflow-x-hidden bg-[#030712] ${className}`}>
+    <div className={`relative min-h-screen overflow-x-hidden bg-[#07111f] ${className}`}>
       {showProgress && (
         <motion.div className="scroll-progress" style={{ scaleX: progress }} />
       )}

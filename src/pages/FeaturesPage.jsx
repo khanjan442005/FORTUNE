@@ -79,7 +79,7 @@ function FeaturesPage({ embedded = false }) {
 
           {/* Quality Process */}
           <section className="py-20 relative">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-[200px]"></div>
+            <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-[200px]"></div>
             <div className="container mx-auto px-6 relative z-10">
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
                 <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -97,7 +97,7 @@ function FeaturesPage({ embedded = false }) {
                     className="fx-panel rounded-2xl p-8 group"
                   >
                     <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center flex-shrink-0 text-white font-bold">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center flex-shrink-0 text-white font-bold">
                         {index + 1}
                       </div>
                       <div>
@@ -129,8 +129,8 @@ function FeaturesPage({ embedded = false }) {
                     transition={{ delay: index * 0.1 }}
                     className="fx-panel rounded-2xl p-6 text-center group"
                   >
-                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <svg className="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500/20 to-indigo-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <svg className="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                       </svg>
                     </div>
@@ -151,7 +151,7 @@ function FeaturesPage({ embedded = false }) {
                 viewport={{ once: true }}
                 className="fx-panel rounded-3xl p-12 md:p-16 text-center relative overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-purple-500/5"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-transparent to-amber-500/5"></div>
                 <div className="relative z-10">
                   <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Experience the Quality Difference</h2>
                   <p className="text-gray-400 mb-8 max-w-xl mx-auto">Visit our showroom or schedule a free consultation to see our premium features firsthand.</p>

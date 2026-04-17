@@ -59,7 +59,7 @@ function StarRating({ rating }) {
       {[...Array(5)].map((_, i) => (
         <svg
           key={i}
-          className={`w-5 h-5 ${i < rating ? 'text-yellow-400' : 'text-gray-600'}`}
+          className={`w-5 h-5 ${i < rating ? 'text-amber-400' : 'text-gray-600'}`}
           fill="currentColor"
           viewBox="0 0 20 20"
         >
@@ -79,13 +79,13 @@ function TestimonialCard({ testimonial, index }) {
       viewport={{ once: true }}
       className="fx-panel relative rounded-2xl p-6 md:p-8"
     >
-      <div className="absolute right-5 top-5 text-5xl font-serif text-cyan-500/10 md:right-6 md:top-6 md:text-6xl">"</div>
+      <div className="absolute right-5 top-5 text-5xl font-serif text-blue-500/10 md:right-6 md:top-6 md:text-6xl">"</div>
       
       <div className="mb-6 flex items-start gap-4">
         <img
           src={testimonial.image}
           alt={testimonial.name}
-          className="h-14 w-14 rounded-full border-2 border-cyan-500/30 object-cover sm:h-16 sm:w-16"
+          className="h-14 w-14 rounded-full border-2 border-blue-500/30 object-cover sm:h-16 sm:w-16"
         />
         <div>
           <h4 className="text-lg font-bold text-white">{testimonial.name}</h4>
@@ -101,7 +101,7 @@ function TestimonialCard({ testimonial, index }) {
       </p>
 
       <div className="flex flex-col gap-2 border-t border-white/10 pt-4 text-left sm:flex-row sm:items-center sm:justify-between">
-        <span className="text-sm text-cyan-400">{testimonial.product}</span>
+        <span className="text-sm text-blue-400">{testimonial.product}</span>
         <span className="text-xs text-gray-500">Verified Customer</span>
       </div>
     </motion.div>
@@ -112,8 +112,8 @@ function Testimonials() {
   return (
     <section id="testimonials" className="relative flex min-h-screen items-center overflow-hidden bg-[#030712] py-20 md:py-24">
       <div className="absolute inset-0 grid-background opacity-20"></div>
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[150px]"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[150px]"></div>
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[150px]"></div>
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-[150px]"></div>
 
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
@@ -122,7 +122,7 @@ function Testimonials() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-2 glass rounded-full text-cyan-400 text-sm font-medium mb-4">
+          <span className="inline-block px-4 py-2 glass rounded-full text-blue-400 text-sm font-medium mb-4">
             Testimonials
           </span>
           <h2 className="mb-4 text-4xl font-bold sm:text-5xl md:text-6xl">

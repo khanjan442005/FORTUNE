@@ -97,7 +97,7 @@ function ProductCard({ product, index }) {
             transition={{ delay: 0.3 }}
             className="absolute top-4 left-4"
           >
-            <span className="px-3 py-1 bg-cyan-500/20 backdrop-blur-sm border border-cyan-500/30 rounded-full text-cyan-400 text-xs font-semibold capitalize">
+            <span className="px-3 py-1 bg-blue-500/20 backdrop-blur-sm border border-blue-500/30 rounded-full text-blue-400 text-xs font-semibold capitalize">
               {product.category}
             </span>
           </motion.div>
@@ -108,7 +108,7 @@ function ProductCard({ product, index }) {
             transition={{ delay: 0.3 }}
             className="absolute top-4 right-4"
           >
-            <span className="px-3 py-1 bg-purple-500/20 backdrop-blur-sm border border-purple-500/30 rounded-full text-purple-400 text-xs font-semibold">
+            <span className="px-3 py-1 bg-amber-500/20 backdrop-blur-sm border border-amber-500/30 rounded-full text-amber-400 text-xs font-semibold">
               {formatProductPrice(product.price)}
             </span>
           </motion.div>
@@ -116,7 +116,7 @@ function ProductCard({ product, index }) {
         </div>
         
         <div className="flex flex-1 flex-col p-6">
-          <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+          <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
             {product.name}
           </h3>
           <p className="min-h-[3.5rem] text-gray-400 text-sm mb-4 line-clamp-2">
@@ -136,14 +136,14 @@ function ProductCard({ product, index }) {
 
           <Link
             to={getProductDetailLink(product.id)}
-            className="mt-auto block w-full rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 py-3 text-center font-semibold text-white shadow-lg fx-press"
+            className="mt-auto block w-full rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 py-3 text-center font-semibold text-white shadow-lg fx-press"
           >
             View Details
           </Link>
         </div>
         
         <div className="absolute inset-0 rounded-2xl pointer-events-none">
-          <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-cyan-500/30 transition-colors duration-500"></div>
+          <div className="absolute inset-0 rounded-2xl border border-transparent group-hover:border-blue-500/30 transition-colors duration-500"></div>
         </div>
       </motion.div>
     </motion.div>
@@ -185,8 +185,8 @@ function Products({ embedded = false }) {
       }`}
     >
       <div className="absolute inset-0 grid-background opacity-30"></div>
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[150px]"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[150px]"></div>
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[150px]"></div>
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-[150px]"></div>
       
       <div className="container mx-auto px-6 relative z-10">
         {!embedded && (
@@ -200,7 +200,7 @@ function Products({ embedded = false }) {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-block px-4 py-2 glass rounded-full text-cyan-400 text-sm font-medium mb-4"
+              className="inline-block px-4 py-2 glass rounded-full text-blue-400 text-sm font-medium mb-4"
             >
               Our Products
             </motion.span>
@@ -232,7 +232,7 @@ function Products({ embedded = false }) {
                 }
                 className={`fx-press rounded-xl px-4 py-2.5 text-sm font-medium transition-all sm:px-6 sm:py-3 sm:text-base ${
                   activeCategory === category.id
-                    ? 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/25'
+                    ? 'bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-lg shadow-blue-500/25'
                     : 'glass text-gray-400 hover:text-white hover:bg-white/10'
                 }`}
               >

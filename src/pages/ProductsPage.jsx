@@ -60,8 +60,8 @@ function ProductsPage({ embedded = false }) {
                   transition={{ delay: index * 0.1 }}
                   className="fx-panel rounded-2xl p-6 text-center group"
                 >
-                  <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 transition-transform group-hover:scale-110">
-                    <svg className="w-7 h-7 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+                  <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500/20 to-indigo-500/20 transition-transform group-hover:scale-110">
+                    <svg className="w-7 h-7 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d={badge.icon} />
                     </svg>
                   </div>
@@ -99,14 +99,14 @@ function ProductsPage({ embedded = false }) {
                   transition={{ delay: index * 0.1 }}
                   className="fx-panel rounded-2xl p-8 group"
                 >
-                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 transition-transform group-hover:scale-110">
-                    <svg className="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500/20 to-indigo-500/20 transition-transform group-hover:scale-110">
+                    <svg className="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
                       <path strokeLinecap="round" strokeLinejoin="round" d={cat.icon} />
                     </svg>
                   </div>
                   <div className="mb-2 flex items-center gap-2">
                     <h3 className="text-xl font-bold text-white">{cat.name}</h3>
-                    <span className="rounded-full bg-cyan-500/20 px-2 py-0.5 text-xs text-cyan-400">{cat.count}</span>
+                    <span className="rounded-full bg-blue-500/20 px-2 py-0.5 text-xs text-blue-400">{cat.count}</span>
                   </div>
                   <p className="text-gray-400 text-sm leading-relaxed">{cat.desc}</p>
                 </motion.div>
@@ -119,7 +119,7 @@ function ProductsPage({ embedded = false }) {
 
         {/* Process Section */}
         <section className="py-20 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-[200px]"></div>
+            <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-[200px]"></div>
             <div className="container mx-auto px-6 relative z-10">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
@@ -144,9 +144,9 @@ function ProductsPage({ embedded = false }) {
                     className="relative"
                   >
                     <div className="fx-panel rounded-2xl p-8 h-full relative overflow-hidden group">
-                      <div className="absolute -top-4 -right-4 text-8xl font-bold text-cyan-500/5 group-hover:text-cyan-500/10 transition-colors">{step.step}</div>
+                      <div className="absolute -top-4 -right-4 text-8xl font-bold text-blue-500/5 group-hover:text-blue-500/10 transition-colors">{step.step}</div>
                       <div className="relative z-10">
-                        <div className="w-12 h-12 mb-6 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-lg">
+                        <div className="w-12 h-12 mb-6 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white font-bold text-lg">
                           {step.step}
                         </div>
                         <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
@@ -154,7 +154,7 @@ function ProductsPage({ embedded = false }) {
                       </div>
                     </div>
                     {index < 3 && (
-                      <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-cyan-500/50 to-transparent"></div>
+                      <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-blue-500/50 to-transparent"></div>
                     )}
                   </motion.div>
                 ))}
@@ -171,7 +171,7 @@ function ProductsPage({ embedded = false }) {
                 viewport={{ once: true }}
                 className="fx-panel rounded-3xl p-12 md:p-16 text-center relative overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 via-transparent to-purple-500/5"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-transparent to-amber-500/5"></div>
                 <div className="relative z-10">
                   <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Can't Find What You're Looking For?</h2>
                   <p className="text-gray-400 mb-8 max-w-xl mx-auto">Our team can create custom solutions tailored to your exact specifications. Get a free consultation today.</p>

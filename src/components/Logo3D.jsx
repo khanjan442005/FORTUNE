@@ -59,7 +59,7 @@ function Logo3D({ size = "md", showText = true, className = "" }) {
         <motion.div
           className="absolute -inset-2 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
           style={{
-            background: "radial-gradient(circle, rgba(34,211,238,0.4) 0%, rgba(59,130,246,0.2) 40%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(59,130,246,0.28) 0%, rgba(245,158,11,0.12) 40%, transparent 70%)",
             filter: "blur(12px)",
           }}
           animate={isHovered ? { scale: [1, 1.1, 1], opacity: 1 } : { scale: 1, opacity: 0.5 }}
@@ -90,7 +90,7 @@ function Logo3D({ size = "md", showText = true, className = "" }) {
               className="absolute inset-0 rounded-xl overflow-hidden"
               style={{
                 transform: "translateZ(8px)",
-                background: "linear-gradient(135deg, #0891b2 0%, #2563eb 50%, #7c3aed 100%)",
+                background: "linear-gradient(135deg, #1d4ed8 0%, #2563eb 50%, #f59e0b 100%)",
                 boxShadow: "inset 0 1px 0 rgba(255,255,255,0.2)",
               }}
             >
@@ -98,7 +98,7 @@ function Logo3D({ size = "md", showText = true, className = "" }) {
               <motion.div
                 className="absolute inset-0"
                 style={{
-                  background: "linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 50%)",
+                  background: "linear-gradient(135deg, rgba(255,255,255,0.26) 0%, rgba(255,255,255,0) 50%)",
                   opacity: isHovered ? 0.8 : 0.4,
                 }}
               />
@@ -144,7 +144,7 @@ function Logo3D({ size = "md", showText = true, className = "" }) {
               className="absolute inset-0 rounded-xl"
               style={{
                 transform: "translateZ(-8px) rotateY(180deg)",
-                background: "linear-gradient(135deg, #0369a1 0%, #1e40af 100%)",
+                background: "linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%)",
               }}
             />
 
@@ -155,7 +155,7 @@ function Logo3D({ size = "md", showText = true, className = "" }) {
                 width: cfg.box,
                 height: 16,
                 transform: "rotateX(90deg) translateZ(0px)",
-                background: "linear-gradient(to bottom, rgba(34,211,238,0.6), rgba(59,130,246,0.4))",
+                background: "linear-gradient(to bottom, rgba(59,130,246,0.55), rgba(245,158,11,0.2))",
               }}
             />
 
@@ -167,7 +167,7 @@ function Logo3D({ size = "md", showText = true, className = "" }) {
                 height: 16,
                 bottom: 0,
                 transform: "rotateX(-90deg) translateZ(0px)",
-                background: "linear-gradient(to top, rgba(124,58,237,0.5), rgba(59,130,246,0.3))",
+                background: "linear-gradient(to top, rgba(245,158,11,0.35), rgba(59,130,246,0.24))",
               }}
             />
 
@@ -179,7 +179,7 @@ function Logo3D({ size = "md", showText = true, className = "" }) {
                 height: cfg.box,
                 right: 0,
                 transform: "rotateY(90deg) translateZ(0px)",
-                background: "linear-gradient(to left, rgba(124,58,237,0.5), rgba(59,130,246,0.4))",
+                background: "linear-gradient(to left, rgba(245,158,11,0.28), rgba(59,130,246,0.35))",
               }}
             />
 
@@ -191,7 +191,7 @@ function Logo3D({ size = "md", showText = true, className = "" }) {
                 height: cfg.box,
                 left: 0,
                 transform: "rotateY(-90deg) translateZ(0px)",
-                background: "linear-gradient(to right, rgba(34,211,238,0.5), rgba(59,130,246,0.3))",
+                background: "linear-gradient(to right, rgba(59,130,246,0.4), rgba(245,158,11,0.18))",
               }}
             />
           </motion.div>
@@ -215,9 +215,9 @@ function Logo3D({ size = "md", showText = true, className = "" }) {
           />
           <defs>
             <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#22d3ee" />
-              <stop offset="50%" stopColor="#3b82f6" />
-              <stop offset="100%" stopColor="#7c3aed" />
+              <stop offset="0%" stopColor="#60a5fa" />
+              <stop offset="50%" stopColor="#1d4ed8" />
+              <stop offset="100%" stopColor="#f59e0b" />
             </linearGradient>
           </defs>
         </motion.svg>
@@ -228,7 +228,7 @@ function Logo3D({ size = "md", showText = true, className = "" }) {
             {[0, 1, 2, 3, 4, 5].map((i) => (
               <motion.div
                 key={i}
-                className="absolute w-1 h-1 rounded-full bg-cyan-400"
+                className="absolute w-1 h-1 rounded-full bg-blue-400"
                 initial={{
                   x: cfg.box / 2,
                   y: cfg.box / 2,
@@ -255,7 +255,7 @@ function Logo3D({ size = "md", showText = true, className = "" }) {
                 }}
                 style={{
                   filter: "blur(0.5px)",
-                  boxShadow: "0 0 6px rgba(34,211,238,0.8)",
+                  boxShadow: "0 0 6px rgba(59,130,246,0.55)",
                 }}
               />
             ))}
@@ -271,11 +271,11 @@ function Logo3D({ size = "md", showText = true, className = "" }) {
             whileHover={{ scale: 1.03 }}
           >
             <span className="text-white">Dynamic</span>
-            <span className="ml-1.5 bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">Windows</span>
+            <span className="ml-1.5 bg-gradient-to-r from-blue-400 via-sky-500 to-amber-400 bg-clip-text text-transparent">Windows</span>
           </motion.h1>
           <motion.span
             className={`${cfg.sub} tracking-[0.25em] uppercase font-medium`}
-            style={{ color: "rgba(34,211,238,0.7)" }}
+            style={{ color: "rgba(59,130,246,0.72)" }}
             initial={{ opacity: 0, y: -5 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}

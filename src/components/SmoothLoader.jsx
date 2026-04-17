@@ -95,8 +95,8 @@ function SmoothLoader({ onComplete, minDuration = 2800 }) {
           </div>
 
           <div className="absolute inset-0">
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/8 rounded-full blur-[120px]" />
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/8 rounded-full blur-[120px]" />
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/8 rounded-full blur-[120px]" />
+            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-500/8 rounded-full blur-[120px]" />
           </div>
 
           <div className="relative flex flex-col items-center gap-8 z-10">
@@ -154,7 +154,7 @@ function SmoothLoader({ onComplete, minDuration = 2800 }) {
               className="text-center"
             >
               <h1 className="text-3xl font-bold mb-2">
-                <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-amber-400 bg-clip-text text-transparent">
                   Dynamic
                 </span>
                 <span className="text-white ml-2">Windows</span>
@@ -189,7 +189,7 @@ function SmoothLoader({ onComplete, minDuration = 2800 }) {
                 <span className="text-[10px] uppercase tracking-[0.2em] text-gray-600">
                   Loading
                 </span>
-                <span className="text-[10px] font-bold text-cyan-500">
+                <span className="text-[10px] font-bold text-blue-500">
                   {Math.round(progress)}%
                 </span>
               </div>

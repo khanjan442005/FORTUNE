@@ -59,8 +59,8 @@ function AboutPage({ embedded = false }) {
                     transition={{ delay: index * 0.1 }}
                     className="fx-panel rounded-2xl p-8 group"
                   >
-                    <div className="w-14 h-14 mb-6 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <svg className="w-7 h-7 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+                    <div className="w-14 h-14 mb-6 rounded-xl bg-gradient-to-br from-blue-500/20 to-indigo-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <svg className="w-7 h-7 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
                         <path strokeLinecap="round" strokeLinejoin="round" d={value.icon} />
                       </svg>
                     </div>
@@ -74,7 +74,7 @@ function AboutPage({ embedded = false }) {
 
           {/* Timeline */}
           <section className="py-20 relative">
-            <div className="absolute top-0 left-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-[200px]"></div>
+            <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-[200px]"></div>
             <div className="container mx-auto px-6 relative z-10">
               <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
                 <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -82,7 +82,7 @@ function AboutPage({ embedded = false }) {
                 </h2>
               </motion.div>
               <div className="relative">
-                <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-cyan-500/50 via-blue-500/50 to-purple-500/50 hidden lg:block"></div>
+                <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500/50 via-indigo-500/50 to-amber-500/50 hidden lg:block"></div>
                 <div className="space-y-8">
                   {milestones.map((milestone, index) => (
                     <motion.div
@@ -95,12 +95,12 @@ function AboutPage({ embedded = false }) {
                     >
                       <div className={`flex-1 ${index % 2 === 0 ? 'lg:text-right' : 'lg:text-left'}`}>
                         <div className="fx-panel rounded-2xl p-6 inline-block">
-                          <div className="text-cyan-400 font-bold text-lg mb-1">{milestone.year}</div>
+                          <div className="text-blue-400 font-bold text-lg mb-1">{milestone.year}</div>
                           <h3 className="text-white font-bold text-lg mb-2">{milestone.event}</h3>
                           <p className="text-gray-400 text-sm">{milestone.detail}</p>
                         </div>
                       </div>
-                      <div className="w-4 h-4 rounded-full bg-gradient-to-r from-cyan-500 to-blue-500 border-4 border-[#030712] z-10 hidden lg:block"></div>
+                      <div className="w-4 h-4 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 border-4 border-[#07111f] z-10 hidden lg:block"></div>
                       <div className="flex-1"></div>
                     </motion.div>
                   ))}

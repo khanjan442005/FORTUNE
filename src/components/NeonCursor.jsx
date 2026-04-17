@@ -32,24 +32,24 @@ const MAX_CURSOR_TEXT = 10;
 
 const palettes = {
   default: {
-    primary: "#22d3ee",
-    secondary: "#0891b2",
-    accent: "#ecfeff",
-    fill: "rgba(34, 211, 238, 0.14)",
-    edge: "rgba(165, 243, 252, 0.42)",
-    glow: "rgba(34, 211, 238, 0.26)",
-    textBg: "rgba(8, 15, 29, 0.88)",
-    frame: "rgba(34, 211, 238, 0.12)",
+  primary: "#3b82f6",
+  secondary: "#1d4ed8",
+  accent: "#eff6ff",
+  fill: "rgba(59, 130, 246, 0.12)",
+  edge: "rgba(191, 219, 254, 0.38)",
+  glow: "rgba(59, 130, 246, 0.22)",
+  textBg: "rgba(15, 23, 42, 0.9)",
+  frame: "rgba(59, 130, 246, 0.1)",
   },
   interactive: {
     primary: "#f59e0b",
-    secondary: "#f97316",
-    accent: "#fff7ed",
-    fill: "rgba(245, 158, 11, 0.14)",
-    edge: "rgba(254, 215, 170, 0.42)",
-    glow: "rgba(249, 115, 22, 0.26)",
-    textBg: "rgba(67, 20, 7, 0.9)",
-    frame: "rgba(249, 115, 22, 0.12)",
+    secondary: "#d97706",
+    accent: "#fffbeb",
+    fill: "rgba(245, 158, 11, 0.12)",
+    edge: "rgba(253, 230, 138, 0.38)",
+    glow: "rgba(245, 158, 11, 0.22)",
+    textBg: "rgba(69, 26, 3, 0.92)",
+    frame: "rgba(245, 158, 11, 0.1)",
   },
   enemy: {
     primary: "#ef4444",
@@ -105,7 +105,6 @@ function getRectData(element) {
 
   return {
     x: rect.left - padding,
-    y: rect.top - padding,
     width: rect.width + padding * 2,
     height: rect.height + padding * 2,
     radius: radius + padding,

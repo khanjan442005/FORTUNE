@@ -78,8 +78,8 @@ function GalleryPage({ embedded = false }) {
                     className="fx-panel rounded-2xl p-8 group"
                   >
                     <div className="flex items-center gap-2 mb-4">
-                      <span className="px-3 py-1 bg-cyan-500/20 text-cyan-400 text-xs rounded-full font-semibold">{project.type}</span>
-                      <span className="px-3 py-1 bg-purple-500/20 text-purple-400 text-xs rounded-full font-semibold">{project.items}</span>
+                      <span className="px-3 py-1 bg-blue-500/20 text-blue-400 text-xs rounded-full font-semibold">{project.type}</span>
+                      <span className="px-3 py-1 bg-amber-500/20 text-amber-400 text-xs rounded-full font-semibold">{project.items}</span>
                     </div>
                     <h3 className="text-xl font-bold text-white mb-3">{project.title}</h3>
                     <p className="text-gray-400 text-sm leading-relaxed">{project.desc}</p>

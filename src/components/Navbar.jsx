@@ -37,15 +37,15 @@ function DesktopNavItem({ item, isActive }) {
         aria-current={isActive ? "page" : undefined}
         className={`relative inline-flex h-12 items-center justify-center px-4 text-sm font-medium transition-all duration-300 nav-link-hover ${
           isActive
-            ? "text-cyan-100 [text-shadow:0_0_16px_rgba(103,232,249,0.5)]"
-            : "text-white/[0.66] hover:text-white hover:[text-shadow:0_0_14px_rgba(255,255,255,0.14)]"
+            ? "text-blue-100 [text-shadow:0_0_16px_rgba(96,165,250,0.45)]"
+            : "text-white/[0.66] hover:text-white hover:[text-shadow:0_0_14px_rgba(255,255,255,0.12)]"
         }`}
       >
         <span className="whitespace-nowrap">{item.name}</span>
         {isActive && (
           <motion.div
             layoutId="navbar-active"
-            className="absolute bottom-0 left-3 right-3 h-[2px] bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full"
+            className="absolute bottom-0 left-3 right-3 h-[2px] bg-gradient-to-r from-blue-500 to-amber-400 rounded-full"
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
           />
         )}
@@ -67,14 +67,14 @@ function MobileNavItem({ item, isActive, onNavigate }) {
         aria-current={isActive ? "page" : undefined}
         className={`flex items-center rounded-[0.95rem] px-3 py-2.5 text-sm transition-all duration-300 interact-press ${
           isActive
-            ? "bg-white/[0.05] text-cyan-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_18px_rgba(34,211,238,0.08)]"
+            ? "bg-white/[0.05] text-blue-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_0_18px_rgba(59,130,246,0.08)]"
             : "text-white/[0.68] hover:bg-white/[0.04] hover:text-white"
         }`}
       >
         <span>{item.name}</span>
         {isActive && (
           <motion.div
-            className="ml-auto w-1.5 h-1.5 rounded-full bg-cyan-400"
+            className="ml-auto w-1.5 h-1.5 rounded-full bg-blue-400"
             animate={{ scale: [1, 1.3, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
           />
@@ -119,17 +119,17 @@ function Navbar() {
           rotateY,
           transformStyle: "preserve-3d",
           background:
-            "linear-gradient(135deg, rgba(7,14,27,0.88), rgba(255,255,255,0.06) 46%, rgba(7,14,27,0.78))",
+            "linear-gradient(135deg, rgba(7,14,27,0.92), rgba(255,255,255,0.05) 46%, rgba(7,14,27,0.82))",
           boxShadow:
-            "0 28px 70px rgba(3, 8, 20, 0.42), 0 10px 26px rgba(34,211,238,0.06), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+            "0 28px 70px rgba(3, 8, 20, 0.42), 0 10px 26px rgba(59,130,246,0.06), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
           backdropFilter: "blur(22px)",
           WebkitBackdropFilter: "blur(22px)",
         }}
         className="relative overflow-hidden rounded-[1.35rem] border border-white/[0.08]"
       >
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(125,211,252,0.14),transparent_22%),radial-gradient(circle_at_bottom_right,rgba(59,130,246,0.08),transparent_24%)]" />
-        <div className="pointer-events-none absolute -left-8 top-2 h-16 w-24 rounded-full bg-cyan-300/[0.1] blur-3xl" />
-        <div className="pointer-events-none absolute -right-8 bottom-0 h-20 w-28 rounded-full bg-blue-400/[0.1] blur-3xl" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(96,165,250,0.14),transparent_22%),radial-gradient(circle_at_bottom_right,rgba(245,158,11,0.08),transparent_24%)]" />
+        <div className="pointer-events-none absolute -left-8 top-2 h-16 w-24 rounded-full bg-blue-300/[0.08] blur-3xl" />
+        <div className="pointer-events-none absolute -right-8 bottom-0 h-20 w-28 rounded-full bg-amber-400/[0.08] blur-3xl" />
 
         <div className="relative flex items-center gap-4 px-4 py-3.5 md:px-5">
           <div

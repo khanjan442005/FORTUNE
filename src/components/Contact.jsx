@@ -510,7 +510,7 @@ function Contact() {
         ? "border-rose-400/20 bg-rose-400/10 text-rose-200"
         : backendStatus.deliveryMode === "resend"
           ? "border-emerald-400/20 bg-emerald-400/10 text-emerald-200"
-          : "border-cyan-400/20 bg-cyan-400/10 text-cyan-200";
+          : "border-blue-400/20 bg-blue-400/10 text-blue-200";
 
   useEffect(() => {
     if (serviceSelectionMode === "manual") {
@@ -756,7 +756,7 @@ function Contact() {
     >
       <div className="hex-pattern absolute inset-0 opacity-25"></div>
       <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-blue-500/15 blur-3xl md:h-[420px] md:w-[420px]"></div>
-      <div className="absolute -bottom-24 -left-24 h-56 w-56 rounded-full bg-cyan-500/15 blur-3xl md:h-[360px] md:w-[360px]"></div>
+      <div className="absolute -bottom-24 -left-24 h-56 w-56 rounded-full bg-blue-500/15 blur-3xl md:h-[360px] md:w-[360px]"></div>
 
       <div className="container relative z-10 mx-auto px-6">
         <motion.div
@@ -769,7 +769,7 @@ function Contact() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glass mb-4 inline-block rounded-full px-4 py-2 text-sm font-medium text-cyan-400"
+            className="glass mb-4 inline-block rounded-full px-4 py-2 text-sm font-medium text-blue-400"
           >
             Contact Us
           </motion.span>
@@ -792,14 +792,14 @@ function Contact() {
             <div className="glass-strong rounded-[2rem] border border-white/10 p-6 md:p-8">
               <div className="mb-8 flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
                 <div>
-                  <p className="text-sm uppercase tracking-[0.28em] text-cyan-300/80">
+                  <p className="text-sm uppercase tracking-[0.28em] text-blue-300/80">
                     Contact Information
                   </p>
                   <h3 className="mt-3 max-w-xl text-3xl font-bold text-white">
                     Start your next window project with a team that replies fast.
                   </h3>
                 </div>
-                <div className="rounded-2xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-3 text-left text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200 md:min-w-[140px] md:text-right">
+                <div className="rounded-2xl border border-blue-400/20 bg-blue-400/10 px-4 py-3 text-left text-xs font-semibold uppercase tracking-[0.18em] text-blue-200 md:min-w-[140px] md:text-right">
                   Response Time
                   <div className="mt-1 text-lg tracking-normal text-white">Within 24 hrs</div>
                 </div>
@@ -817,17 +817,17 @@ function Contact() {
                     href={item.href}
                     target={item.href.startsWith("http") ? "_blank" : undefined}
                     rel={item.href.startsWith("http") ? "noreferrer" : undefined}
-                    className="group flex items-start gap-4 rounded-2xl border border-white/10 bg-slate-950/35 p-4 transition-colors hover:border-cyan-400/30 hover:bg-slate-900/60 hover-lift sm:items-center sm:gap-5 sm:p-5"
+                    className="group flex items-start gap-4 rounded-2xl border border-white/10 bg-slate-950/35 p-4 transition-colors hover:border-blue-400/30 hover:bg-slate-900/60 hover-lift sm:items-center sm:gap-5 sm:p-5"
                   >
                     <motion.div
-                      className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500/80 to-cyan-500/80 text-[11px] font-bold tracking-[0.2em] text-white shadow-lg shadow-cyan-900/40 transition-transform group-hover:scale-110"
+                      className="flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-blue-500/80 to-indigo-500/80 text-[11px] font-bold tracking-[0.2em] text-white shadow-lg shadow-blue-900/40 transition-transform group-hover:scale-110"
                       whileHover={{ rotate: [0, -5, 5, 0] }}
                       transition={{ duration: 0.5 }}
                     >
                       {item.badge}
                     </motion.div>
                     <div>
-                      <p className="font-semibold text-cyan-300">{item.title}</p>
+                      <p className="font-semibold text-blue-300">{item.title}</p>
                       <p className="mt-1 text-white">{item.desc}</p>
                       <p className="mt-1 text-sm text-slate-400">{item.subdesc}</p>
                     </div>
@@ -847,7 +847,7 @@ function Contact() {
                 <div className="mt-5 space-y-3 text-sm text-slate-300">
                   <div className="flex items-center justify-between gap-4">
                     <span>Monday - Saturday</span>
-                    <span className="text-cyan-300">9:00 AM - 7:00 PM</span>
+                    <span className="text-blue-300">9:00 AM - 7:00 PM</span>
                   </div>
                   <div className="flex items-center justify-between gap-4">
                     <span>Sunday</span>
@@ -888,11 +888,11 @@ function Contact() {
               onSubmit={handleSubmit}
               className="glass-strong relative overflow-hidden rounded-[2rem] border border-white/10 p-6 md:p-10"
             >
-              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500"></div>
+              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-400 to-amber-400"></div>
 
               <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <div>
-                  <p className="text-sm uppercase tracking-[0.26em] text-cyan-300/80">
+                  <p className="text-sm uppercase tracking-[0.26em] text-blue-300/80">
                     Enquiry Form
                   </p>
                   <h3 className="mt-3 text-3xl font-bold text-white">Tell us what you need.</h3>
@@ -906,7 +906,7 @@ function Contact() {
                   <button
                     type="button"
                     onClick={clearForm}
-                    className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:border-cyan-400/30 hover:text-white"
+                    className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-slate-300 transition-colors hover:border-blue-400/30 hover:text-white"
                   >
                     Clear form
                   </button>
@@ -933,7 +933,7 @@ function Contact() {
               </div>
 
               {hasRestoredDraft && (
-                <div className="mb-6 rounded-2xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-3 text-sm text-cyan-100">
+                <div className="mb-6 rounded-2xl border border-blue-400/20 bg-blue-400/10 px-4 py-3 text-sm text-blue-100">
                   Restored your last saved enquiry draft.
                 </div>
               )}
@@ -950,15 +950,15 @@ function Contact() {
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.08 }}
                     >
-                      <label className="mb-3 flex items-center gap-3 text-sm font-semibold text-cyan-300">
-                        <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-cyan-400/20 bg-cyan-400/10 text-[11px] tracking-[0.16em] text-cyan-200">
+                      <label className="mb-3 flex items-center gap-3 text-sm font-semibold text-blue-300">
+                        <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-blue-400/20 bg-blue-400/10 text-[11px] tracking-[0.16em] text-blue-200">
                           {field.badge}
                         </span>
                         {field.label}
                       </label>
                       <div className="relative">
                         <div
-                          className={`pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/10 to-cyan-500/10 transition-opacity duration-300 ${
+                          className={`pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/10 to-indigo-500/10 transition-opacity duration-300 ${
                             focusedField === field.id ? "opacity-100" : "opacity-0"
                           }`}
                         ></div>
@@ -973,7 +973,7 @@ function Contact() {
                           aria-invalid={Boolean(fieldError)}
                           aria-describedby={`${field.id}-hint`}
                           className={`input-glow relative z-10 bg-slate-950/45 ${
-                            focusedField === field.id ? "border-cyan-500" : ""
+                            focusedField === field.id ? "border-blue-500" : ""
                           } ${fieldError ? "border-rose-400/60" : ""}`}
                           required={field.required}
                         />
@@ -996,15 +996,15 @@ function Contact() {
                   viewport={{ once: true }}
                   transition={{ delay: 0.24 }}
                 >
-                  <label className="mb-3 flex items-center gap-3 text-sm font-semibold text-cyan-300">
-                    <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-cyan-400/20 bg-cyan-400/10 text-[11px] tracking-[0.16em] text-cyan-200">
+                  <label className="mb-3 flex items-center gap-3 text-sm font-semibold text-blue-300">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-blue-400/20 bg-blue-400/10 text-[11px] tracking-[0.16em] text-blue-200">
                       SR
                     </span>
                     Service Interested In
                   </label>
                   <div className="relative">
                     <div
-                      className={`pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/10 to-cyan-500/10 transition-opacity duration-300 ${
+                      className={`pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/10 to-indigo-500/10 transition-opacity duration-300 ${
                         focusedField === "service" ? "opacity-100" : "opacity-0"
                       }`}
                     ></div>
@@ -1016,7 +1016,7 @@ function Contact() {
                       aria-invalid={Boolean(getVisibleError("service"))}
                       aria-describedby="service-hint"
                       className={`input-glow relative z-10 appearance-none bg-slate-950/45 pr-12 ${
-                        focusedField === "service" ? "border-cyan-500" : ""
+                        focusedField === "service" ? "border-blue-500" : ""
                       } ${getVisibleError("service") ? "border-rose-400/60" : ""}`}
                       required
                     >
@@ -1051,7 +1051,7 @@ function Contact() {
                           className={
                             serviceSelectionMode === "manual"
                               ? "text-slate-400"
-                              : "text-cyan-300"
+                              : "text-blue-300"
                           }
                         >
                           {serviceSelectionMode === "manual"
@@ -1065,7 +1065,7 @@ function Contact() {
                           <button
                             type="button"
                             onClick={applySuggestedService}
-                            className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-medium text-cyan-200 transition-colors hover:border-cyan-300/40 hover:text-white"
+                            className="rounded-full border border-blue-400/20 bg-blue-400/10 px-3 py-1 text-xs font-medium text-blue-200 transition-colors hover:border-blue-300/40 hover:text-white"
                           >
                             Use suggestion
                           </button>
@@ -1087,15 +1087,15 @@ function Contact() {
                 transition={{ delay: 0.3 }}
                 className="mt-6"
               >
-                <label className="mb-3 flex items-center gap-3 text-sm font-semibold text-cyan-300">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-cyan-400/20 bg-cyan-400/10 text-[11px] tracking-[0.16em] text-cyan-200">
+                <label className="mb-3 flex items-center gap-3 text-sm font-semibold text-blue-300">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-blue-400/20 bg-blue-400/10 text-[11px] tracking-[0.16em] text-blue-200">
                     MSG
                   </span>
                   Message
                 </label>
                 <div className="relative">
                   <div
-                    className={`pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/10 to-cyan-500/10 transition-opacity duration-300 ${
+                    className={`pointer-events-none absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/10 to-indigo-500/10 transition-opacity duration-300 ${
                       focusedField === "message" ? "opacity-100" : "opacity-0"
                     }`}
                   ></div>
@@ -1109,7 +1109,7 @@ function Contact() {
                     aria-invalid={Boolean(getVisibleError("message"))}
                     aria-describedby="message-hint"
                     className={`input-glow relative z-10 resize-none bg-slate-950/45 ${
-                      focusedField === "message" ? "border-cyan-500" : ""
+                      focusedField === "message" ? "border-blue-500" : ""
                     } ${getVisibleError("message") ? "border-rose-400/60" : ""}`}
                     required
                   />

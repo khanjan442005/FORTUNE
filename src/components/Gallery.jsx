@@ -39,12 +39,12 @@ function GalleryImage({ image, index }) {
         
         {/* Content */}
         <div className="absolute inset-0 flex translate-y-0 flex-col justify-end p-5 opacity-100 transition-all duration-500 md:translate-y-4 md:p-6 md:opacity-0 md:group-hover:translate-y-0 md:group-hover:opacity-100">
-          <span className="text-cyan-400 text-sm font-medium mb-1">{image.category}</span>
+          <span className="text-blue-400 text-sm font-medium mb-1">{image.category}</span>
           <h3 className="text-white text-xl font-bold">{image.title}</h3>
         </div>
         
         {/* Border Glow */}
-        <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-cyan-500/50 transition-colors duration-500"></div>
+        <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-blue-500/50 transition-colors duration-500"></div>
       </motion.div>
     </motion.div>
   )
@@ -69,7 +69,7 @@ function Gallery() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-block px-4 py-2 glass rounded-full text-cyan-400 text-sm font-medium mb-4"
+            className="inline-block px-4 py-2 glass rounded-full text-blue-400 text-sm font-medium mb-4"
           >
             Our Work
           </motion.span>

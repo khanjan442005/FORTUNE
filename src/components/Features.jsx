@@ -12,7 +12,7 @@ const features = [
     ),
     title: "Weather Resistant",
     description: "Engineered to withstand extreme weather conditions, from scorching heat to heavy rainfall.",
-    gradient: "from-cyan-500 to-blue-600"
+    gradient: "from-blue-500 to-indigo-600"
   },
   {
     icon: (
@@ -22,7 +22,7 @@ const features = [
     ),
     title: "Noise Protection",
     description: "Advanced acoustic glass technology that reduces outside noise by up to 40 decibels.",
-    gradient: "from-purple-500 to-pink-600"
+    gradient: "from-amber-500 to-orange-600"
   },
   {
     icon: (
@@ -62,7 +62,7 @@ const features = [
     ),
     title: "Smart Integration",
     description: "Compatible with home automation systems for seamless smart living experience.",
-    gradient: "from-violet-500 to-purple-600"
+    gradient: "from-slate-500 to-blue-600"
   }
 ]
 
@@ -86,7 +86,7 @@ function FeatureCard({ feature, index }) {
               {feature.icon}
             </motion.div>
 
-            <h3 className="mb-3 text-lg font-bold text-white transition-colors group-hover:text-cyan-400 md:text-xl">
+            <h3 className="mb-3 text-lg font-bold text-white transition-colors group-hover:text-blue-400 md:text-xl">
               {feature.title}
             </h3>
             <p className="text-gray-400 leading-relaxed">
@@ -106,8 +106,8 @@ function Features() {
     <section id="features" className="relative flex min-h-screen items-center overflow-hidden bg-[#030712] py-20 md:py-24">
       {/* Background */}
       <div className="absolute inset-0 grid-background opacity-20"></div>
-      <div className="absolute top-0 right-0 h-72 w-72 rounded-full bg-purple-500/10 blur-[140px] md:h-[600px] md:w-[600px] md:blur-[200px]"></div>
-      <div className="absolute bottom-0 left-0 h-72 w-72 rounded-full bg-cyan-500/10 blur-[140px] md:h-[600px] md:w-[600px] md:blur-[200px]"></div>
+      <div className="absolute top-0 right-0 h-72 w-72 rounded-full bg-amber-500/10 blur-[140px] md:h-[600px] md:w-[600px] md:blur-[200px]"></div>
+      <div className="absolute bottom-0 left-0 h-72 w-72 rounded-full bg-blue-500/10 blur-[140px] md:h-[600px] md:w-[600px] md:blur-[200px]"></div>
       
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
@@ -116,7 +116,7 @@ function Features() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-block px-4 py-2 glass rounded-full text-cyan-400 text-sm font-medium mb-4 hover-glow"
+            className="inline-block px-4 py-2 glass rounded-full text-blue-400 text-sm font-medium mb-4 hover-glow"
           >
             Why Choose Us
           </motion.span>

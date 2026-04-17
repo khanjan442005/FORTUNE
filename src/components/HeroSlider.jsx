@@ -114,7 +114,7 @@ function HeroSlider() {
                         transition={{ duration: 0.8, delay: 0.15 }}
                         className="fx-panel-soft m-3 max-w-[min(100%,28rem)] rounded-[1.9rem] border border-white/12 bg-[linear-gradient(155deg,rgba(15,23,42,0.78),rgba(15,23,42,0.38)_55%,rgba(255,255,255,0.12))] p-5 shadow-[0_20px_40px_rgba(2,8,23,0.28)] backdrop-blur-xl sm:m-4 sm:max-w-[30rem] sm:p-6 md:m-6 md:rounded-[2.75rem] md:p-8"
                       >
-                        <span className="inline-flex items-center rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-cyan-100/90 sm:px-5 sm:py-2.5 sm:text-[11px]">
+                        <span className="inline-flex items-center rounded-full border border-blue-300/20 bg-blue-300/10 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-blue-100/90 sm:px-5 sm:py-2.5 sm:text-[11px]">
                           {slide.eyebrow}
                         </span>
 
@@ -147,7 +147,7 @@ function HeroSlider() {
                             whileHover={{ y: -3, scale: 1.03, boxShadow: "0 14px 34px rgba(56,189,248,0.4)" }}
                             whileTap={{ scale: 0.97 }}
                             transition={{ type: "spring", stiffness: 300 }}
-                            className="btn-glow-cyan inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_34px_rgba(56,189,248,0.3)] transition-colors hover:from-blue-600 hover:to-cyan-500 sm:w-auto sm:px-7 sm:py-3.5 sm:text-base md:px-8 md:py-3.5"
+                            className="btn-glow-cyan inline-flex w-full items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_34px_rgba(59,130,246,0.3)] transition-colors hover:from-blue-600 hover:to-indigo-600 sm:w-auto sm:px-7 sm:py-3.5 sm:text-base md:px-8 md:py-3.5"
                           >
                             View Products
                           </MotionLink>

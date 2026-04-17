@@ -21,8 +21,8 @@ function About() {
     <section id="about" className="relative flex min-h-screen items-center overflow-hidden bg-[#030712] py-20 md:py-24">
       {/* Background */}
       <div className="absolute inset-0 grid-background opacity-20"></div>
-      <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-cyan-500/5 to-transparent"></div>
-      <div className="absolute bottom-0 right-0 w-1/2 h-full bg-gradient-to-l from-purple-500/5 to-transparent"></div>
+      <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-blue-500/5 to-transparent"></div>
+      <div className="absolute bottom-0 right-0 w-1/2 h-full bg-gradient-to-l from-amber-500/5 to-transparent"></div>
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
@@ -36,7 +36,7 @@ function About() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-block px-4 py-2 glass rounded-full text-cyan-400 text-sm font-medium mb-4"
+              className="inline-block px-4 py-2 glass rounded-full text-blue-400 text-sm font-medium mb-4"
             >
               About Us
             </motion.span>
@@ -158,7 +158,7 @@ function About() {
                     className="flex items-start gap-4"
                   >
                     <div className="fx-panel-soft flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl sm:h-16 sm:w-16">
-                      <span className="text-cyan-400 font-bold">{item.year}</span>
+                      <span className="text-blue-400 font-bold">{item.year}</span>
                     </div>
                     <div>
                       <h4 className="font-semibold text-white">{item.title}</h4>

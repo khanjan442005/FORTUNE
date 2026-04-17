@@ -47,13 +47,13 @@ function ContactPage({ embedded = false }) {
                     transition={{ delay: index * 0.1 }}
                     className="fx-panel rounded-2xl p-8 text-center group"
                   >
-                    <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <svg className="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+                    <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-blue-500/20 to-indigo-500/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                      <svg className="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
                         <path strokeLinecap="round" strokeLinejoin="round" d={card.icon} />
                       </svg>
                     </div>
                     <h3 className="text-xl font-bold text-white mb-2">{card.title}</h3>
-                    <p className="text-cyan-400 font-medium mb-1">{card.detail}</p>
+                    <p className="text-blue-400 font-medium mb-1">{card.detail}</p>
                     <p className="text-sm text-gray-500">{card.sub}</p>
                   </motion.div>
                 ))}
@@ -72,9 +72,9 @@ function ContactPage({ embedded = false }) {
                 viewport={{ once: true }}
                 className="fx-panel rounded-3xl overflow-hidden"
               >
-                <div className="relative h-64 md:h-80 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 flex items-center justify-center">
+                <div className="relative h-64 md:h-80 bg-gradient-to-br from-blue-500/10 to-amber-500/10 flex items-center justify-center">
                   <div className="text-center">
-                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center">
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
                       <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -86,7 +86,7 @@ function ContactPage({ embedded = false }) {
                       href="https://maps.google.com/?q=123 Business Park, Ahmedabad"
                       target="_blank"
                       rel="noreferrer"
-                      className="mt-4 inline-flex items-center gap-2 px-6 py-3 glass rounded-full text-cyan-400 hover:text-white transition-colors text-sm font-medium"
+                      className="mt-4 inline-flex items-center gap-2 px-6 py-3 glass rounded-full text-blue-400 hover:text-white transition-colors text-sm font-medium"
                     >
                       <span>Open in Google Maps</span>
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>

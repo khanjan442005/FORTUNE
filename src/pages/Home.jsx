@@ -20,14 +20,14 @@ function GlowDivider() {
     <RevealOnScroll variant="fadeScale" duration={1}>
       <div className="relative py-2">
         <motion.div
-          className="h-[1px] bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent"
+          className="h-[1px] bg-gradient-to-r from-transparent via-blue-500/40 to-transparent"
           initial={{ scaleX: 0, opacity: 0 }}
           whileInView={{ scaleX: 1, opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1.2, ease: "easeOut" }}
         />
         <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-cyan-500/50"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-blue-500/50"
           initial={{ scale: 0 }}
           whileInView={{ scale: 1 }}
           viewport={{ once: true }}
@@ -76,7 +76,7 @@ function StatsSection() {
             <GlowCard
               key={index}
               className="glass rounded-2xl p-6 text-center cursor-default hover-lift hover-glow"
-              glowColor="rgba(34, 211, 238, 0.08)"
+              glowColor="rgba(59, 130, 246, 0.08)"
             >
               <motion.div
                 initial={{ scale: 0.5, opacity: 0 }}
@@ -113,7 +113,7 @@ function MiniProductCard({ product }) {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-transparent"></div>
             <motion.span
-              className="absolute top-3 left-3 px-3 py-1 bg-cyan-500/20 backdrop-blur-sm border border-cyan-500/30 rounded-full text-cyan-400 text-xs font-semibold capitalize"
+              className="absolute top-3 left-3 px-3 py-1 bg-blue-500/20 backdrop-blur-sm border border-blue-500/30 rounded-full text-blue-400 text-xs font-semibold capitalize"
               initial={{ x: -20, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: true }}
@@ -122,7 +122,7 @@ function MiniProductCard({ product }) {
               {product.category}
             </motion.span>
             <motion.span
-              className="absolute top-3 right-3 px-3 py-1 bg-purple-500/20 backdrop-blur-sm border border-purple-500/30 rounded-full text-purple-400 text-xs font-semibold"
+              className="absolute top-3 right-3 px-3 py-1 bg-amber-500/20 backdrop-blur-sm border border-amber-500/30 rounded-full text-amber-400 text-xs font-semibold"
               initial={{ x: 20, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               viewport={{ once: true }}
@@ -132,11 +132,11 @@ function MiniProductCard({ product }) {
             </motion.span>
           </div>
           <div className="p-5 flex flex-col flex-1">
-            <h3 className="text-lg font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">{product.name}</h3>
+            <h3 className="text-lg font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">{product.name}</h3>
             <p className="text-gray-400 text-sm line-clamp-2 mb-4 flex-1">{product.description}</p>
             <Link
               to={getProductDetailLink(product.id)}
-              className="block w-full py-2.5 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border border-cyan-500/30 rounded-xl text-center text-cyan-400 text-sm font-semibold hover:from-cyan-500 hover:to-blue-600 hover:text-white hover:border-transparent transition-all interact-press"
+              className="block w-full py-2.5 bg-gradient-to-r from-blue-500/20 to-indigo-500/20 border border-blue-500/30 rounded-xl text-center text-blue-400 text-sm font-semibold hover:from-blue-500 hover:to-indigo-600 hover:text-white hover:border-transparent transition-all interact-press"
             >
               View Details
             </Link>
@@ -163,7 +163,7 @@ function TrendingProducts() {
     <section className="relative overflow-hidden py-20 md:py-24">
       <div className="absolute inset-0 grid-background opacity-10"></div>
       <ParallaxLayer speed={0.15} className="absolute top-0 right-0 w-96 h-96 pointer-events-none">
-        <div className="w-full h-full bg-cyan-500/10 rounded-full blur-[200px]"></div>
+        <div className="w-full h-full bg-blue-500/10 rounded-full blur-[200px]"></div>
       </ParallaxLayer>
       <div className="container mx-auto px-6 relative z-10">
         <RevealOnScroll variant="fadeUp" className="flex items-center justify-between mb-10">
@@ -172,7 +172,7 @@ function TrendingProducts() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-block px-4 py-2 glass rounded-full text-cyan-400 text-sm font-medium mb-3 hover-glow"
+              className="inline-block px-4 py-2 glass rounded-full text-blue-400 text-sm font-medium mb-3 hover-glow"
             >
               Hot Picks
             </motion.span>
@@ -181,7 +181,7 @@ function TrendingProducts() {
               <span className="gradient-text">Products</span>
             </h2>
           </div>
-          <Link to={sectionLinks.products} className="hidden md:flex items-center gap-2 px-6 py-3 glass rounded-full text-cyan-400 hover:text-white hover:border-cyan-500/30 transition-all text-sm font-medium hover-lift">
+          <Link to={sectionLinks.products} className="hidden md:flex items-center gap-2 px-6 py-3 glass rounded-full text-blue-400 hover:text-white hover:border-blue-500/30 transition-all text-sm font-medium hover-lift">
             View All
             <motion.svg
               className="w-4 h-4"
@@ -201,7 +201,7 @@ function TrendingProducts() {
           ))}
         </div>
         <div className="md:hidden text-center mt-8">
-          <Link to={sectionLinks.products} className="inline-flex items-center gap-2 px-6 py-3 glass rounded-full text-cyan-400 hover:text-white transition-all text-sm font-medium hover-lift interact-press">
+          <Link to={sectionLinks.products} className="inline-flex items-center gap-2 px-6 py-3 glass rounded-full text-blue-400 hover:text-white transition-all text-sm font-medium hover-lift interact-press">
             View All Products
           </Link>
         </div>
@@ -212,8 +212,8 @@ function TrendingProducts() {
 
 function QuickActions() {
   const actions = [
-    { label: "Browse Products", desc: "Explore our full range", to: sectionLinks.products, icon: "M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z", gradient: "from-cyan-500 to-blue-600" },
-    { label: "Request Quote", desc: "Get a free estimate", to: sectionLinks.contact, icon: "M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z", gradient: "from-purple-500 to-pink-600" },
+    { label: "Browse Products", desc: "Explore our full range", to: sectionLinks.products, icon: "M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z", gradient: "from-blue-500 to-indigo-600" },
+    { label: "Request Quote", desc: "Get a free estimate", to: sectionLinks.contact, icon: "M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z", gradient: "from-amber-500 to-orange-600" },
     { label: "Our Features", desc: "See what we offer", to: sectionLinks.features, icon: "M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z", gradient: "from-emerald-500 to-teal-600" },
     { label: "Contact Us", desc: "Talk to our team", to: sectionLinks.contact, icon: "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z", gradient: "from-amber-500 to-orange-600" },
   ]
@@ -241,7 +241,7 @@ function QuickActions() {
                     <path strokeLinecap="round" strokeLinejoin="round" d={action.icon} />
                   </svg>
                 </motion.div>
-                <h3 className="text-white font-bold mb-1 group-hover:text-cyan-400 transition-colors">{action.label}</h3>
+                <h3 className="text-white font-bold mb-1 group-hover:text-blue-400 transition-colors">{action.label}</h3>
                 <p className="text-gray-500 text-sm">{action.desc}</p>
               </Link>
             </TiltCard>
@@ -265,7 +265,7 @@ function WhyChooseUs() {
   return (
     <section className="relative overflow-hidden py-20 md:py-24">
       <ParallaxLayer speed={0.1} className="absolute bottom-0 left-0 w-96 h-96 pointer-events-none">
-        <div className="w-full h-full bg-purple-500/10 rounded-full blur-[200px]"></div>
+        <div className="w-full h-full bg-amber-500/10 rounded-full blur-[200px]"></div>
       </ParallaxLayer>
       <div className="container mx-auto px-6 relative z-10">
         <RevealOnScroll variant="fadeUp" className="text-center mb-12">
@@ -284,20 +284,20 @@ function WhyChooseUs() {
             >
               <div className="flex items-start gap-4">
                 <motion.div
-                  className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform"
+                  className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500/20 to-indigo-500/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform"
                   whileHover={{ rotate: [0, -10, 10, 0] }}
                   transition={{ duration: 0.5 }}
                 >
-                  <svg className="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
+                  <svg className="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d={point.icon} />
                   </svg>
                 </motion.div>
                 <div>
-                  <h3 className="text-lg font-bold text-white mb-1 group-hover:text-cyan-400 transition-colors">{point.title}</h3>
+                  <h3 className="text-lg font-bold text-white mb-1 group-hover:text-blue-400 transition-colors">{point.title}</h3>
                   <p className="text-gray-400 text-sm leading-relaxed">{point.desc}</p>
                 </div>
               </div>
-              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-cyan-500 to-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+              <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-blue-500 to-amber-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
             </GlowCard>
           ))}
         </StaggerReveal>
@@ -320,7 +320,7 @@ function RecentlyViewed() {
       <div className="container mx-auto px-6">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="flex items-center justify-between mb-10">
           <div>
-            <motion.span initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="inline-block px-4 py-2 glass rounded-full text-cyan-400 text-sm font-medium mb-3">
+            <motion.span initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="inline-block px-4 py-2 glass rounded-full text-blue-400 text-sm font-medium mb-3">
               Just For You
             </motion.span>
             <h2 className="text-4xl md:text-5xl font-bold">
@@ -357,7 +357,7 @@ function FloatingCartIcon() {
     >
       <Link
         to={sectionLinks.products}
-        className="relative flex items-center justify-center w-14 h-14 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full shadow-lg shadow-cyan-500/30 hover:shadow-cyan-500/50 hover:scale-110 transition-all group btn-glow-cyan"
+        className="relative flex items-center justify-center w-14 h-14 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-110 transition-all group btn-glow-cyan"
       >
         <motion.svg
           className="w-6 h-6 text-white"
@@ -371,7 +371,7 @@ function FloatingCartIcon() {
         </motion.svg>
         {count > 0 && (
           <motion.span
-            className="absolute -top-1 -right-1 w-5 h-5 bg-purple-500 rounded-full text-white text-xs flex items-center justify-center font-bold"
+            className="absolute -top-1 -right-1 w-5 h-5 bg-amber-500 rounded-full text-white text-xs flex items-center justify-center font-bold"
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ type: "spring", stiffness: 500 }}
