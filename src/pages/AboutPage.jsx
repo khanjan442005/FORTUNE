@@ -29,7 +29,7 @@ function AboutPage({ embedded = false }) {
           badge="About Us"
           title="Crafting"
           titleAccent="Excellence"
-          description="Since 2010, Dynamic Windows has been transforming spaces with premium windows and doors that blend innovation, quality, and timeless design."
+          description="Since 2010, FORTUNE has been transforming spaces with premium windows and doors that blend innovation, quality, and timeless design."
           stats={[
             { value: "2010", label: "Company Founded" },
             { value: "1000+", label: "Projects Milestone" },

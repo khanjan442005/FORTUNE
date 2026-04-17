@@ -29,7 +29,7 @@ function LoadingFallback() {
           animate={{ rotate: [0, 10, -10, 0], scale: [1, 1.05, 1] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
         >
-          DW
+          FT
         </motion.div>
         <p className="mt-5 text-sm uppercase tracking-[0.28em] text-blue-200/75">
           Loading Space

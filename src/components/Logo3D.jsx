@@ -270,8 +270,7 @@ function Logo3D({ size = "md", showText = true, className = "" }) {
             className={`${cfg.text} font-bold tracking-wide leading-tight`}
             whileHover={{ scale: 1.03 }}
           >
-            <span className="text-white">Dynamic</span>
-            <span className="ml-1.5 bg-gradient-to-r from-blue-400 via-sky-500 to-amber-400 bg-clip-text text-transparent">Windows</span>
+            <span className="bg-gradient-to-r from-blue-400 via-sky-500 to-amber-400 bg-clip-text text-transparent">FORTUNE</span>
           </motion.h1>
           <motion.span
             className={`${cfg.sub} tracking-[0.25em] uppercase font-medium`}

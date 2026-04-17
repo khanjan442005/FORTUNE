@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react'
 
-const LOCAL_STORAGE_EVENT = 'dynamic-windows:local-storage'
+const LOCAL_STORAGE_EVENT = 'fortune:local-storage'
 
 function resolveValue(value) {
   return value instanceof Function ? value() : value

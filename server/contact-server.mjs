@@ -178,7 +178,7 @@ function validatePayload(payload) {
 }
 
 function buildEmailContent(payload) {
-  const subjectPrefix = process.env.CONTACT_SUBJECT_PREFIX || "[Dynamic Windows]";
+  const subjectPrefix = process.env.CONTACT_SUBJECT_PREFIX || "[FORTUNE]";
   const subject = `${subjectPrefix} ${payload.service} inquiry from ${payload.name}`;
 
   const rows = [
@@ -201,7 +201,7 @@ function buildEmailContent(payload) {
       <div style="max-width:680px;margin:0 auto;background:#0f172a;border:1px solid rgba(148,163,184,0.18);border-radius:20px;overflow:hidden;">
         <div style="padding:24px 28px;background:linear-gradient(135deg,#0891b2,#2563eb);color:white;">
           <h1 style="margin:0;font-size:24px;">New Contact Inquiry</h1>
-          <p style="margin:8px 0 0;font-size:14px;opacity:0.92;">Dynamic Windows website lead</p>
+          <p style="margin:8px 0 0;font-size:14px;opacity:0.92;">FORTUNE website lead</p>
         </div>
         <div style="padding:24px 28px;">
           <table style="width:100%;border-collapse:collapse;font-size:14px;">${htmlRows}</table>

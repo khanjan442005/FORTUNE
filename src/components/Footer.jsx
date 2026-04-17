@@ -123,13 +123,12 @@ function Footer() {
               <motion.div whileHover={{ scale: 1.08, rotate: -4 }} transition={{ duration: 0.45 }} className="relative">
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500 to-amber-500 opacity-40 blur-md"></div>
                 <div className="relative flex h-12 w-12 items-center justify-center rounded-xl border border-blue-400/30 bg-gradient-to-br from-blue-500 via-sky-500 to-amber-500 shadow-lg shadow-blue-500/20">
-                  <span className="text-xl font-black tracking-tight text-white">DW</span>
+                  <span className="text-xl font-black tracking-tight text-white">FT</span>
                 </div>
               </motion.div>
               <div>
                 <h2 className="text-2xl font-bold">
-                  <span className="text-white">Dynamic</span>
-                  <span className="gradient-text ml-1">Windows</span>
+                  <span className="gradient-text">FORTUNE</span>
                 </h2>
                 <p className="text-xs uppercase tracking-[0.24em] text-blue-200/60">
                   Precision Crafted Openings
@@ -177,7 +176,7 @@ function Footer() {
         <div className="border-t border-white/10 py-8">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <p className="text-sm text-gray-500">
-              Copyright {currentYear} Dynamic Windows. All rights reserved.
+              Copyright {currentYear} FORTUNE. All rights reserved.
             </p>
             <div className="flex gap-6">
               {["Privacy Policy", "Terms of Service", "Cookie Policy"].map((link) => (

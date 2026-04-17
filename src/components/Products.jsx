@@ -12,7 +12,7 @@ const categories = [
   { id: 'door', name: 'Doors' }
 ]
 
-const PRODUCT_FILTERS_KEY = 'dynamic-windows.products.filters'
+const PRODUCT_FILTERS_KEY = 'fortune.products.filters'
 
 function createDefaultProductFilters() {
   return {

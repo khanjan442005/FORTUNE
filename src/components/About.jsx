@@ -49,7 +49,7 @@ function About() {
             </h2>
             
             <p className="mb-6 text-base leading-relaxed text-gray-400 md:mb-8 md:text-lg">
-              Dynamic Windows has been at the forefront of the windows and doors industry for over 15 years. 
+              FORTUNE has been at the forefront of the windows and doors industry for over 15 years. 
               We specialize in premium aluminium, UPVC, and glass solutions that transform ordinary spaces into extraordinary ones.
             </p>
             

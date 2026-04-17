@@ -123,7 +123,7 @@ function SmoothLoader({ onComplete, minDuration = 2800 }) {
                   transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                 >
                   <div className="flex items-center justify-center w-full h-full">
-                    <span className="text-white font-black text-3xl">DW</span>
+                    <span className="text-white font-black text-3xl">FT</span>
                   </div>
                 </motion.div>
               </motion.div>
@@ -155,9 +155,8 @@ function SmoothLoader({ onComplete, minDuration = 2800 }) {
             >
               <h1 className="text-3xl font-bold mb-2">
                 <span className="bg-gradient-to-r from-blue-400 via-indigo-400 to-amber-400 bg-clip-text text-transparent">
-                  Dynamic
+                  FORTUNE
                 </span>
-                <span className="text-white ml-2">Windows</span>
               </h1>
               <motion.p
                 className="text-gray-500 text-sm tracking-[0.3em] uppercase"

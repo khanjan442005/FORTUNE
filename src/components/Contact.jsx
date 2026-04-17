@@ -4,7 +4,7 @@ import { useDebounce, useLocalStorage } from "../hooks/useInView";
 import { RevealOnScroll, StaggerReveal } from "./RevealOnScroll";
 
 const CONTACT_API_URL = import.meta.env.VITE_CONTACT_API_URL || "/api/contact";
-const CONTACT_DRAFT_KEY = "dynamic-windows.contact-form.draft";
+const CONTACT_DRAFT_KEY = "fortune.contact-form.draft";
 const CONTACT_DRAFT_DELAY = 250;
 const MAX_MESSAGE_LENGTH = 900;
 const MIN_MESSAGE_LENGTH = 20;
@@ -150,9 +150,9 @@ const contactCards = [
   },
   {
     title: "Email Us",
-    desc: "info@dynamicwindows.com",
+    desc: "info@fortune.com",
     subdesc: "Replies within 24 hours",
-    href: "mailto:info@dynamicwindows.com",
+    href: "mailto:info@fortune.com",
     badge: "MAIL",
   },
 ];

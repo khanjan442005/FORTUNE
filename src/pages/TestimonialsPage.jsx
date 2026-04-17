@@ -27,7 +27,7 @@ function TestimonialsPage({ embedded = false }) {
           badge="Testimonials"
           title="What Our"
           titleAccent="Clients Say"
-          description="Don't just take our word for it. Hear from hundreds of satisfied homeowners, architects, and developers who chose Dynamic Windows."
+          description="Don't just take our word for it. Hear from hundreds of satisfied homeowners, architects, and developers who chose FORTUNE."
           stats={[
             { value: "4.9/5", label: "Average Rating" },
             { value: "98%", label: "Would Recommend" },

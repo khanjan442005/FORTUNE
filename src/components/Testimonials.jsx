@@ -21,7 +21,7 @@ const testimonials = [
     location: "Bangalore, Karnataka",
     image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face",
     rating: 5,
-    text: "Dynamic Windows exceeded my expectations. The casement windows are beautifully crafted and the attention to detail is remarkable. Great customer service throughout.",
+    text: "FORTUNE exceeded my expectations. The casement windows are beautifully crafted and the attention to detail is remarkable. Great customer service throughout.",
     product: "Casement Windows"
   },
   {
@@ -30,7 +30,7 @@ const testimonials = [
     location: "Delhi, NCR",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=face",
     rating: 5,
-    text: "We installed folding doors from Dynamic Windows and it's been a game changer for our living space. The quality is top-notch and the team was very helpful.",
+    text: "We installed folding doors from FORTUNE and it's been a game changer for our living space. The quality is top-notch and the team was very helpful.",
     product: "Folding Doors"
   },
   {
@@ -130,7 +130,7 @@ function Testimonials() {
             <span className="gradient-text">Clients Say</span>
           </h2>
           <p className="mx-auto max-w-2xl text-base text-gray-400 sm:text-lg">
-            Don't just take our word for it. Here's what our satisfied customers have to say about their experience with Dynamic Windows.
+            Don't just take our word for it. Here's what our satisfied customers have to say about their experience with FORTUNE.
           </p>
         </motion.div>
 
